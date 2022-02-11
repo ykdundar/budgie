@@ -6,7 +6,7 @@ First of all, obtain an API key from the [marketstack](https://marketstack.com/p
 
 ## Usage
 
-### Configuration
+### Configuration
 
 ```sh
 budgie config --token "YOUR_API_TOKEN"

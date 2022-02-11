@@ -17,13 +17,13 @@ budgie config --token "YOUR_API_TOKEN"
 #### Create Portfolio
 
 ```sh
-budgie portfolio create --name "European Stocks" --currency "USD" --default true
+budgie portfolio create --name "European Stocks" --currency "USD" --active true
 ```
 
 #### Update Portfolio
 
 ```sh
-budgie portfolio update --name "European Stocks" --new_name "German Stocks" --currency "EUR" --default false
+budgie portfolio update --name "European Stocks" --new_name "German Stocks" --currency "EUR" --active false
 ```
 
 #### Delete Portfolio
@@ -41,7 +41,7 @@ budgie portfolio list
 #### Show a Single Portfolio
 
 ```sh
-budgie portfolio show # shows the default portfolio
+budgie portfolio show # shows the active portfolio
 budgie portfolio show --name "European Stocks"
 ```
 

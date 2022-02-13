@@ -12,7 +12,6 @@ var (
 	currency string 
 	active bool 
 	rename string
-
 )
 
 // portfolioCmd represents the portfolio command
@@ -117,7 +116,4 @@ func init() {
 	deleteCmd.PersistentFlags().StringVarP(&name, "name", "n", "", "Portfolio name (required)")
 	deleteCmd.MarkPersistentFlagRequired("name")
 	showCmd.PersistentFlags().StringVarP(&name, "name", "n", "", "Portfolio name")
-
-
-
 }

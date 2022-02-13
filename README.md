@@ -54,7 +54,7 @@ budgie portfolio show --name "European Stocks"
 budgie stock add --portfolio "European Stocks" --ticker "MSFT" --currency "USD"
 ```
 
-#### Remove Stock from Portfolio
+#### Remove Stock from Portfolio *
 
 ```sh
 budgie stock remove --portfolio "European Stocks" --ticker "MSFT"

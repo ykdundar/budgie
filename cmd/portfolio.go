@@ -67,8 +67,8 @@ to quickly create a Cobra application.`,
 	},
 }
 
-var listAllCmd = &cobra.Command{
-	Use:   "listAll",
+var listCmd = &cobra.Command{
+	Use:   "list",
 	Short: "A brief description of your command",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
@@ -77,7 +77,7 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("listAll called")
+		fmt.Println("list called")
 	},
 }
 var showCmd = &cobra.Command{
@@ -98,7 +98,7 @@ func init() {
 	portfolioCmd.AddCommand(createCmd)
   portfolioCmd.AddCommand(updateCmd)
 	portfolioCmd.AddCommand(updateCmd)
-	portfolioCmd.AddCommand(listAllCmd)
+	portfolioCmd.AddCommand(listCmd)
 	portfolioCmd.AddCommand(showCmd)
 
 
@@ -115,5 +115,6 @@ func init() {
 
 	deleteCmd.PersistentFlags().StringVarP(&name, "name", "n", "", "Portfolio name (required)")
 	deleteCmd.MarkPersistentFlagRequired("name")
+
 	showCmd.PersistentFlags().StringVarP(&name, "name", "n", "", "Portfolio name")
 }

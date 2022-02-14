@@ -17,37 +17,20 @@ var (
 // portfolioCmd represents the portfolio command
 var portfolioCmd = &cobra.Command{
 	Use:   "portfolio",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "portfolio commend creates, updates, deletes and lists portfolios by using sub commends",
 }
 
 var createCmd = &cobra.Command{
 	Use:   "create",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Creates a new portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("create called")
 	},
 }
+
 var updateCmd = &cobra.Command{
 	Use:   "update",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Updates a portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("update called")
 	},
@@ -55,13 +38,7 @@ to quickly create a Cobra application.`,
 
 var deleteCmd = &cobra.Command{
 	Use:   "delete",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Deletes a portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("delete called")
 	},
@@ -69,38 +46,29 @@ to quickly create a Cobra application.`,
 
 var listCmd = &cobra.Command{
 	Use:   "list",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Lists all portfolios",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("list called")
 	},
 }
+
 var showCmd = &cobra.Command{
 	Use:   "show",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Shows an active portfolio",
+	PersistentPostRun: func(cmd *cobra.Command, args []string) {
+		fmt.Println("en son ben calistim!")
+	},
+	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+		fmt.Println("once ben calistim!")
+	},
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("show called")
 	},
 }
+
 func init() {
 	rootCmd.AddCommand(portfolioCmd)
-	portfolioCmd.AddCommand(createCmd)
-  portfolioCmd.AddCommand(updateCmd)
-	portfolioCmd.AddCommand(updateCmd)
-	portfolioCmd.AddCommand(listCmd)
-	portfolioCmd.AddCommand(showCmd)
-
+	portfolioCmd.AddCommand(createCmd, updateCmd, deleteCmd, listCmd, showCmd)
 
 	createCmd.PersistentFlags().StringVarP(&name, "name", "n", "", "Portfolio name (required)")
 	createCmd.PersistentFlags().StringVarP(&currency, "currency", "c", "USD", "Portfolio currency")

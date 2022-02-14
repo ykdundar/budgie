@@ -1,7 +1,3 @@
-/*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
-
-*/
 package cmd
 
 import (
@@ -10,19 +6,17 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// flag variables
+// token represents the API token obtained from marketstack
 var token string
 
 // configCmd represents the config command
 var configCmd = &cobra.Command{
 	Use:   "config",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "config is used to add or update an API token",
+	Long: `First of all, you need to obtain an API token
+from marketstack, and then you can use the 'token' flag to save it.
+If you run the command again with a different token, your existing
+token will be updated.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("config called")
 	},

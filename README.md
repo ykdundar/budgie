@@ -81,13 +81,10 @@ budgie stock sell --portfolio "European Stocks" --ticker "MSFT" --date "06.02.20
 ### Reporting
 
 ```sh
-budgie stock report now # until now
-budgie stock report today # since today
-budgie stock report yesterday # since yesterday
-budgie stock report week
-budgie stock report month
-budgie stock report year
-budgie stock report --days 30
-budgie stock report --months 5
-budgie stock report --years 2
+budgie stock report
+budgie stock report --today # since today
+budgie stock report --day 30
+bugdie stock report --week 2
+budgie stock report --month 5
+budgie stock report --year 2
 ```

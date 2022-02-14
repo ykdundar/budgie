@@ -15,58 +15,52 @@ day int
 week int
 month int
 year int
-
 )
 
 // stockCmd represents the stock command
 var stockCmd = &cobra.Command{
 	Use:   "stock",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "stock command adds, removes, buys, sells and reports a given stock by subcommands",
 }
 
 var addCmd = &cobra.Command{
 	Use:   "add",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Add a stock to a given portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("add called")
 	},
+	Example: `budgie stock add
+	--portfolio "European Stocks"
+	--ticker "MSFT" --date "06.02.2020"
+	--price "180"
+	--shares "20"
+	--currency "USD"
+`,
 }
 
 var removeCmd = &cobra.Command{
 	Use:   "remove",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Removes a given stock",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("remove called")
 	},
+	Example: "TODO",
 }
+
 var reportCmd = &cobra.Command{
 	Use:   "report",
-	Short: "A brief description of your command",
+	Short: "Reports stock situations by the given time as intiger ",
+	Long: `Reports stock situations by the given time as intiger
+For example:
+day 5
+week 3
+mont 9
+year 2`,
 
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("report called")
 	},
 }
-
-
 
 /*
 var buyCmd = &cobra.Command{
@@ -88,10 +82,7 @@ var sellCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(stockCmd)
-	stockCmd.AddCommand(addCmd)
-	stockCmd.AddCommand(removeCmd)
-	stockCmd.AddCommand(reportCmd)
-
+	stockCmd.AddCommand(addCmd, removeCmd, reportCmd)
 
 	addCmd.Flags().StringVarP(&portfolio,"portfolio", "p", "", "Portfolio name (required)")
 	addCmd.MarkPersistentFlagRequired("portfolio")

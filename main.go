@@ -1,31 +1,33 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"os"
 
 	"github.com/spf13/viper"
+	"github.com/ykdundar/budgie/cmd"
 )
 
 func main() {
-	viper.SetConfigName(".budgie") // name of config file (without extension)
-	viper.SetConfigType("yaml") // REQUIRED if the config file does not have the extension in the name
-	viper.AddConfigPath("$HOME") // path to look for the config file in	
+	// position of this command is wrong!
+	cmd.Execute()
 
-	viper.SetEnvPrefix("budgie") // will be uppercased automatically
-	viper.BindEnv("apikey")
-	os.Setenv("BUDGIE_APIKEY", "13")
+	home_dir, _ := os.UserHomeDir()
 
-	fmt.Println(os.Getenv("BUDGIE_APIKEY"))
-	// os.Setenv("SPF_ID", "13") // typically done outside of the app
+	// // name of config file (without extension)
+	viper.SetConfigName(".budgie")
+	// // format of the config file
+	viper.SetConfigType("yaml")
+	// // path to look for the config file in
+	viper.AddConfigPath(home_dir)
 
-	// id := Get("id") // 13
+	// // Find and read the config file
+	err := viper.ReadInConfig()
 
-	err := viper.ReadInConfig() // Find and read the config file
-	if err != nil { // Handle errors reading the config file
-		panic(fmt.Errorf("Fatal error: %w \n", err))
+	if err != nil {
+		errMsg := errors.New("Please add your API key as explained in the README")
+		fmt.Println(errMsg)
+		os.Exit(1)
 	}
-
-	// viper.Set("LogFile", LogFile)
-	// cmd.Execute()
 }

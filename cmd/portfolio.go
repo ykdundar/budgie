@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 // flags
@@ -48,7 +49,8 @@ var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "Lists all portfolios",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("list called")
+		fmt.Println(viper.IsSet("token"))
+		fmt.Println(viper.GetString("token"))
 	},
 }
 

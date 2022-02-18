@@ -25,7 +25,7 @@ var stockCmd = &cobra.Command{
 
 var addCmd = &cobra.Command{
 	Use:   "add",
-	Short: "Add a stock to a given portfolio",
+	Short: "add a stock to a given portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("add called")
 	},
@@ -49,8 +49,8 @@ var removeCmd = &cobra.Command{
 
 var reportCmd = &cobra.Command{
 	Use:   "report",
-	Short: "Reports stock situations by the given time as intiger ",
-	Long: `Reports stock situations by the given time as intiger
+	Short: "reports stock situations by the given time as intiger ",
+	Long: `reports stock situations by the given time as intiger
 For example:
 day 5
 week 3
@@ -61,24 +61,6 @@ year 2`,
 		fmt.Println("report called")
 	},
 }
-
-/*
-var buyCmd = &cobra.Command{
-	Use:   "buy",
-	Short: "Aliases of add command",
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("add called")
-	},
-}
-
-var sellCmd = &cobra.Command{
-	Use:   "sell",
-	Short: "A brief description of your command",
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("remove called")
-	},
-}*/
-
 
 func init() {
 	rootCmd.AddCommand(stockCmd)

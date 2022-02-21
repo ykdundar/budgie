@@ -4,15 +4,14 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 )
 
 // flags
 var (
-	name string 
-	currency string 
-	active bool 
-	rename string
+	name     string
+	currency string
+	active   bool
+	rename   string
 )
 
 // portfolioCmd represents the portfolio command
@@ -49,20 +48,13 @@ var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "Lists all portfolios",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(viper.IsSet("token"))
-		fmt.Println(viper.GetString("token"))
+		fmt.Println("list called")
 	},
 }
 
 var showCmd = &cobra.Command{
 	Use:   "show",
 	Short: "Shows an active portfolio",
-	PersistentPostRun: func(cmd *cobra.Command, args []string) {
-		fmt.Println("en son ben calistim!")
-	},
-	PersistentPreRun: func(cmd *cobra.Command, args []string) {
-		fmt.Println("once ben calistim!")
-	},
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("show called")
 	},

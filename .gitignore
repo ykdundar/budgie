@@ -22,3 +22,6 @@ budgie
 
 # goreleaser folder
 dist/
+
+# golang files
+.idea

@@ -29,17 +29,19 @@ token will be updated.`,
 			os.Exit(1)
 		}
 
-		home_dir, _ := os.UserHomeDir()
-		file_name := ".budgie.yaml"
-		configFilePath := filepath.Join(home_dir, file_name)
+		homeDir, _ := os.UserHomeDir()
+		fileName := ".budgie.yaml"
+		configFilePath := filepath.Join(homeDir, fileName)
 
-		var yamlStr = []byte(fmt.Sprintf("token:\n  %s", token))
+		var yamlStr = []byte(fmt.Sprintf("token: \"%s\"", token))
 
-		writeErr := ioutil.WriteFile(configFilePath, yamlStr, 0755)
+		writeErr := ioutil.WriteFile(configFilePath, yamlStr, 0666)
 
-    if writeErr != nil {
-      fmt.Printf("Unable to write file: %v", err)
-    }
+		if writeErr != nil {
+			fmt.Printf("Unable to write file: %v", err)
+		} else {
+			fmt.Println("Token successfully updated!")
+		}
 	},
 }
 

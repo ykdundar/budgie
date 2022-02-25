@@ -2,8 +2,9 @@ package cmd
 
 import (
 	"fmt"
-
 	"github.com/spf13/cobra"
+	"github.com/ykdundar/budgie/internal"
+	"strings"
 )
 
 // flags
@@ -24,7 +25,14 @@ var createCmd = &cobra.Command{
 	Use:   "create",
 	Short: "Creates a new portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("create called")
+		activeValue := internal.ConvertBoolToInt(active)
+
+		createPortfolio, _ := dataBase.Prepare(
+			"INSERT INTO portfolio (name, currency, active) VALUES (?, ?, ?)",
+		)
+
+		_, insertErr := createPortfolio.Exec(name, currency, activeValue)
+		cobra.CheckErr(insertErr)
 	},
 }
 
@@ -32,7 +40,34 @@ var updateCmd = &cobra.Command{
 	Use:   "update",
 	Short: "Updates a portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("update called")
+		activeValue := internal.ConvertBoolToInt(active)
+
+		var queryStr []string
+
+		if rename != "" {
+			queryStr = append(queryStr, fmt.Sprintf("name='%s'", rename))
+		}
+
+		if currency != "" {
+			queryStr = append(queryStr, fmt.Sprintf("currency='%s'", currency))
+		}
+
+		queryStr = append(queryStr, fmt.Sprintf("active=%d", activeValue))
+
+		updateSql := strings.Join(queryStr[:], ",")
+
+		fmt.Println(
+			fmt.Sprintf("UPDATE portfolio SET %s WHERE name = '%s'", updateSql, name),
+		)
+
+		updatePortfolio, _ := dataBase.Prepare(
+			fmt.Sprintf("UPDATE portfolio SET %s WHERE name = '%s'", updateSql, name),
+		)
+
+		_, updateErr := updatePortfolio.Exec()
+
+		cobra.CheckErr(updateErr)
+
 	},
 }
 

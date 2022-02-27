@@ -8,14 +8,18 @@ import (
 
 // flags
 var (
-portfolio string
-symbol string
-today string
-day int
-week int
-month int
-year int
+	portfolio string
+	symbol    string
+	today     string
+	day       int
+	week      int
+	month     int
+	year      int
 )
+
+// Stock Type
+type Stock struct {
+}
 
 // stockCmd represents the stock command
 var stockCmd = &cobra.Command{
@@ -66,21 +70,21 @@ func init() {
 	rootCmd.AddCommand(stockCmd)
 	stockCmd.AddCommand(addCmd, removeCmd, reportCmd)
 
-	addCmd.Flags().StringVarP(&portfolio,"portfolio", "p", "", "Portfolio name (required)")
+	addCmd.Flags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
 	addCmd.MarkPersistentFlagRequired("portfolio")
-	addCmd.Flags().StringVarP(&symbol,"symbol", "s", "", "Company name (required)")
+	addCmd.Flags().StringVarP(&symbol, "symbol", "s", "", "Company name (required)")
 	addCmd.MarkPersistentFlagRequired("symbol")
-	addCmd.Flags().StringVarP(&currency,"currency", "c", "", "Stock currency (required)")
+	addCmd.Flags().StringVarP(&currency, "currency", "c", "", "Stock currency (required)")
 	addCmd.MarkPersistentFlagRequired("currency")
 
-	removeCmd.Flags().StringVarP(&portfolio,"portfolio", "p", "", "Portfolio name (required)")
+	removeCmd.Flags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
 	removeCmd.MarkPersistentFlagRequired("portfolio")
-	removeCmd.Flags().StringVarP(&symbol,"symbol", "s", "", "Company name (required)")
+	removeCmd.Flags().StringVarP(&symbol, "symbol", "s", "", "Company name (required)")
 	removeCmd.MarkPersistentFlagRequired("symbol")
 
-	reportCmd.Flags().StringVarP(&today,"today", "t", "", "Portfolio name (required)")
-	reportCmd.Flags().IntVarP(&day,"day", "d", 1, "Report last given number of days ")
-	reportCmd.Flags().IntVarP(&week,"week", "w", 1, "Report last given number of weeks")
-	reportCmd.Flags().IntVarP(&month,"month", "m", 1, "Report last given number of months")
-	reportCmd.Flags().IntVarP(&year,"year", "y", 1, "Report last given number of years")
+	reportCmd.Flags().StringVarP(&today, "today", "t", "", "Portfolio name (required)")
+	reportCmd.Flags().IntVarP(&day, "day", "d", 1, "Report last given number of days ")
+	reportCmd.Flags().IntVarP(&week, "week", "w", 1, "Report last given number of weeks")
+	reportCmd.Flags().IntVarP(&month, "month", "m", 1, "Report last given number of months")
+	reportCmd.Flags().IntVarP(&year, "year", "y", 1, "Report last given number of years")
 }

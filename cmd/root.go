@@ -5,6 +5,7 @@ import (
 	"fmt"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/spf13/viper"
+	"github.com/ykdundar/budgie/database"
 	"github.com/ykdundar/budgie/internal"
 	"io/ioutil"
 	"os"
@@ -85,34 +86,14 @@ func initConfig() {
 	_, fkErr := enableForeignKeys.Exec()
 	cobra.CheckErr(fkErr)
 
-	createPortfolio, _ := dataBase.Prepare(
-		"CREATE TABLE IF NOT EXISTS portfolio (" +
-			"id INTEGER PRIMARY KEY," +
-			"name TEXT," +
-			"currency TEXT" +
-			"active INTEGER)",
-	)
+	createPortfolios, _ := database.CreatePortfolioTable()
 
-	_, portfolioErr := createPortfolio.Exec()
+	_, portfolioErr := createPortfolios.Exec()
 	cobra.CheckErr(portfolioErr)
 
-	// TODO => date_buy & date_sell degıl buy_date
-	createStock, _ := dataBase.Prepare(
-		"CREATE TABLE IF NOT EXISTS stocks (" +
-			"stockId INTEGER PRIMARY KEY," +
-			"stockName TEXT," +
-			"ticker TEXT," +
-			"date_buy INTEGER," +
-			"date_sell INTEGER," +
-			"price_buy INTEGER ," +
-			"price_sell INTEGER ," +
-			"share INTEGER," +
-			"portfolio_id INTEGER," +
-			"FOREIGN KEY(portfolio_id)" +
-			"REFERENCES portfolio(id))",
-	)
+	createStock, _ := database.CreateStocksTable()
 	_, stockErr := createStock.Exec()
-	cobra.CheckErr(stockErr) // TODO: Use helper of cobra to print errors to console
+	cobra.CheckErr(stockErr)
 
 	/*
 		createStock, _ = dataBase.Prepare("INSERT INTO stocks (stockName, ticker, date_buy, date_sell, price_buy, price_sell, share, portfolio_id ) VALUES (?,?,?,?,?,?,?,?)")

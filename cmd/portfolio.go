@@ -76,6 +76,11 @@ var deleteCmd = &cobra.Command{
 	Short: "Deletes a portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("delete called")
+		deletePortfolio, _ := dataBase.Prepare(
+			fmt.Sprintf("DELETE FROM portfolio WHERE name= '%s'", name),
+		)
+		_, deleteErr := deletePortfolio.Exec()
+		cobra.CheckErr(deleteErr)
 	},
 }
 
@@ -92,6 +97,7 @@ var showCmd = &cobra.Command{
 	Short: "Shows an active portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("show called")
+		// record := dataBase.QueryRow()
 	},
 }
 

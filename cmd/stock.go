@@ -2,8 +2,8 @@ package cmd
 
 import (
 	"fmt"
-
 	"github.com/spf13/cobra"
+	"github.com/ykdundar/budgie/database"
 )
 
 // flags
@@ -17,19 +17,6 @@ var (
 	year      int
 )
 
-// Stock Type
-type Stock struct {
-	stockId     int
-	name        string
-	ticker      string
-	buyDate     int
-	sellDate    int
-	buyPrice    int
-	sellPrice   int
-	portfolioId int
-	shares      int
-}
-
 // stockCmd represents the stock command
 var stockCmd = &cobra.Command{
 	Use:   "stock",
@@ -40,12 +27,7 @@ var addCmd = &cobra.Command{
 	Use:   "add",
 	Short: "add a stock to a given portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("add called")
-		addStock, _ := dataBase.Prepare(
-			"INSERT INTO stocks (portfolio_id, ticker) VALUES (?,?)")
-		defer addStock.Close()
-		_, insertErr := addStock.Exec(portfolio, ticker)
-		cobra.CheckErr(insertErr)
+		database.AddStock(name, ticker)
 	},
 
 	Example: `budgie stock add
@@ -56,6 +38,7 @@ var addCmd = &cobra.Command{
 	--currency "USD"
 `,
 }
+
 var buyCmd = &cobra.Command{
 	Use:   "buy",
 	Short: "Add the stock you bought to portfolio",
@@ -76,8 +59,8 @@ var removeCmd = &cobra.Command{
 
 var reportCmd = &cobra.Command{
 	Use:   "report",
-	Short: "reports stock situations by the given time as intiger ",
-	Long: `reports stock situations by the given time as intiger
+	Short: "reports stock situations by the given time as integer ",
+	Long: `reports stock situations by the given time as integer
 For example:
 day 5
 week 3

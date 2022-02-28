@@ -1,6 +1,9 @@
 package database
 
-import "github.com/spf13/cobra"
+import (
+	_ "github.com/mattn/go-sqlite3"
+	"github.com/spf13/cobra"
+)
 
 func EnableForeignKeys() {
 	// https://www.sqlite.org/foreignkeys.html
@@ -9,6 +12,6 @@ func EnableForeignKeys() {
 	defer enableForeignKeys.Close()
 
 	_, fkErr := enableForeignKeys.Exec()
-	
+
 	cobra.CheckErr(fkErr)
 }

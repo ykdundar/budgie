@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"database/sql"
 	"fmt"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/spf13/viper"
@@ -39,14 +38,10 @@ func init() {
 // Find home directory
 var home, _ = os.UserHomeDir()
 
-// Database connection
-// TODO: Save into home folder instead of repository
-var dataBase, _ = sql.Open("sqlite3", "./budgie.db")
-
 func initConfig() {
 	// set config path
-	var cfgFileName string = ".budgie"
-	var cfgFileType string = "yaml"
+	var cfgFileName = ".budgie"
+	var cfgFileType = "yaml"
 
 	// tell viper where to find config files
 	viper.AddConfigPath(home)

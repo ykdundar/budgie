@@ -78,22 +78,9 @@ func initConfig() {
 		}
 	}
 
-	// https://www.sqlite.org/datatype3.html
-	// https://www.sqlite.org/foreignkeys.html
-	enableForeignKeys, _ := dataBase.Prepare(
-		"PRAGMA foreign_keys = ON;",
-	)
-	_, fkErr := enableForeignKeys.Exec()
-	cobra.CheckErr(fkErr)
-
-	createPortfolios, _ := database.CreatePortfolioTable()
-
-	_, portfolioErr := createPortfolios.Exec()
-	cobra.CheckErr(portfolioErr)
-
-	createStock, _ := database.CreateStocksTable()
-	_, stockErr := createStock.Exec()
-	cobra.CheckErr(stockErr)
+	database.EnableForeignKeys()
+	database.CreatePortfolioTable()
+	database.CreateStocksTable()
 
 	/*
 		createStock, _ = dataBase.Prepare("INSERT INTO stocks (stockName, ticker, date_buy, date_sell, price_buy, price_sell, share, portfolio_id ) VALUES (?,?,?,?,?,?,?,?)")

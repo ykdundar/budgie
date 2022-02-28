@@ -1,9 +1,11 @@
 package database
 
-import "database/sql"
+import (
+	"github.com/spf13/cobra"
+)
 
-func CreateStocksTable() (*sql.Stmt, error) {
-	createStocksTable, err := database.Prepare(
+func CreateStocksTable() {
+	createStocksTable, _ := database.Prepare(
 		"CREATE TABLE IF NOT EXISTS stocks (" +
 			"stockId INTEGER PRIMARY KEY," +
 			"name TEXT," +
@@ -17,5 +19,10 @@ func CreateStocksTable() (*sql.Stmt, error) {
 			"FOREIGN KEY(portfolio_id)" +
 			"REFERENCES portfolio(id))",
 	)
-	return createStocksTable, err
+
+	defer createStocksTable.Close()
+
+	_, stockErr := createStocksTable.Exec()
+
+	cobra.CheckErr(stockErr)
 }

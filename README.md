@@ -51,7 +51,7 @@ budgie portfolio show --name "European Stocks"
 
 ```sh
 # Runs on search and asks "did you mean?"
-budgie stock add --portfolio "European Stocks" --ticker "MSFT" --currency "USD"
+budgie stock add --portfolio "European Stocks" --ticker "MSFT" 
 ```
 
 #### Remove Stock from Portfolio *
@@ -65,8 +65,6 @@ budgie stock remove --portfolio "European Stocks" --ticker "MSFT"
 #### Buy a Stock
 
 ```sh
-# buy and add are aliases
-budgie stock add --portfolio "European Stocks" --ticker "MSFT" --date "06.02.2020" --price "180" --shares "20" --currency "USD"
 budgie stock buy --portfolio "European Stocks" --ticker "MSFT" --date "06.02.2022" --price "180" --shares "20" --currency "USD"
 ```
 

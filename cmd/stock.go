@@ -9,7 +9,7 @@ import (
 // flags
 var (
 	portfolio string
-	symbol    string
+	ticker    string
 	today     string
 	day       int
 	week      int
@@ -19,6 +19,15 @@ var (
 
 // Stock Type
 type Stock struct {
+	stockId     int
+	name        string
+	ticker      string
+	buyDate     int
+	sellDate    int
+	buyPrice    int
+	sellPrice   int
+	portfolioId int
+	shares      int
 }
 
 // stockCmd represents the stock command
@@ -32,14 +41,28 @@ var addCmd = &cobra.Command{
 	Short: "add a stock to a given portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("add called")
+		addStock, _ := dataBase.Prepare(
+			"INSERT INTO stocks (portfolio_id, ticker) VALUES (?,?)")
+		defer addStock.Close()
+		_, insertErr := addStock.Exec(portfolio, ticker)
+		cobra.CheckErr(insertErr)
 	},
+
 	Example: `budgie stock add
 	--portfolio "European Stocks"
-	--ticker "MSFT" --date "06.02.2020"
+	--ticker "MSFT"
 	--price "180"
 	--shares "20"
 	--currency "USD"
 `,
+}
+var buyCmd = &cobra.Command{
+	Use:   "buy",
+	Short: "Add the stock you bought to portfolio",
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println("buy called")
+	},
+	Example: "TODO",
 }
 
 var removeCmd = &cobra.Command{
@@ -68,19 +91,19 @@ year 2`,
 
 func init() {
 	rootCmd.AddCommand(stockCmd)
-	stockCmd.AddCommand(addCmd, removeCmd, reportCmd)
+	stockCmd.AddCommand(addCmd, buyCmd, removeCmd, reportCmd)
 
 	addCmd.Flags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
 	addCmd.MarkPersistentFlagRequired("portfolio")
-	addCmd.Flags().StringVarP(&symbol, "symbol", "s", "", "Company name (required)")
-	addCmd.MarkPersistentFlagRequired("symbol")
-	addCmd.Flags().StringVarP(&currency, "currency", "c", "", "Stock currency (required)")
-	addCmd.MarkPersistentFlagRequired("currency")
+	addCmd.Flags().StringVarP(&ticker, "ticker", "s", "", "Company name (required)")
+	addCmd.MarkPersistentFlagRequired("ticker")
+
+	buyCmd.Flags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
 
 	removeCmd.Flags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
 	removeCmd.MarkPersistentFlagRequired("portfolio")
-	removeCmd.Flags().StringVarP(&symbol, "symbol", "s", "", "Company name (required)")
-	removeCmd.MarkPersistentFlagRequired("symbol")
+	removeCmd.Flags().StringVarP(&ticker, "ticker", "s", "", "Company name (required)")
+	removeCmd.MarkPersistentFlagRequired("ticker")
 
 	reportCmd.Flags().StringVarP(&today, "today", "t", "", "Portfolio name (required)")
 	reportCmd.Flags().IntVarP(&day, "day", "d", 1, "Report last given number of days ")

@@ -1,9 +1,11 @@
 package database
 
-import "database/sql"
+import (
+	"github.com/spf13/cobra"
+)
 
-func CreatePortfolioTable() (*sql.Stmt, error) {
-	createPortfolios, err := database.Prepare(
+func CreatePortfolioTable() {
+	createPortfolios, _ := database.Prepare(
 		"CREATE TABLE IF NOT EXISTS portfolios (" +
 			"id INTEGER PRIMARY KEY," +
 			"name TEXT," +
@@ -11,5 +13,9 @@ func CreatePortfolioTable() (*sql.Stmt, error) {
 			"active INTEGER)",
 	)
 
-	return createPortfolios, err
+	createPortfolios.Close()
+
+	_, portfolioErr := createPortfolios.Exec()
+
+	cobra.CheckErr(portfolioErr)
 }

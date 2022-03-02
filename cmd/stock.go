@@ -20,33 +20,21 @@ var (
 // stockCmd represents the stock command
 var stockCmd = &cobra.Command{
 	Use:   "stock",
-	Short: "stock command adds, removes, buys, sells and reports a given stock by subcommands",
+	Short: "stock command adds, removes and reports a given stock by subcommands",
 }
 
 var addCmd = &cobra.Command{
 	Use:   "add",
 	Short: "add a stock to a given portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
-		database.AddStock(name, ticker)
+		database.AddStock(portfolio, ticker)
 	},
-
 	Example: `budgie stock add
 	--portfolio "European Stocks"
 	--ticker "MSFT"
-	--price "180"
-	--shares "20"
-	--currency "USD"
 `,
 }
 
-var buyCmd = &cobra.Command{
-	Use:   "buy",
-	Short: "Add the stock you bought to portfolio",
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("buy called")
-	},
-	Example: "TODO",
-}
 
 var removeCmd = &cobra.Command{
 	Use:   "remove",
@@ -54,7 +42,10 @@ var removeCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("remove called")
 	},
-	Example: "TODO",
+	Example: `budgie stock remove
+	--portfolio "European Stocks"
+	--ticker "MSFT"
+`,
 }
 
 var reportCmd = &cobra.Command{
@@ -74,14 +65,12 @@ year 2`,
 
 func init() {
 	rootCmd.AddCommand(stockCmd)
-	stockCmd.AddCommand(addCmd, buyCmd, removeCmd, reportCmd)
+	stockCmd.AddCommand(addCmd, removeCmd, reportCmd)
 
 	addCmd.Flags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
 	addCmd.MarkPersistentFlagRequired("portfolio")
 	addCmd.Flags().StringVarP(&ticker, "ticker", "s", "", "Company name (required)")
 	addCmd.MarkPersistentFlagRequired("ticker")
-
-	buyCmd.Flags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
 
 	removeCmd.Flags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
 	removeCmd.MarkPersistentFlagRequired("portfolio")

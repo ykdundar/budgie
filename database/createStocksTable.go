@@ -6,24 +6,18 @@ import (
 )
 
 func CreateStocksTable() {
-	createStocksTable, _ := database.Prepare(
+	createStocksTable, queryErr := database.Prepare(
 		"CREATE TABLE IF NOT EXISTS stocks (" +
 			"stockId INTEGER PRIMARY KEY," +
-			"name TEXT," +
 			"ticker TEXT," +
-			"buy_date INTEGER," +
-			"sell_date INTEGER," +
-			"buy_price INTEGER ," +
-			"sell_price INTEGER ," +
-			"shares INTEGER," +
 			"portfolio_id INTEGER," +
+			"UNIQUE(ticker, portfolio_id)," +
 			"FOREIGN KEY(portfolio_id)" +
-			"REFERENCES portfolio(id))",
+			"REFERENCES portfolios(id))",
 	)
-
 	defer createStocksTable.Close()
+	cobra.CheckErr(queryErr)
 
 	_, stockErr := createStocksTable.Exec()
-
 	cobra.CheckErr(stockErr)
 }

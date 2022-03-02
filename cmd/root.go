@@ -78,24 +78,4 @@ func initConfig() {
 	database.CreateStocksTable()
 	database.CreateTransactionsTable()
 
-	/*
-		createStock, _ = dataBase.Prepare("INSERT INTO stocks (stockName, ticker, date_buy, date_sell, price_buy, price_sell, share, portfolio_id ) VALUES (?,?,?,?,?,?,?,?)")
-		createStock.Exec("Apple", "AAPL", 1645549453, 1645549650, 12.4, 15.3, 20, 1)
-
-		stockRows, _ := dataBase.Query("SELECT stockName, ticker, dateBuy, dateSell, priceBuy, priceSell, share, portfolioId FROM stocks")
-		var stockId int
-		var stockName string
-		var ticker string
-		var dateBuy int
-		var dateSell int
-		var priceBuy int
-		var priceSell int
-		var share int
-		var portfolioId int
-		for stockRows.Next() {
-			stockRows.Scan(&stockId, &stockName, &ticker, &dateBuy, &dateSell, &priceBuy, &priceSell, &share, &portfolioId)
-		}
-		fmt.Println(stockId, stockName, ticker, dateBuy, dateSell, priceBuy, priceSell, share, portfolioId)
-
-	*/
 }

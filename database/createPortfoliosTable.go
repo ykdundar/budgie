@@ -6,7 +6,7 @@ import (
 )
 
 func CreatePortfolioTable() {
-	createPortfolios, _ := database.Prepare(
+	createPortfolios, queryErr := database.Prepare(
 		"CREATE TABLE IF NOT EXISTS portfolios (" +
 			"id INTEGER PRIMARY KEY," +
 			"name TEXT," +
@@ -14,7 +14,8 @@ func CreatePortfolioTable() {
 			"active INTEGER)",
 	)
 
-	createPortfolios.Close()
+	defer createPortfolios.Close()
+	cobra.CheckErr(queryErr)
 
 	_, portfolioErr := createPortfolios.Exec()
 

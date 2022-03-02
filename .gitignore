@@ -25,3 +25,6 @@ dist/
 
 # golang files
 .idea
+
+# local database
+budgie.db

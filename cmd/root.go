@@ -76,6 +76,7 @@ func initConfig() {
 	database.EnableForeignKeys()
 	database.CreatePortfolioTable()
 	database.CreateStocksTable()
+	database.CreateTransactionsTable()
 
 	/*
 		createStock, _ = dataBase.Prepare("INSERT INTO stocks (stockName, ticker, date_buy, date_sell, price_buy, price_sell, share, portfolio_id ) VALUES (?,?,?,?,?,?,?,?)")

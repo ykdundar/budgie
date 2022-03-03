@@ -1,14 +1,15 @@
-
 package cmd
 
 import (
-
 	"github.com/spf13/cobra"
+	"github.com/ykdundar/budgie/database"
+	"time"
 )
+
 //flags
 var price int
 var shares int
-var date int
+var date string
 
 // transactionCmd represents the transaction command
 var transactionCmd = &cobra.Command{
@@ -20,25 +21,48 @@ var buyCmd = &cobra.Command{
 	Use:   "buy",
 	Short: "Add the stock you bought to transactions table",
 	Run: func(cmd *cobra.Command, args []string) {
+		database.AddTransaction(ticker, price, shares, date, cmd.Use)
 	},
 	Example: `budgie transaction buy
 	--ticker "MSFT"
-	--price "180"
-	--shares "20"
+	--price 180
+	--shares 20
+	--date "19.01.2022"
+`,
+}
+var sellCmd = &cobra.Command{
+	Use:   "sell",
+	Short: "Add the stock you bought to transactions table",
+	Run: func(cmd *cobra.Command, args []string) {
+		database.AddTransaction(ticker, price, shares, date, cmd.Use)
+	},
+	Example: `budgie transaction sell
+	--ticker "MSFT"
+	--price 180
+	--shares 20
 	--date "19.01.2022"
 `,
 }
 
 func init() {
 	rootCmd.AddCommand(transactionCmd)
-	transactionCmd.AddCommand(buyCmd)
+	transactionCmd.AddCommand(buyCmd, sellCmd)
 
-	buyCmd.Flags().StringVarP(&ticker, "ticker", "s", "", "Company name (required)")
+	buyCmd.PersistentFlags().StringVarP(&ticker, "ticker", "t", "", "Company name (required)")
 	buyCmd.MarkPersistentFlagRequired("ticker")
-	buyCmd.Flags().IntVarP(&price, "price", "p", 0, "Company price (required)")
+	buyCmd.PersistentFlags().IntVarP(&price, "price", "p", 0, "Company price (required)")
 	buyCmd.MarkPersistentFlagRequired("price")
-	buyCmd.Flags().IntVarP(&date, "date", "d", 0, "The date stock was bought (required)")
+	buyCmd.PersistentFlags().StringVarP(&date, "date", "d", time.Now().Format("02.01.2006"), "The date stock was bought (required)")
 	buyCmd.MarkPersistentFlagRequired("date")
-	buyCmd.Flags().IntVarP(&shares, "shares", "h", 0, "Number of shares (required)")
+	buyCmd.PersistentFlags().IntVarP(&shares, "shares", "s", 0, "Number of shares (required)")
 	buyCmd.MarkPersistentFlagRequired("shares")
-	}
+
+	sellCmd.PersistentFlags().StringVarP(&ticker, "ticker", "t", "", "Company name (required)")
+	sellCmd.MarkPersistentFlagRequired("ticker")
+	sellCmd.PersistentFlags().IntVarP(&price, "price", "p", 0, "Company price (required)")
+	sellCmd.MarkPersistentFlagRequired("price")
+	sellCmd.PersistentFlags().StringVarP(&date, "date", "d", time.Now().Format("02.01.2006"), "The date stock was sold (required)")
+	sellCmd.MarkPersistentFlagRequired("date")
+	sellCmd.PersistentFlags().IntVarP(&shares, "shares", "s", 0, "Number of shares (required)")
+	sellCmd.MarkPersistentFlagRequired("shares")
+}

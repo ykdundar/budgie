@@ -71,19 +71,19 @@ func init() {
 	rootCmd.AddCommand(stockCmd)
 	stockCmd.AddCommand(addCmd, removeCmd, reportCmd)
 
-	addCmd.Flags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
+	addCmd.PersistentFlags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
 	addCmd.MarkPersistentFlagRequired("portfolio")
-	addCmd.Flags().StringVarP(&ticker, "ticker", "s", "", "Company name (required)")
+	addCmd.PersistentFlags().StringVarP(&ticker, "ticker", "s", "", "Company name (required)")
 	addCmd.MarkPersistentFlagRequired("ticker")
 
-	removeCmd.Flags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
+	removeCmd.PersistentFlags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
 	removeCmd.MarkPersistentFlagRequired("portfolio")
-	removeCmd.Flags().StringVarP(&ticker, "ticker", "s", "", "Company name (required)")
+	removeCmd.PersistentFlags().StringVarP(&ticker, "ticker", "s", "", "Company name (required)")
 	removeCmd.MarkPersistentFlagRequired("ticker")
 
-	reportCmd.Flags().StringVarP(&today, "today", "t", "", "Portfolio name (required)")
-	reportCmd.Flags().IntVarP(&day, "day", "d", 1, "Report last given number of days ")
-	reportCmd.Flags().IntVarP(&week, "week", "w", 1, "Report last given number of weeks")
-	reportCmd.Flags().IntVarP(&month, "month", "m", 1, "Report last given number of months")
-	reportCmd.Flags().IntVarP(&year, "year", "y", 1, "Report last given number of years")
+	reportCmd.PersistentFlags().StringVarP(&today, "today", "t", "", "Portfolio name (required)")
+	reportCmd.PersistentFlags().IntVarP(&day, "day", "d", 1, "Report last given number of days ")
+	reportCmd.PersistentFlags().IntVarP(&week, "week", "w", 1, "Report last given number of weeks")
+	reportCmd.PersistentFlags().IntVarP(&month, "month", "m", 1, "Report last given number of months")
+	reportCmd.PersistentFlags().IntVarP(&year, "year", "y", 1, "Report last given number of years")
 }

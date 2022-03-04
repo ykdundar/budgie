@@ -35,6 +35,10 @@ var addCmd = &cobra.Command{
 `,
 }
 
+/*INSERT INTO phonebook(name,phonenumber) VALUES('Alice','704-555-1212')
+ON CONFLICT(name) DO UPDATE SET phonenumber=excluded.phonenumber;
+*/
+
 var removeCmd = &cobra.Command{
 	Use:   "remove",
 	Short: "Removes a given stock",

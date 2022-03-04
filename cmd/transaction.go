@@ -22,7 +22,10 @@ var buyCmd = &cobra.Command{
 	Use:   "buy",
 	Short: "Add the stock you bought to transactions table",
 	Run: func(cmd *cobra.Command, args []string) {
-		database.AddTransaction(ticker, price, shares, date, cmd.Use)
+		req, reqErr := api.IntradayRequest(ticker)
+		cobra.CheckErr(reqErr)
+
+		database.AddTransaction(ticker, price, shares, date, cmd.Use, req.Data[0].Last)
 	},
 	Example: `budgie transaction buy
 	--ticker "MSFT"
@@ -35,7 +38,10 @@ var sellCmd = &cobra.Command{
 	Use:   "sell",
 	Short: "Add the stock you bought to transactions table",
 	Run: func(cmd *cobra.Command, args []string) {
-		database.AddTransaction(ticker, price, shares, date, cmd.Use)
+		req, reqErr := api.IntradayRequest(ticker)
+		cobra.CheckErr(reqErr)
+
+		database.AddTransaction(ticker, price, shares, date, cmd.Use, req.Data[0].Last)
 	},
 	Example: `budgie transaction sell
 	--ticker "MSFT"

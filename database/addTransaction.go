@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func AddTransaction(ticker string, price int,  shares int, date string, category string) {
+func AddTransaction(ticker string, price float64, shares int, date string, category string, lastPrice float64) {
 	val, timeErr := time.Parse("02.01.2006", date)
 	cobra.CheckErr(timeErr)
 

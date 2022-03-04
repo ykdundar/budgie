@@ -24,10 +24,11 @@ func AddTransaction(ticker string, price int,  shares int, date string, category
 	}
 
 	var (
-		unixTime = int(val.Unix())
-		purchaseValue = price * shares
+		unixTime      = int(val.Unix())
+		purchaseValue = price * float64(shares)
+		marketValue = lastPrice * float64(shares)
 	)
-	_, insertErr := addTransaction.Exec(ticker, price, shares, transactionCategory, unixTime, purchaseValue, 0)
+	_, insertErr := addTransaction.Exec(ticker, price, shares, transactionCategory, unixTime, purchaseValue, marketValue)
 	cobra.CheckErr(insertErr)
 
 	fmt.Printf("'%s' is added succesfully\n", ticker)

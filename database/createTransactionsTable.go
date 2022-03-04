@@ -11,11 +11,11 @@ func CreateTransactionsTable() {
 			"id INTEGER PRIMARY KEY,"+
 			"ticker TEXT," +
 			"transactions_date INTEGER," +
-			"price INTEGER," +
+			"price REAL," +
 			"shares INTEGER," +
 			"transaction_category INTEGER," +
-			"purchase_value INTEGER," +
-			"market_value INTEGER)",
+			"purchase_value REAL," +
+			"market_value REAL)",
 		)
 	defer createTransactionsTable.Close()
 	cobra.CheckErr(queryErr)

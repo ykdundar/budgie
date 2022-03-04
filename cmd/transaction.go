@@ -50,7 +50,7 @@ func init() {
 
 	buyCmd.PersistentFlags().StringVarP(&ticker, "ticker", "t", "", "Company name (required)")
 	buyCmd.MarkPersistentFlagRequired("ticker")
-	buyCmd.PersistentFlags().IntVarP(&price, "price", "p", 0, "Company price (required)")
+	buyCmd.PersistentFlags().Float64VarP(&price, "price", "p", 0, "Company price (required)")
 	buyCmd.MarkPersistentFlagRequired("price")
 	buyCmd.PersistentFlags().StringVarP(&date, "date", "d", time.Now().Format("02.01.2006"), "The date stock was bought (required)")
 	buyCmd.MarkPersistentFlagRequired("date")
@@ -59,7 +59,7 @@ func init() {
 
 	sellCmd.PersistentFlags().StringVarP(&ticker, "ticker", "t", "", "Company name (required)")
 	sellCmd.MarkPersistentFlagRequired("ticker")
-	sellCmd.PersistentFlags().IntVarP(&price, "price", "p", 0, "Company price (required)")
+	sellCmd.PersistentFlags().Float64VarP(&price, "price", "p", 0, "Company price (required)")
 	sellCmd.MarkPersistentFlagRequired("price")
 	sellCmd.PersistentFlags().StringVarP(&date, "date", "d", time.Now().Format("02.01.2006"), "The date stock was sold (required)")
 	sellCmd.MarkPersistentFlagRequired("date")

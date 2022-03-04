@@ -1,6 +1,7 @@
 package database
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
 )
 
@@ -13,4 +14,5 @@ func AddStock(portfolioName string, ticker string) {
 
 	_, insertErr := addStock.Exec(portfolio.Id, ticker)
 	cobra.CheckErr(insertErr)
+	fmt.Printf("'%s' is added succesfully\n", ticker)
 }

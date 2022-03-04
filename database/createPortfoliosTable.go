@@ -9,7 +9,7 @@ func CreatePortfolioTable() {
 	createPortfolios, queryErr := database.Prepare(
 		"CREATE TABLE IF NOT EXISTS portfolios (" +
 			"id INTEGER PRIMARY KEY," +
-			"name TEXT," +
+			"name TEXT UNIQUE," +
 			"currency TEXT," +
 			"active INTEGER)",
 	)

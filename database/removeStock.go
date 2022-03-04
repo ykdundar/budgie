@@ -8,7 +8,7 @@ import (
 
 func RemoveStock(portfolio string, ticker string) {
 	portfolioStr := internal.Portfolio{}
-	portfolioStr = SelectPortfolio(portfolio)
+	portfolioStr = FindPortfolio(portfolio)
 
 	removeStock, queryErr := database.Prepare(fmt.Sprintf("DELETE FROM stocks WHERE ticker='%s' AND portfolio_id=%d", ticker, portfolioStr.Id))
 	defer removeStock.Close()

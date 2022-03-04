@@ -6,7 +6,7 @@ import (
 	"github.com/ykdundar/budgie/internal"
 )
 
-func FindPortfolio(name string) internal.Portfolio {
+func SelectPortfolio(name string) internal.Portfolio {
 	record := database.QueryRow("SELECT * FROM portfolios WHERE name=?", name)
 
 	portfolio := internal.Portfolio{}

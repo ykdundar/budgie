@@ -56,7 +56,7 @@ var showCmd = &cobra.Command{
 	Use:   "show",
 	Short: "Shows an active portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(database.SelectPortfolio(name))
+		fmt.Println(database.FindPortfolio(name))
 	},
 }
 

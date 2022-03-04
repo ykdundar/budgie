@@ -1,6 +1,7 @@
 package database
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
 	"time"
 )
@@ -28,4 +29,6 @@ func AddTransaction(ticker string, price int,  shares int, date string, category
 	)
 	_, insertErr := addTransaction.Exec(ticker, price, shares, transactionCategory, unixTime, purchaseValue, 0)
 	cobra.CheckErr(insertErr)
+
+	fmt.Printf("'%s' is added succesfully\n", ticker)
 }

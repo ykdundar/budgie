@@ -7,6 +7,7 @@ import (
 )
 
 func RemoveStock(portfolio string, ticker string) {
+
 	portfolioStr := internal.Portfolio{}
 	portfolioStr = FindPortfolio(portfolio)
 

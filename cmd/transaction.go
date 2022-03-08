@@ -25,7 +25,15 @@ var buyCmd = &cobra.Command{
 		req, reqErr := api.IntradayRequest(ticker)
 		cobra.CheckErr(reqErr)
 
-		database.AddTransaction(ticker, price, shares, date, cmd.Use, req.Data[0].Last)
+		lastPrice := req.Data[0].Last
+
+		if lastPrice == 0 {
+			eodReq, eodReqErr := api.EndOfDayRequest(ticker)
+			lastPrice = eodReq.Data[0].Close
+			cobra.CheckErr(eodReqErr)
+		}
+
+		database.AddTransaction(ticker, price, shares, cmd.Use, date, lastPrice)
 	},
 	Example: `budgie transaction buy
 	--ticker "MSFT"
@@ -34,6 +42,7 @@ var buyCmd = &cobra.Command{
 	--date "19.01.2022"
 `,
 }
+
 var sellCmd = &cobra.Command{
 	Use:   "sell",
 	Short: "Add the stock you bought to transactions table",
@@ -41,7 +50,15 @@ var sellCmd = &cobra.Command{
 		req, reqErr := api.IntradayRequest(ticker)
 		cobra.CheckErr(reqErr)
 
-		database.AddTransaction(ticker, price, shares, date, cmd.Use, req.Data[0].Last)
+		lastPrice := req.Data[0].Last
+
+		if lastPrice == 0 {
+			eodReq, eodReqErr := api.EndOfDayRequest(ticker)
+			lastPrice = eodReq.Data[0].Close
+			cobra.CheckErr(eodReqErr)
+		}
+
+		database.AddTransaction(ticker, price, shares, cmd.Use, date, lastPrice)
 	},
 	Example: `budgie transaction sell
 	--ticker "MSFT"
@@ -57,7 +74,7 @@ func init() {
 
 	buyCmd.PersistentFlags().StringVarP(&ticker, "ticker", "t", "", "Company name (required)")
 	buyCmd.MarkPersistentFlagRequired("ticker")
-	buyCmd.PersistentFlags().IntVarP(&price, "price", "p", 0, "Company price (required)")
+	buyCmd.PersistentFlags().Float64VarP(&price, "price", "p", 0, "Company price (required)")
 	buyCmd.MarkPersistentFlagRequired("price")
 	buyCmd.PersistentFlags().StringVarP(&date, "date", "d", time.Now().Format("02.01.2006"), "The date stock was bought (required)")
 	buyCmd.MarkPersistentFlagRequired("date")
@@ -66,7 +83,7 @@ func init() {
 
 	sellCmd.PersistentFlags().StringVarP(&ticker, "ticker", "t", "", "Company name (required)")
 	sellCmd.MarkPersistentFlagRequired("ticker")
-	sellCmd.PersistentFlags().IntVarP(&price, "price", "p", 0, "Company price (required)")
+	sellCmd.PersistentFlags().Float64VarP(&price, "price", "p", 0, "Company price (required)")
 	sellCmd.MarkPersistentFlagRequired("price")
 	sellCmd.PersistentFlags().StringVarP(&date, "date", "d", time.Now().Format("02.01.2006"), "The date stock was sold (required)")
 	sellCmd.MarkPersistentFlagRequired("date")

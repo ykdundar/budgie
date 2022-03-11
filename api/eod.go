@@ -41,14 +41,14 @@ func EndOfDayRequest(symbols string) (EndOfDay, error) {
 
 	if err != nil {
 		return EndOfDay{}, errors.New("the HTTP request has failed with an error")
-	}else {
+	} else {
 		data, _ := ioutil.ReadAll(response.Body)
 		endOfDay := EndOfDay{}
 		err := json.Unmarshal(data, &endOfDay)
-		if err != nil{
+		if err != nil {
 			return EndOfDay{}, err
 		}
-		return  endOfDay, nil
+		return endOfDay, nil
 	}
 
 }

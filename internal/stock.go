@@ -1,5 +1,6 @@
 package internal
 
+// TODO: Do we even use this?!
 // Stock Type
 type Stock struct {
 	stockId     int

@@ -11,6 +11,7 @@ import (
 var price float64
 var shares int
 var date string
+var id int
 
 // transactionCmd represents the transaction command
 var transactionCmd = &cobra.Command{
@@ -66,6 +67,14 @@ var sellCmd = &cobra.Command{
 	--shares 20
 	--date "19.01.2022"
 `,
+}
+
+var reportCmd = &cobra.Command{
+	Use:   "report",
+	Short: "",
+	Run: func(cmd *cobra.Command, args []string) {
+		database.ReportRequest()
+	},
 }
 
 var removeTransactionCmd = &cobra.Command{

@@ -78,6 +78,7 @@ budgie stock sell --portfolio "European Stocks" --ticker "MSFT" --date "06.02.20
 
 ### Reporting
 
+# TODO add transaction and fix comments below
 ```sh
 budgie stock report
 budgie stock report --today # since today

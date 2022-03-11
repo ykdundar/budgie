@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/database"
 )
@@ -10,11 +9,6 @@ import (
 var (
 	portfolio string
 	ticker    string
-	today     string
-	day       int
-	week      int
-	month     int
-	year      int
 )
 
 // stockCmd represents the stock command
@@ -46,26 +40,10 @@ var removeCmd = &cobra.Command{
 	--ticker "MSFT"
 `,
 }
-
-var reportCmd = &cobra.Command{
-	Use:   "report",
-	Short: "reports stock situations by the given time as integer ",
-	Long: `reports stock situations by the given time as integer
-For example:
-day 5
-week 3
-mont 9
-year 2`,
-
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("report called")
-
-	},
-}
-
+	
 func init() {
 	rootCmd.AddCommand(stockCmd)
-	stockCmd.AddCommand(addCmd, removeCmd, reportCmd)
+	stockCmd.AddCommand(addCmd, removeCmd)
 
 	addCmd.PersistentFlags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
 	addCmd.MarkPersistentFlagRequired("portfolio")
@@ -74,12 +52,7 @@ func init() {
 
 	removeCmd.PersistentFlags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
 	removeCmd.MarkPersistentFlagRequired("portfolio")
-	removeCmd.PersistentFlags().StringVarP(&ticker, "ticker", "s", "", "Company name (required)")
+	removeCmd.PersistentFlags().StringVarP(&ticker, "ticker", "t", "", "Company name (required)")
 	removeCmd.MarkPersistentFlagRequired("ticker")
 
-	reportCmd.PersistentFlags().StringVarP(&today, "today", "t", "", "Portfolio name (required)")
-	reportCmd.PersistentFlags().IntVarP(&day, "day", "d", 1, "Report last given number of days ")
-	reportCmd.PersistentFlags().IntVarP(&week, "week", "w", 1, "Report last given number of weeks")
-	reportCmd.PersistentFlags().IntVarP(&month, "month", "m", 1, "Report last given number of months")
-	reportCmd.PersistentFlags().IntVarP(&year, "year", "y", 1, "Report last given number of years")
 }

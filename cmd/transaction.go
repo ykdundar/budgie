@@ -68,9 +68,17 @@ var sellCmd = &cobra.Command{
 `,
 }
 
+var removeTransactionCmd = &cobra.Command{
+	Use:   "remove",
+	Short: "Delete the stock you bought to transactions table",
+	Run: func(cmd *cobra.Command, args []string) {
+		database.RemoveTransaction(id)
+	},
+}
+
 func init() {
 	rootCmd.AddCommand(transactionCmd)
-	transactionCmd.AddCommand(buyCmd, sellCmd)
+	transactionCmd.AddCommand(buyCmd, sellCmd, removeTransactionCmd, reportCmd)
 
 	buyCmd.PersistentFlags().StringVarP(&ticker, "ticker", "t", "", "Company name (required)")
 	buyCmd.MarkPersistentFlagRequired("ticker")
@@ -89,4 +97,7 @@ func init() {
 	sellCmd.MarkPersistentFlagRequired("date")
 	sellCmd.PersistentFlags().IntVarP(&shares, "shares", "s", 0, "Number of shares (required)")
 	sellCmd.MarkPersistentFlagRequired("shares")
+
+	removeTransactionCmd.PersistentFlags().IntVarP(&id, "id", "i", 0, "Transaction ID (required)")
+	removeTransactionCmd.MarkPersistentFlagRequired("id")
 }

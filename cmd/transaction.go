@@ -7,11 +7,14 @@ import (
 	"time"
 )
 
-//flags
+// flags
 var price float64
 var shares int
 var date string
 var id int
+var day int
+var month int
+var year int
 
 // transactionCmd represents the transaction command
 var transactionCmd = &cobra.Command{
@@ -21,7 +24,7 @@ var transactionCmd = &cobra.Command{
 
 var buyCmd = &cobra.Command{
 	Use:   "buy",
-	Short: "Add the stock you bought to transactions table",
+	Short: "Saves your stock buys",
 	Run: func(cmd *cobra.Command, args []string) {
 		req, reqErr := api.IntradayRequest(ticker)
 		cobra.CheckErr(reqErr)
@@ -29,7 +32,7 @@ var buyCmd = &cobra.Command{
 		lastPrice := req.Data[0].Last
 
 		if lastPrice == 0 {
-			eodReq, eodReqErr := api.EndOfDayRequest(ticker)
+			eodReq, eodReqErr := api.EndOfDayRequest(ticker, "latest")
 			lastPrice = eodReq.Data[0].Close
 			cobra.CheckErr(eodReqErr)
 		}
@@ -46,7 +49,7 @@ var buyCmd = &cobra.Command{
 
 var sellCmd = &cobra.Command{
 	Use:   "sell",
-	Short: "Add the stock you bought to transactions table",
+	Short: "Saves your stock sells",
 	Run: func(cmd *cobra.Command, args []string) {
 		req, reqErr := api.IntradayRequest(ticker)
 		cobra.CheckErr(reqErr)
@@ -54,7 +57,7 @@ var sellCmd = &cobra.Command{
 		lastPrice := req.Data[0].Last
 
 		if lastPrice == 0 {
-			eodReq, eodReqErr := api.EndOfDayRequest(ticker)
+			eodReq, eodReqErr := api.EndOfDayRequest(ticker, "latest")
 			lastPrice = eodReq.Data[0].Close
 			cobra.CheckErr(eodReqErr)
 		}
@@ -69,25 +72,54 @@ var sellCmd = &cobra.Command{
 `,
 }
 
-var reportCmd = &cobra.Command{
-	Use:   "report",
-	Short: "",
+var removeTransactionCmd = &cobra.Command{
+	Use:   "remove",
+	Short: "Removes your stock purchases",
 	Run: func(cmd *cobra.Command, args []string) {
-		database.ReportRequest()
+		database.RemoveTransaction(id)
 	},
 }
 
-var removeTransactionCmd = &cobra.Command{
-	Use:   "remove",
-	Short: "Delete the stock you bought to transactions table",
+var reportCmd = &cobra.Command{
+	Use:   "report",
+	Short: "Reports transaction earnings/losses per stock",
+	Args: cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
-		database.RemoveTransaction(id)
+		database.ReportRequest(cmd.Use, "")
+	},
+}
+
+var dayCmd = &cobra.Command{
+	Use:   "day",
+	Short: "Reports transaction earnings/losses per stock for a given number of days",
+	Args:  cobra.ExactArgs(1),
+	Run: func(cmd *cobra.Command, args []string) {
+		database.ReportRequest(cmd.Use, args[0])
+	},
+}
+
+var monthCmd = &cobra.Command{
+	Use:   "month",
+	Short: "Reports transaction earnings/losses per stock for a given number of months",
+	Args:  cobra.ExactArgs(1),
+	Run: func(cmd *cobra.Command, args []string) {
+		database.ReportRequest(cmd.Use, args[0])
+	},
+}
+
+var yearCmd = &cobra.Command{
+	Use:   "year",
+	Short: "Reports transaction earnings/losses per stock for a given number of years",
+	Args:  cobra.ExactArgs(1),
+	Run: func(cmd *cobra.Command, args []string) {
+		database.ReportRequest(cmd.Use, args[0])
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(transactionCmd)
 	transactionCmd.AddCommand(buyCmd, sellCmd, removeTransactionCmd, reportCmd)
+	reportCmd.AddCommand(dayCmd, monthCmd, yearCmd)
 
 	buyCmd.PersistentFlags().StringVarP(&ticker, "ticker", "t", "", "Company name (required)")
 	buyCmd.MarkPersistentFlagRequired("ticker")

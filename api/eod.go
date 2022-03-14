@@ -27,8 +27,9 @@ type EndOfDay struct {
 	} `json:"data"`
 }
 
-func EndOfDayRequest(symbols string) (EndOfDay, error) {
-	const endpointURL string = "/eod/latest"
+func EndOfDayRequest(symbols string, date string) (EndOfDay, error) {
+	var endpointURL string = "/eod/" + date
+
 	baseURL := BaseURL()
 	values := baseURL.Query()
 

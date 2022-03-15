@@ -80,10 +80,8 @@ budgie stock sell --portfolio "European Stocks" --ticker "MSFT" --date "06.02.20
 
 # TODO add transaction and fix comments below
 ```sh
-budgie stock report
-budgie stock report --today # since today
-budgie stock report --day 30
-bugdie stock report --week 2
-budgie stock report --month 5
-budgie stock report --year 2
+budgie transaction report
+budgie transaction report day 30
+budgie transaction report month 5
+budgie transaction report year 2
 ```

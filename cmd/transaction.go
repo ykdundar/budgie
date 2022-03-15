@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/api"
 	"github.com/ykdundar/budgie/database"
@@ -116,9 +117,17 @@ var yearCmd = &cobra.Command{
 	},
 }
 
+var listAllTransactionsCmd = &cobra.Command{
+	Use:   "list",
+	Short: "Lists all your buying and selling records ",
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println(database.ListAllTransactions())
+	},
+}
+
 func init() {
 	rootCmd.AddCommand(transactionCmd)
-	transactionCmd.AddCommand(buyCmd, sellCmd, removeTransactionCmd, reportCmd)
+	transactionCmd.AddCommand(buyCmd, sellCmd, removeTransactionCmd, reportCmd, listAllTransactionsCmd)
 	reportCmd.AddCommand(dayCmd, monthCmd, yearCmd)
 
 	buyCmd.PersistentFlags().StringVarP(&ticker, "ticker", "t", "", "Company name (required)")

@@ -35,7 +35,7 @@ func ReportRequest(command string, commandValue string) {
 
 	var baseQuery = fmt.Sprintf(
 		"SELECT ticker, shares, purchase_value, transaction_category FROM transactions WHERE transactions_date > %d", pastTime,
-		)
+	)
 
 	records, queryErr := database.Query(baseQuery)
 	defer records.Close()

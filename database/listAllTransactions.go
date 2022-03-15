@@ -1,23 +1,25 @@
 package database
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/internal"
 )
 
-func ListAllTransactions() []internal.Transaction {
+func ListAllTransactions() {
 	records, queryErr := database.Query("SELECT id, ticker, price,  shares, transaction_category FROM transactions ")
 	defer records.Close()
 	cobra.CheckErr(queryErr)
 
-	transactions := internal.Transaction{}
-	var transaction []internal.Transaction
+	transaction := internal.Transaction{}
+	var transactions []internal.Transaction
 
 	for records.Next() {
-		scanErr := records.Scan(&transactions.Id, &transactions.Ticker, &transactions.Price, &transactions.Shares, &transactions.TransactionCategory)
+		scanErr := records.Scan(&transaction.Id, &transaction.Ticker, &transaction.Price, &transaction.Shares, &transaction.TransactionCategory)
 		cobra.CheckErr(scanErr)
-		transaction = append(transaction, transactions)
+		transactions = append(transactions, transaction)
 	}
-	return transaction
-
+	for _, v := range transactions{
+		fmt.Println("Id: ", v.Id, "Ticker: ", v.Ticker, "Price: ", v.Price, "Shares: ", v.Shares, "Category: ", v.TransactionCategory)
+	}
 }

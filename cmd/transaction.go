@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/api"
 	"github.com/ykdundar/budgie/database"
@@ -121,7 +120,7 @@ var listAllTransactionsCmd = &cobra.Command{
 	Use:   "list",
 	Short: "Lists all your buying and selling records ",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(database.ListAllTransactions())
+		database.ListAllTransactions()
 	},
 }
 

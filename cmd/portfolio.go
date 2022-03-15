@@ -48,7 +48,7 @@ var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "Lists all portfolios",
 	Run: func(cmd *cobra.Command, args []string) {
-		database.SelectAllPortfolios()
+		fmt.Println(database.SelectAllPortfolios())
 	},
 }
 

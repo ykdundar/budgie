@@ -1,8 +1,11 @@
 package database
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/internal"
+	"strconv"
+	"time"
 )
 
 type TransactionSum struct {
@@ -10,11 +13,33 @@ type TransactionSum struct {
 	PurchaseValue float64
 }
 
-func ReportRequest() {
-	records, queryErr := database.Query("SELECT ticker, shares, purchase_value, transaction_category FROM transactions")
-	cobra.CheckErr(queryErr)
+func ReportRequest(command string, commandValue string) {
+	var commandValueInt int = 0
+	var convErr error
 
+	if command != "report" {
+		commandValueInt, convErr = strconv.Atoi(commandValue)
+		cobra.CheckErr(convErr)
+	}
+
+	var pastTime int64
+
+	switch {
+	case command == "day":
+		pastTime = time.Now().AddDate(0, 0, -commandValueInt).Unix()
+	case command == "month":
+		pastTime = time.Now().AddDate(0, -commandValueInt, 0).Unix()
+	case command == "year":
+		pastTime = time.Now().AddDate(-commandValueInt, 0, 0).Unix()
+	}
+
+	var baseQuery = fmt.Sprintf(
+		"SELECT ticker, shares, purchase_value, transaction_category FROM transactions WHERE transactions_date > %d", pastTime,
+		)
+
+	records, queryErr := database.Query(baseQuery)
 	defer records.Close()
+	cobra.CheckErr(queryErr)
 
 	dbRecord := internal.Transaction{}
 
@@ -37,4 +62,6 @@ func ReportRequest() {
 		}
 
 	}
+
+	fmt.Println(transactions)
 }

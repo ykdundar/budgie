@@ -1,11 +1,12 @@
 package database
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/internal"
 )
 
-func SelectAllPortfolios() []internal.Portfolio {
+func SelectAllPortfolios() {
 	records, queryErr := database.Query("SELECT * FROM portfolios")
 	cobra.CheckErr(queryErr)
 
@@ -21,5 +22,7 @@ func SelectAllPortfolios() []internal.Portfolio {
 		portfolios = append(portfolios, portfolio)
 	}
 
-	return portfolios
+	for _, v := range portfolios {
+		fmt.Println("Id: ", v.Id, "Name: ", v.Name, "Currency: ", v.Currency, "Active: ", v.Active)
+	}
 }

@@ -23,13 +23,13 @@ budgie portfolio create --name "European Stocks" --currency "USD" --active true
 #### Update Portfolio
 
 ```sh
-budgie portfolio update --name "European Stocks" --new_name "German Stocks" --currency "EUR" --active false
+budgie portfolio update --name "European Stocks" --rename "German Stocks" --currency "EUR" --active false
 ```
 
 #### Delete Portfolio
 
 ```sh
-budgie portfolio destroy --name "European Stocks"
+budgie portfolio delete --name "European Stocks"
 ```
 
 #### List All Portfolios
@@ -60,28 +60,53 @@ budgie stock add --portfolio "European Stocks" --ticker "MSFT"
 budgie stock remove --portfolio "European Stocks" --ticker "MSFT"
 ```
 
-### Buy and Sell Operations
+### Transaction Operations
 
-#### Buy a Stock
+#### Buy Stock to Transactions
 
 ```sh
-budgie stock buy --portfolio "European Stocks" --ticker "MSFT" --date "06.02.2022" --price "180" --shares "20" --currency "USD"
+budgie transaction buy --ticker "MSFT" --price 10.5 --date "02.01.2006" --shares 5 
 ```
 
-#### Sell a Stock
+#### Sell Stock to Transactions
 
 ```sh
-# sell and remove are aliases
-budgie stock remove --portfolio "European Stocks" --ticker "MSFT" --date "06.02.2020" --price "180" --shares "20"
-budgie stock sell --portfolio "European Stocks" --ticker "MSFT" --date "06.02.2020" --price "180" --shares "20"
+budgie transaction sell --ticker "MSFT" --price 10.5 --date "02.01.2006" --shares 5 
 ```
 
-### Reporting
+#### Remove Stock from Transactions
 
-# TODO add transaction and fix comments below
 ```sh
-budgie transaction report
+budgie transaction remove --id 1
+```
+
+#### Report Transaction Earnings/Losses
+
+##### Report All Transactions
+
+```sh
+budgie transaction report 
+```
+##### Report Transaction Earnings/Losses for The Given Number of Days
+
+```sh
 budgie transaction report day 30
+```
+
+##### Report Transaction Earnings/Losses for The Given Number of Months
+
+```sh
 budgie transaction report month 5
-budgie transaction report year 2
+```
+
+##### Report Transaction Earnings/Losses for The Given Number of Years
+
+```sh
+budgie transaction report year 5
+```
+
+#### List All Transactions Records
+
+```sh
+budgie transaction list
 ```

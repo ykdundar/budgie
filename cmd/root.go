@@ -16,7 +16,7 @@ import (
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "budgie",
-	Short: "budgie is a cli tool which follow your stock market transactions",
+	Short: "budgie allows you to manage your stock purchases without leaving the command line",
 	Long: `You can create portfolios and add, update, remove your stocks into these portfolios and
  check your stocks or stock you are interested in`,
 }
@@ -29,7 +29,13 @@ func Execute() {
 }
 
 func init() {
-	cobra.OnInitialize(initConfig)
+	cobra.OnInitialize(
+		database.EnableForeignKeys,
+		database.CreatePortfolioTable,
+		database.CreateStocksTable,
+		database.CreateTransactionsTable,
+		initConfig,
+	)
 
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 	rootCmd.Version = "[1.0.0]"
@@ -72,10 +78,4 @@ func initConfig() {
 			os.Exit(1)
 		}
 	}
-
-	database.EnableForeignKeys()
-	database.CreatePortfolioTable()
-	database.CreateStocksTable()
-	database.CreateTransactionsTable()
-
 }

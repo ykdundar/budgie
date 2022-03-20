@@ -5,7 +5,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func CreatePortfolioTable() {
+func CreatePortfoliosTable() {
 	createPortfolios, queryErr := database.Prepare(
 		"CREATE TABLE IF NOT EXISTS portfolios (" +
 			"id INTEGER PRIMARY KEY," +

@@ -3,12 +3,12 @@ package database
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"github.com/ykdundar/budgie/internal"
+	"github.com/ykdundar/budgie/internal/objects"
 )
 
 func RemoveStock(portfolio string, ticker string) {
 
-	portfolioStr := internal.Portfolio{}
+	portfolioStr := objects.Portfolio{}
 	portfolioStr = FindPortfolio(portfolio)
 
 	removeStock, queryErr := database.Prepare(fmt.Sprintf("DELETE FROM stocks WHERE ticker='%s' AND portfolio_id=%d", ticker, portfolioStr.Id))

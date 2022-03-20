@@ -3,7 +3,7 @@ package database
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"github.com/ykdundar/budgie/internal"
+	"github.com/ykdundar/budgie/internal/objects"
 	"strconv"
 	"time"
 )
@@ -41,7 +41,7 @@ func ReportRequest(command string, commandValue string) {
 	defer records.Close()
 	cobra.CheckErr(queryErr)
 
-	dbRecord := internal.Transaction{}
+	dbRecord := objects.Transaction{}
 
 	transactions := make(map[string]TransactionSum)
 

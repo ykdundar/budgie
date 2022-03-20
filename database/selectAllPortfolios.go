@@ -3,7 +3,7 @@ package database
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"github.com/ykdundar/budgie/internal"
+	"github.com/ykdundar/budgie/internal/objects"
 )
 
 func SelectAllPortfolios() {
@@ -12,8 +12,8 @@ func SelectAllPortfolios() {
 
 	defer records.Close()
 
-	portfolio := internal.Portfolio{}
-	var portfolios []internal.Portfolio
+	portfolio := objects.Portfolio{}
+	var portfolios []objects.Portfolio
 
 	for records.Next() {
 		scanErr := records.Scan(&portfolio.Id, &portfolio.Name, &portfolio.Currency, &portfolio.Active)

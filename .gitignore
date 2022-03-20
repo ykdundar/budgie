@@ -28,3 +28,6 @@ dist/
 
 # local database
 budgie.db
+
+# TODO list
+TODO.md

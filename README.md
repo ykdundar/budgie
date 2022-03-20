@@ -4,20 +4,24 @@
 
 First of all, obtain an API key from the [marketstack](https://marketstack.com/product).
 
-## Usage
+## Configuration
 
-### Configuration
+In order to use budgie, first you need to enter your API token as follows:
 
 ```sh
 budgie config --token "YOUR_API_TOKEN"
 ```
+
+If you want to update your token, you can run the same command again. The latest token will be used while using budgie.
+
+## Usage
 
 ### Portfolio Operations
 
 #### Create Portfolio
 
 ```sh
-budgie portfolio create --name "European Stocks" --currency "USD" --active true
+budgie portfolio create --name="European Stocks" --currency="USD" --active=true
 ```
 
 #### Update Portfolio

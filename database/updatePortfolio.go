@@ -3,12 +3,12 @@ package database
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"github.com/ykdundar/budgie/internal"
+	"github.com/ykdundar/budgie/internal/functions"
 	"strings"
 )
 
 func UpdatePortfolio(name string, rename string, currency string, active bool) {
-	activeValue := internal.ConvertBoolToInt(active)
+	activeValue := functions.ConvertBoolToInt(active)
 
 	var queryStr []string
 

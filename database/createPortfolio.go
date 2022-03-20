@@ -3,11 +3,11 @@ package database
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"github.com/ykdundar/budgie/internal"
+	"github.com/ykdundar/budgie/internal/functions"
 )
 
 func CreatePortfolio(name string, currency string, active bool) {
-	activeValue := internal.ConvertBoolToInt(active)
+	activeValue := functions.ConvertBoolToInt(active)
 
 	createPortfolio, _ := database.Prepare(
 		"INSERT INTO portfolios (name, currency, active) VALUES (?, ?, ?)",

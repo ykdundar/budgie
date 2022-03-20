@@ -5,13 +5,13 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// EnableForeignKeys enables foreign key support in sqlite
+// For more details: https://www.sqlite.org/foreignkeys.html
 func EnableForeignKeys() {
-	// https://www.sqlite.org/foreignkeys.html
-	enableForeignKeys, _ := database.Prepare("PRAGMA foreign_keys = ON;")
-
+	enableForeignKeys, queryErr := database.Prepare("PRAGMA foreign_keys = ON;")
 	defer enableForeignKeys.Close()
+	cobra.CheckErr(queryErr)
 
 	_, fkErr := enableForeignKeys.Exec()
-
 	cobra.CheckErr(fkErr)
 }

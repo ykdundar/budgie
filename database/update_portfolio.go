@@ -24,7 +24,7 @@ func UpdatePortfolio(name string, rename string, currency string, active bool) {
 
 	updateSql := strings.Join(queryStr[:], ",")
 
-	updatePortfolio, _ := database.Prepare(
+	updatePortfolio, _ := Database.Prepare(
 		fmt.Sprintf("UPDATE portfolios SET %s WHERE name = '%s'", updateSql, name),
 	)
 

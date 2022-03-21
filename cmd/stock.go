@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/ykdundar/budgie/database"
+	"github.com/ykdundar/budgie/database/stocks"
 )
 
 // flags
@@ -21,7 +21,7 @@ var addCmd = &cobra.Command{
 	Use:   "add",
 	Short: "add a stock to a given portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
-		database.AddStock(portfolio, ticker)
+		stocks.AddStock(portfolio, ticker)
 	},
 	Example: `budgie stock add
 	--portfolio "European Stocks"
@@ -33,7 +33,7 @@ var removeCmd = &cobra.Command{
 	Use:   "remove",
 	Short: "Removes a given stock",
 	Run: func(cmd *cobra.Command, args []string) {
-		database.RemoveStock(portfolio, ticker)
+		stocks.RemoveStock(portfolio, ticker)
 	},
 	Example: `budgie stock remove
 	--portfolio "European Stocks"

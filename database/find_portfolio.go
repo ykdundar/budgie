@@ -7,7 +7,7 @@ import (
 )
 
 func FindPortfolio(name string) objects.Portfolio {
-	record := database.QueryRow("SELECT * FROM portfolios WHERE name=?", name)
+	record := Database.QueryRow("SELECT * FROM portfolios WHERE name=?", name)
 
 	portfolio := objects.Portfolio{}
 

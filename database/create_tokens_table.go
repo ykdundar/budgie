@@ -3,10 +3,10 @@ package database
 import "github.com/spf13/cobra"
 
 // CreateTokensTable creates a table to store API tokens
-func CreateTokensTable(){
-	createTokensTable, queryErr := database.Prepare(
+func CreateTokensTable() {
+	createTokensTable, queryErr := Database.Prepare(
 		"CREATE TABLE IF NOT EXISTS tokens (" +
-			"id INTEGER PRIMARY KEY,"+
+			"id INTEGER PRIMARY KEY," +
 			"token TEXT)",
 	)
 	defer createTokensTable.Close()

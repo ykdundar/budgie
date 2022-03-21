@@ -1,14 +1,15 @@
-package database
+package stocks
 
 import (
 	"fmt"
 	"github.com/spf13/cobra"
+	"github.com/ykdundar/budgie/database"
 )
 
 func AddStock(portfolioName string, ticker string) {
-	portfolio := FindPortfolio(portfolioName)
+	portfolio := database.FindPortfolio(portfolioName)
 
-	addStock, queryErr := database.Prepare("INSERT INTO stocks (portfolio_id, ticker) VALUES (?, ?)")
+	addStock, queryErr := database.Database.Prepare("INSERT INTO stocks (portfolio_id, ticker) VALUES (?, ?)")
 	defer addStock.Close()
 	cobra.CheckErr(queryErr)
 

@@ -6,7 +6,7 @@ import (
 )
 
 func CreatePortfoliosTable() {
-	createPortfolios, queryErr := database.Prepare(
+	createPortfolios, queryErr := Database.Prepare(
 		"CREATE TABLE IF NOT EXISTS portfolios (" +
 			"id INTEGER PRIMARY KEY," +
 			"name TEXT UNIQUE," +

@@ -5,6 +5,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/ykdundar/budgie/database"
+	"github.com/ykdundar/budgie/database/stocks"
 	"os"
 )
 
@@ -29,7 +30,7 @@ func init() {
 		database.EnableForeignKeys,
 		database.CreateTokensTable,
 		database.CreatePortfoliosTable,
-		database.CreateStocksTable,
+		stocks.CreateStocksTable,
 		database.CreateTransactionsTable,
 		initConfig,
 	)

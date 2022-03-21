@@ -6,9 +6,9 @@ import (
 )
 
 func CreateTransactionsTable() {
-	createTransactionsTable, queryErr := database.Prepare(
+	createTransactionsTable, queryErr := Database.Prepare(
 		"CREATE TABLE IF NOT EXISTS transactions (" +
-			"id INTEGER PRIMARY KEY,"+
+			"id INTEGER PRIMARY KEY," +
 			"ticker TEXT," +
 			"transactions_date INTEGER," +
 			"price INTEGER," +
@@ -16,7 +16,7 @@ func CreateTransactionsTable() {
 			"transaction_category INTEGER," +
 			"purchase_value INTEGER," +
 			"market_value INTEGER)",
-		)
+	)
 	defer createTransactionsTable.Close()
 	cobra.CheckErr(queryErr)
 

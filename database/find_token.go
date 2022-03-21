@@ -7,7 +7,7 @@ import (
 )
 
 func FindToken() string {
-	record := database.QueryRow("SELECT * FROM tokens ORDER BY id DESC LIMIT 1;")
+	record := Database.QueryRow("SELECT * FROM tokens ORDER BY id DESC LIMIT 1;")
 
 	token := objects.Token{}
 

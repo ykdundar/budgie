@@ -6,7 +6,7 @@ import (
 )
 
 func DeletePortfolio(name string) {
-	deletePortfolio, queryErr := database.Prepare(
+	deletePortfolio, queryErr := Database.Prepare(
 		fmt.Sprintf("DELETE FROM portfolios WHERE name= '%s'", name),
 	)
 	defer deletePortfolio.Close()

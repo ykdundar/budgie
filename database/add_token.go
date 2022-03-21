@@ -5,8 +5,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func AddToken(token string){
-	addToken, queryErr := database.Prepare("INSERT INTO tokens (token) VALUES (?)")
+func AddToken(token string) {
+	addToken, queryErr := Database.Prepare("INSERT INTO tokens (token) VALUES (?)")
 	defer addToken.Close()
 	cobra.CheckErr(queryErr)
 

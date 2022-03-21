@@ -1,13 +1,14 @@
-package database
+package portfolios
 
 import (
 	"fmt"
 	"github.com/spf13/cobra"
+	"github.com/ykdundar/budgie/database"
 	"github.com/ykdundar/budgie/internal/objects"
 )
 
 func SelectAllPortfolios() {
-	records, queryErr := Database.Query("SELECT * FROM portfolios")
+	records, queryErr := database.Database.Query("SELECT * FROM portfolios")
 	cobra.CheckErr(queryErr)
 
 	defer records.Close()

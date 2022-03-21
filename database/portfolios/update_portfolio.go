@@ -1,8 +1,9 @@
-package database
+package portfolios
 
 import (
 	"fmt"
 	"github.com/spf13/cobra"
+	"github.com/ykdundar/budgie/database"
 	"github.com/ykdundar/budgie/internal/functions"
 	"strings"
 )
@@ -24,7 +25,7 @@ func UpdatePortfolio(name string, rename string, currency string, active bool) {
 
 	updateSql := strings.Join(queryStr[:], ",")
 
-	updatePortfolio, _ := Database.Prepare(
+	updatePortfolio, _ := database.Database.Prepare(
 		fmt.Sprintf("UPDATE portfolios SET %s WHERE name = '%s'", updateSql, name),
 	)
 

@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"github.com/ykdundar/budgie/database"
+	"github.com/ykdundar/budgie/database/portfolios"
 )
 
 // flags
@@ -24,7 +24,7 @@ var createCmd = &cobra.Command{
 	Use:   "create",
 	Short: "Creates a new portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
-		database.CreatePortfolio(name, currency, active)
+		portfolios.CreatePortfolio(name, currency, active)
 	},
 }
 
@@ -32,7 +32,7 @@ var updateCmd = &cobra.Command{
 	Use:   "update",
 	Short: "Updates a portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
-		database.UpdatePortfolio(name, rename, currency, active)
+		portfolios.UpdatePortfolio(name, rename, currency, active)
 	},
 }
 
@@ -40,7 +40,7 @@ var deleteCmd = &cobra.Command{
 	Use:   "delete",
 	Short: "Deletes a portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
-		database.DeletePortfolio(name)
+		portfolios.DeletePortfolio(name)
 	},
 }
 
@@ -48,7 +48,7 @@ var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "Lists all portfolios",
 	Run: func(cmd *cobra.Command, args []string) {
-		database.SelectAllPortfolios()
+		portfolios.SelectAllPortfolios()
 	},
 }
 
@@ -56,7 +56,7 @@ var showCmd = &cobra.Command{
 	Use:   "show",
 	Short: "Shows an active portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(database.FindPortfolio(name))
+		fmt.Println(portfolios.FindPortfolio(name))
 	},
 }
 

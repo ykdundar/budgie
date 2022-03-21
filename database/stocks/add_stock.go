@@ -4,10 +4,11 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/database"
+	"github.com/ykdundar/budgie/database/portfolios"
 )
 
 func AddStock(portfolioName string, ticker string) {
-	portfolio := database.FindPortfolio(portfolioName)
+	portfolio := portfolios.FindPortfolio(portfolioName)
 
 	addStock, queryErr := database.Database.Prepare("INSERT INTO stocks (portfolio_id, ticker) VALUES (?, ?)")
 	defer addStock.Close()

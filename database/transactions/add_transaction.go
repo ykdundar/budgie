@@ -1,8 +1,9 @@
-package database
+package transactions
 
 import (
 	"fmt"
 	"github.com/spf13/cobra"
+	"github.com/ykdundar/budgie/database"
 	"time"
 )
 
@@ -10,7 +11,7 @@ func AddTransaction(ticker string, price float64, shares int, category string, d
 	val, timeErr := time.Parse("02.01.2006", date)
 	cobra.CheckErr(timeErr)
 
-	addTransaction, queryErr := Database.Prepare(
+	addTransaction, queryErr := database.Database.Prepare(
 		"INSERT INTO transactions" +
 			"(ticker, price, shares, transaction_category, transactions_date, purchase_value, market_value)" +
 			"VALUES (?,?,?,?,?,?,?)")

@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/viper"
 	"github.com/ykdundar/budgie/database"
 	"github.com/ykdundar/budgie/database/stocks"
+	"github.com/ykdundar/budgie/database/transactions"
 	"os"
 )
 
@@ -31,7 +32,7 @@ func init() {
 		database.CreateTokensTable,
 		database.CreatePortfoliosTable,
 		stocks.CreateStocksTable,
-		database.CreateTransactionsTable,
+		transactions.CreateTransactionsTable,
 		initConfig,
 	)
 

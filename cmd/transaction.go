@@ -3,7 +3,7 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/api"
-	"github.com/ykdundar/budgie/database"
+	"github.com/ykdundar/budgie/database/transactions"
 	"time"
 )
 
@@ -37,7 +37,7 @@ var buyCmd = &cobra.Command{
 			cobra.CheckErr(eodReqErr)
 		}
 
-		database.AddTransaction(ticker, price, shares, cmd.Use, date, lastPrice)
+		transactions.AddTransaction(ticker, price, shares, cmd.Use, date, lastPrice)
 	},
 	Example: `budgie transaction buy
 	--ticker "MSFT"
@@ -62,7 +62,7 @@ var sellCmd = &cobra.Command{
 			cobra.CheckErr(eodReqErr)
 		}
 
-		database.AddTransaction(ticker, price, shares, cmd.Use, date, lastPrice)
+		transactions.AddTransaction(ticker, price, shares, cmd.Use, date, lastPrice)
 	},
 	Example: `budgie transaction sell
 	--ticker "MSFT"
@@ -76,16 +76,16 @@ var removeTransactionCmd = &cobra.Command{
 	Use:   "remove",
 	Short: "Removes your stock purchases",
 	Run: func(cmd *cobra.Command, args []string) {
-		database.RemoveTransaction(id)
+		transactions.RemoveTransaction(id)
 	},
 }
 
 var reportCmd = &cobra.Command{
 	Use:   "report",
 	Short: "Reports transaction earnings/losses per stock",
-	Args: cobra.NoArgs,
+	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
-		database.ReportRequest(cmd.Use, "")
+		transactions.ReportRequest(cmd.Use, "")
 	},
 }
 
@@ -94,7 +94,7 @@ var dayCmd = &cobra.Command{
 	Short: "Reports transaction earnings/losses per stock for a given number of days",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		database.ReportRequest(cmd.Use, args[0])
+		transactions.ReportRequest(cmd.Use, args[0])
 	},
 }
 
@@ -103,7 +103,7 @@ var monthCmd = &cobra.Command{
 	Short: "Reports transaction earnings/losses per stock for a given number of months",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		database.ReportRequest(cmd.Use, args[0])
+		transactions.ReportRequest(cmd.Use, args[0])
 	},
 }
 
@@ -112,7 +112,7 @@ var yearCmd = &cobra.Command{
 	Short: "Reports transaction earnings/losses per stock for a given number of years",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		database.ReportRequest(cmd.Use, args[0])
+		transactions.ReportRequest(cmd.Use, args[0])
 	},
 }
 
@@ -120,7 +120,7 @@ var listAllTransactionsCmd = &cobra.Command{
 	Use:   "list",
 	Short: "Lists all your buying and selling records ",
 	Run: func(cmd *cobra.Command, args []string) {
-		database.ListAllTransactions()
+		transactions.ListAllTransactions()
 	},
 }
 

@@ -1,12 +1,13 @@
-package database
+package transactions
 
 import (
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/spf13/cobra"
+	"github.com/ykdundar/budgie/database"
 )
 
 func CreateTransactionsTable() {
-	createTransactionsTable, queryErr := Database.Prepare(
+	createTransactionsTable, queryErr := database.Database.Prepare(
 		"CREATE TABLE IF NOT EXISTS transactions (" +
 			"id INTEGER PRIMARY KEY," +
 			"ticker TEXT," +

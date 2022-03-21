@@ -1,8 +1,9 @@
-package database
+package transactions
 
 import (
 	"fmt"
 	"github.com/spf13/cobra"
+	"github.com/ykdundar/budgie/database"
 	"github.com/ykdundar/budgie/internal/objects"
 	"strconv"
 	"time"
@@ -37,7 +38,7 @@ func ReportRequest(command string, commandValue string) {
 		"SELECT ticker, shares, purchase_value, transaction_category FROM transactions WHERE transactions_date > %d", pastTime,
 	)
 
-	records, queryErr := Database.Query(baseQuery)
+	records, queryErr := database.Database.Query(baseQuery)
 	defer records.Close()
 	cobra.CheckErr(queryErr)
 

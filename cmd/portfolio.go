@@ -6,14 +6,6 @@ import (
 	"github.com/ykdundar/budgie/database/portfolios"
 )
 
-// flags
-var (
-	name     string
-	currency string
-	active   bool
-	rename   string
-)
-
 // portfolioCmd represents the portfolio command
 var portfolioCmd = &cobra.Command{
 	Use:   "portfolio",

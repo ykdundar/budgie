@@ -6,9 +6,6 @@ import (
 	"github.com/ykdundar/budgie/internal/functions"
 )
 
-// token represents an API token obtained from marketstack
-var token string
-
 // configCmd represents the config command
 var configCmd = &cobra.Command{
 	Use:   "config",

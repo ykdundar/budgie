@@ -5,12 +5,6 @@ import (
 	"github.com/ykdundar/budgie/database/stocks"
 )
 
-// flags
-var (
-	portfolio string
-	ticker    string
-)
-
 // stockCmd represents the stock command
 var stockCmd = &cobra.Command{
 	Use:   "stock",

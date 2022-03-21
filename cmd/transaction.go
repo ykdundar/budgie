@@ -7,15 +7,6 @@ import (
 	"time"
 )
 
-// flags
-var price float64
-var shares int
-var date string
-var id int
-var day int
-var month int
-var year int
-
 // transactionCmd represents the transaction command
 var transactionCmd = &cobra.Command{
 	Use:   "transaction",

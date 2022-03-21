@@ -1,10 +1,13 @@
-package database
+package tokens
 
-import "github.com/spf13/cobra"
+import (
+	"github.com/spf13/cobra"
+	"github.com/ykdundar/budgie/database"
+)
 
 // CreateTokensTable creates a table to store API tokens
 func CreateTokensTable() {
-	createTokensTable, queryErr := Database.Prepare(
+	createTokensTable, queryErr := database.Database.Prepare(
 		"CREATE TABLE IF NOT EXISTS tokens (" +
 			"id INTEGER PRIMARY KEY," +
 			"token TEXT)",

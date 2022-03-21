@@ -7,6 +7,7 @@ import (
 	"github.com/ykdundar/budgie/database"
 	"github.com/ykdundar/budgie/database/portfolios"
 	"github.com/ykdundar/budgie/database/stocks"
+	"github.com/ykdundar/budgie/database/tokens"
 	"github.com/ykdundar/budgie/database/transactions"
 	"os"
 )
@@ -30,7 +31,7 @@ func Execute() {
 func init() {
 	cobra.OnInitialize(
 		database.EnableForeignKeys,
-		database.CreateTokensTable,
+		tokens.CreateTokensTable,
 		portfolios.CreatePortfoliosTable,
 		stocks.CreateStocksTable,
 		transactions.CreateTransactionsTable,
@@ -43,7 +44,7 @@ func init() {
 func initConfig() {
 	// check if a token flag exists or not
 	if token == "" {
-		tokenRecord := database.FindToken()
+		tokenRecord := tokens.FindToken()
 
 		if tokenRecord == "" {
 			cobra.CheckErr("Please enter an API token with config command!")

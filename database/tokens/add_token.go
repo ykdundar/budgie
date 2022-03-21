@@ -1,12 +1,13 @@
-package database
+package tokens
 
 import (
 	"fmt"
 	"github.com/spf13/cobra"
+	"github.com/ykdundar/budgie/database"
 )
 
 func AddToken(token string) {
-	addToken, queryErr := Database.Prepare("INSERT INTO tokens (token) VALUES (?)")
+	addToken, queryErr := database.Database.Prepare("INSERT INTO tokens (token) VALUES (?)")
 	defer addToken.Close()
 	cobra.CheckErr(queryErr)
 

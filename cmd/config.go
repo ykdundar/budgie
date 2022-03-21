@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/ykdundar/budgie/database"
+	"github.com/ykdundar/budgie/database/tokens"
 	"github.com/ykdundar/budgie/internal/functions"
 )
 
@@ -21,7 +21,7 @@ token will be updated.`,
 		tokenErr := functions.CheckToken(token)
 		cobra.CheckErr(tokenErr)
 
-		database.AddToken(token)
+		tokens.AddToken(token)
 	},
 }
 

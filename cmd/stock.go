@@ -40,7 +40,7 @@ var removeCmd = &cobra.Command{
 	--ticker "MSFT"
 `,
 }
-	
+
 func init() {
 	rootCmd.AddCommand(stockCmd)
 	stockCmd.AddCommand(addCmd, removeCmd)

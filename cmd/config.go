@@ -24,6 +24,6 @@ token will be updated.`,
 
 func init() {
 	rootCmd.AddCommand(configCmd)
-	configCmd.PersistentFlags().StringVarP(&token, "token", "t", "", "API token (required)")
-	configCmd.MarkPersistentFlagRequired("token")
+	configCmd.Flags().StringVarP(&token, "token", "t", "", "API token (required)")
+	configCmd.MarkFlagRequired("token")
 }

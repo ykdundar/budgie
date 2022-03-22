@@ -10,10 +10,11 @@ import (
 func AddPortfolio(name string, currency string, active bool) {
 	activeValue := functions.ConvertBoolToInt(active)
 
-	createPortfolio, _ := database.DBConnection.Prepare(
+	createPortfolio, prepErr := database.DBConnection.Prepare(
 		"INSERT INTO portfolios (name, currency, active) VALUES (?, ?, ?)",
 	)
 	defer createPortfolio.Close()
+	cobra.CheckErr(prepErr)
 
 	_, insertErr := createPortfolio.Exec(name, currency, activeValue)
 	cobra.CheckErr(insertErr)

@@ -25,11 +25,12 @@ func UpdatePortfolio(name string, rename string, currency string, active bool) {
 
 	updateSql := strings.Join(queryStr[:], ",")
 
-	updatePortfolio, _ := database.DBConnection.Prepare(
+	updatePortfolio, prepErr := database.DBConnection.Prepare(
 		fmt.Sprintf("UPDATE portfolios SET %s WHERE name = '%s'", updateSql, name),
 	)
-
 	defer updatePortfolio.Close()
+	cobra.CheckErr(prepErr)
+
 
 	_, updateErr := updatePortfolio.Exec()
 

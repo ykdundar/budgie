@@ -10,7 +10,7 @@ import (
 func CreatePortfolio(name string, currency string, active bool) {
 	activeValue := functions.ConvertBoolToInt(active)
 
-	createPortfolio, _ := database.Database.Prepare(
+	createPortfolio, _ := database.DBConnection.Prepare(
 		"INSERT INTO portfolios (name, currency, active) VALUES (?, ?, ?)",
 	)
 

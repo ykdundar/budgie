@@ -8,7 +8,7 @@ import (
 )
 
 func SelectAllPortfolios() {
-	records, queryErr := database.Database.Query("SELECT * FROM portfolios")
+	records, queryErr := database.DBConnection.Query("SELECT * FROM portfolios")
 	cobra.CheckErr(queryErr)
 
 	defer records.Close()

@@ -7,7 +7,7 @@ import (
 )
 
 func AddToken(token string) {
-	addToken, queryErr := database.Database.Prepare("INSERT INTO tokens (token) VALUES (?)")
+	addToken, queryErr := database.DBConnection.Prepare("INSERT INTO tokens (token) VALUES (?)")
 	defer addToken.Close()
 	cobra.CheckErr(queryErr)
 

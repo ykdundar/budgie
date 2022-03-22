@@ -13,7 +13,7 @@ func RemoveStock(portfolio string, ticker string) {
 	portfolioStr := objects.Portfolio{}
 	portfolioStr = portfolios.FindPortfolio(portfolio)
 
-	removeStock, queryErr := database.Database.Prepare(fmt.Sprintf("DELETE FROM stocks WHERE ticker='%s' AND portfolio_id=%d", ticker, portfolioStr.Id))
+	removeStock, queryErr := database.DBConnection.Prepare(fmt.Sprintf("DELETE FROM stocks WHERE ticker='%s' AND portfolio_id=%d", ticker, portfolioStr.Id))
 	defer removeStock.Close()
 	cobra.CheckErr(queryErr)
 

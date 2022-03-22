@@ -7,7 +7,7 @@ import (
 
 // CreateTokensTable creates a table to store API tokens
 func CreateTokensTable() {
-	createTokensTable, queryErr := database.Database.Prepare(
+	createTokensTable, queryErr := database.DBConnection.Prepare(
 		"CREATE TABLE IF NOT EXISTS tokens (" +
 			"id INTEGER PRIMARY KEY," +
 			"token TEXT)",

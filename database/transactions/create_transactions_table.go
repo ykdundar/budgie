@@ -7,7 +7,7 @@ import (
 )
 
 func CreateTransactionsTable() {
-	createTransactionsTable, queryErr := database.Database.Prepare(
+	createTransactionsTable, queryErr := database.DBConnection.Prepare(
 		"CREATE TABLE IF NOT EXISTS transactions (" +
 			"id INTEGER PRIMARY KEY," +
 			"ticker TEXT," +

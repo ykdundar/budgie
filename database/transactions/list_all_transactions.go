@@ -8,7 +8,7 @@ import (
 )
 
 func ListAllTransactions() {
-	records, queryErr := database.Database.Query("SELECT id, ticker, price,  shares, transaction_category FROM transactions ")
+	records, queryErr := database.DBConnection.Query("SELECT id, ticker, price,  shares, transaction_category FROM transactions ")
 	defer records.Close()
 	cobra.CheckErr(queryErr)
 

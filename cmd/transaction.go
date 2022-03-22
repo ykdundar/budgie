@@ -3,6 +3,7 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/api"
+	"github.com/ykdundar/budgie/database/tokens"
 	"github.com/ykdundar/budgie/database/transactions"
 	"time"
 )
@@ -19,6 +20,9 @@ var transactionCmd = &cobra.Command{
 var buyCmd = &cobra.Command{
 	Use:   "buy",
 	Short: "Saves your stock buys",
+	PreRun: func(cmd *cobra.Command, args []string) {
+		tokens.CheckToken()
+	},
 	Run: func(cmd *cobra.Command, args []string) {
 		req, reqErr := api.IntradayRequest(ticker)
 		cobra.CheckErr(reqErr)
@@ -44,6 +48,9 @@ var buyCmd = &cobra.Command{
 var sellCmd = &cobra.Command{
 	Use:   "sell",
 	Short: "Saves your stock sells",
+	PreRun: func(cmd *cobra.Command, args []string) {
+		tokens.CheckToken()
+	},
 	Run: func(cmd *cobra.Command, args []string) {
 		req, reqErr := api.IntradayRequest(ticker)
 		cobra.CheckErr(reqErr)

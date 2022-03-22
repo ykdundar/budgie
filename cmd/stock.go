@@ -9,6 +9,9 @@ import (
 var stockCmd = &cobra.Command{
 	Use:   "stock",
 	Short: "stock command adds, removes and reports a given stock by subcommands",
+	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+		stocks.CreateStocksTable()
+	},
 }
 
 var addCmd = &cobra.Command{

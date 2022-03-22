@@ -59,19 +59,19 @@ func init() {
 	rootCmd.AddCommand(portfolioCmd)
 	portfolioCmd.AddCommand(createCmd, updateCmd, deleteCmd, listCmd, showCmd)
 
-	createCmd.PersistentFlags().StringVarP(&name, "name", "n", "", "Portfolio name (required)")
-	createCmd.PersistentFlags().StringVarP(&currency, "currency", "c", "USD", "Portfolio currency")
-	createCmd.PersistentFlags().BoolVarP(&active, "active", "a", true, "Set to true if default portfolio")
-	createCmd.MarkPersistentFlagRequired("name")
+	createCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name (required)")
+	createCmd.Flags().StringVarP(&currency, "currency", "c", "USD", "Portfolio currency")
+	createCmd.Flags().BoolVarP(&active, "active", "a", true, "Set to true if default portfolio")
+	createCmd.MarkFlagRequired("name")
 
-	updateCmd.PersistentFlags().StringVarP(&name, "name", "n", "", "Portfolio name (required)")
-	updateCmd.PersistentFlags().StringVarP(&rename, "rename", "r", "", "Update portfolio name (required)")
-	updateCmd.PersistentFlags().StringVarP(&currency, "currency", "c", "USD", "Portfolio currency")
-	updateCmd.PersistentFlags().BoolVarP(&active, "active", "a", true, "Set to true if default portfolio")
-	updateCmd.MarkPersistentFlagRequired("name")
+	updateCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name (required)")
+	updateCmd.Flags().StringVarP(&rename, "rename", "r", "", "Update portfolio name (required)")
+	updateCmd.Flags().StringVarP(&currency, "currency", "c", "USD", "Portfolio currency")
+	updateCmd.Flags().BoolVarP(&active, "active", "a", true, "Set to true if default portfolio")
+	updateCmd.MarkFlagRequired("name")
 
-	deleteCmd.PersistentFlags().StringVarP(&name, "name", "n", "", "Portfolio name (required)")
-	deleteCmd.MarkPersistentFlagRequired("name")
+	deleteCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name (required)")
+	deleteCmd.MarkFlagRequired("name")
 
-	showCmd.PersistentFlags().StringVarP(&name, "name", "n", "", "Portfolio name")
+	showCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name")
 }

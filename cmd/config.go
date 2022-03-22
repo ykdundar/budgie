@@ -14,6 +14,10 @@ var configCmd = &cobra.Command{
 from marketstack, and then you can use the 'token' flag to save it.
 If you run the command again with a different token, your existing
 token will be updated.`,
+	PreRun: func(cmd *cobra.Command, args []string) {
+		tokens.CreateTokensTable()
+	},
+
 	Run: func(cmd *cobra.Command, args []string) {
 		tokenErr := functions.CheckToken(token)
 		cobra.CheckErr(tokenErr)

@@ -5,7 +5,6 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/database"
 	"github.com/ykdundar/budgie/database/stocks"
-	"github.com/ykdundar/budgie/database/tokens"
 	"github.com/ykdundar/budgie/database/transactions"
 	"os"
 )
@@ -29,11 +28,9 @@ func Execute() {
 func init() {
 	cobra.OnInitialize(
 		database.EnableForeignKeys,
-		tokens.CreateTokensTable,
 		stocks.CreateStocksTable,
 		transactions.CreateTransactionsTable,
 	)
 
 	rootCmd.Version = "[1.0.0]"
 }
-

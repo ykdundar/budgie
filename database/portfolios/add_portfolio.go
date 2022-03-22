@@ -13,7 +13,6 @@ func CreatePortfolio(name string, currency string, active bool) {
 	createPortfolio, _ := database.DBConnection.Prepare(
 		"INSERT INTO portfolios (name, currency, active) VALUES (?, ?, ?)",
 	)
-
 	defer createPortfolio.Close()
 
 	_, insertErr := createPortfolio.Exec(name, currency, activeValue)

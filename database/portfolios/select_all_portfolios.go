@@ -9,9 +9,8 @@ import (
 
 func SelectAllPortfolios() {
 	records, queryErr := database.DBConnection.Query("SELECT * FROM portfolios")
-	cobra.CheckErr(queryErr)
-
 	defer records.Close()
+	cobra.CheckErr(queryErr)
 
 	portfolio := objects.Portfolio{}
 	var portfolios []objects.Portfolio

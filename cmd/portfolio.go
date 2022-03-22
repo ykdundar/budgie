@@ -10,6 +10,9 @@ import (
 var portfolioCmd = &cobra.Command{
 	Use:   "portfolio",
 	Short: "portfolio commend creates, updates, deletes and lists portfolios by using sub commends",
+	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+		portfolios.CreatePortfoliosTable()
+	},
 }
 
 var createCmd = &cobra.Command{

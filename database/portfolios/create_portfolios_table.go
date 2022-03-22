@@ -14,11 +14,9 @@ func CreatePortfoliosTable() {
 			"currency TEXT," +
 			"active INTEGER)",
 	)
-
 	defer createPortfolios.Close()
 	cobra.CheckErr(queryErr)
 
 	_, portfolioErr := createPortfolios.Exec()
-
 	cobra.CheckErr(portfolioErr)
 }

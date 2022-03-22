@@ -3,9 +3,7 @@ package cmd
 import (
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 	"github.com/ykdundar/budgie/database"
-	"github.com/ykdundar/budgie/database/portfolios"
 	"github.com/ykdundar/budgie/database/stocks"
 	"github.com/ykdundar/budgie/database/tokens"
 	"github.com/ykdundar/budgie/database/transactions"
@@ -32,7 +30,6 @@ func init() {
 	cobra.OnInitialize(
 		database.EnableForeignKeys,
 		tokens.CreateTokensTable,
-		portfolios.CreatePortfoliosTable,
 		stocks.CreateStocksTable,
 		transactions.CreateTransactionsTable,
 	)

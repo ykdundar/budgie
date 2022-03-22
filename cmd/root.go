@@ -35,20 +35,8 @@ func init() {
 		portfolios.CreatePortfoliosTable,
 		stocks.CreateStocksTable,
 		transactions.CreateTransactionsTable,
-		initConfig,
 	)
 
 	rootCmd.Version = "[1.0.0]"
 }
 
-func initConfig() {
-	// check if a token flag exists or not
-	if token == "" {
-		tokenRecord := tokens.FindToken()
-
-		if tokenRecord == "" {
-			cobra.CheckErr("Please enter an API token with config command!")
-		}
-		viper.Set("token", tokenRecord)
-	}
-}

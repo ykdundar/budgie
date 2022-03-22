@@ -7,7 +7,7 @@ import (
 	"github.com/ykdundar/budgie/internal/functions"
 )
 
-func CreatePortfolio(name string, currency string, active bool) {
+func AddPortfolio(name string, currency string, active bool) {
 	activeValue := functions.ConvertBoolToInt(active)
 
 	createPortfolio, _ := database.DBConnection.Prepare(

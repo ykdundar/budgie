@@ -16,10 +16,10 @@ var portfolioCmd = &cobra.Command{
 }
 
 var createCmd = &cobra.Command{
-	Use:   "create",
-	Short: "Creates a new portfolio",
+	Use:   "add",
+	Short: "Adds a new portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
-		portfolios.CreatePortfolio(name, currency, active)
+		portfolios.AddPortfolio(name, currency, active)
 	},
 }
 

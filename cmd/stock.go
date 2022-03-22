@@ -42,14 +42,14 @@ func init() {
 	rootCmd.AddCommand(stockCmd)
 	stockCmd.AddCommand(addCmd, removeCmd)
 
-	addCmd.PersistentFlags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
-	addCmd.MarkPersistentFlagRequired("portfolio")
-	addCmd.PersistentFlags().StringVarP(&ticker, "ticker", "s", "", "Company name (required)")
-	addCmd.MarkPersistentFlagRequired("ticker")
+	addCmd.Flags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
+	addCmd.MarkFlagRequired("portfolio")
+	addCmd.Flags().StringVarP(&ticker, "ticker", "s", "", "Company name (required)")
+	addCmd.MarkFlagRequired("ticker")
 
-	removeCmd.PersistentFlags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
-	removeCmd.MarkPersistentFlagRequired("portfolio")
-	removeCmd.PersistentFlags().StringVarP(&ticker, "ticker", "t", "", "Company name (required)")
-	removeCmd.MarkPersistentFlagRequired("ticker")
+	removeCmd.Flags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
+	removeCmd.MarkFlagRequired("portfolio")
+	removeCmd.Flags().StringVarP(&ticker, "ticker", "t", "", "Company name (required)")
+	removeCmd.MarkFlagRequired("ticker")
 
 }

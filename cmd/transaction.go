@@ -11,6 +11,9 @@ import (
 var transactionCmd = &cobra.Command{
 	Use:   "transaction",
 	Short: "transaction command adds, updates, removes and reports a given stock by subcommands",
+	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+		transactions.CreateTransactionsTable()
+	},
 }
 
 var buyCmd = &cobra.Command{

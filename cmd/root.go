@@ -4,7 +4,6 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/database"
-	"github.com/ykdundar/budgie/database/transactions"
 	"os"
 )
 
@@ -25,10 +24,7 @@ func Execute() {
 }
 
 func init() {
-	cobra.OnInitialize(
-		database.EnableForeignKeys,
-		transactions.CreateTransactionsTable,
-	)
+	cobra.OnInitialize(database.EnableForeignKeys)
 
 	rootCmd.Version = "[1.0.0]"
 }

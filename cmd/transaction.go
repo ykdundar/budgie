@@ -22,7 +22,7 @@ var buyTransactionCmd = &cobra.Command{
 	Use:   "buy",
 	Short: "Saves your stock buys",
 	PreRun: func(cmd *cobra.Command, args []string) {
-		tokens.CheckToken()
+		tokens.SetToken()
 	},
 	Run: func(cmd *cobra.Command, args []string) {
 		req, reqErr := api.IntradayRequest(ticker)
@@ -53,7 +53,7 @@ var sellTransactionCmd = &cobra.Command{
 	Use:   "sell",
 	Short: "Saves your stock sells",
 	PreRun: func(cmd *cobra.Command, args []string) {
-		tokens.CheckToken()
+		tokens.SetToken()
 	},
 	Run: func(cmd *cobra.Command, args []string) {
 		req, reqErr := api.IntradayRequest(ticker)

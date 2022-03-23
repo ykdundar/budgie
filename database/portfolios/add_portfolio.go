@@ -10,13 +10,13 @@ import (
 func AddPortfolio(name string, currency string, active bool) {
 	activeValue := functions.BoolConverter(active)
 
-	createPortfolio, prepErr := database.DBConnection.Prepare(
+	addPortfolio, prepErr := database.DBConnection.Prepare(
 		"INSERT INTO portfolios (name, currency, active) VALUES (?, ?, ?)",
 	)
-	defer createPortfolio.Close()
+	defer addPortfolio.Close()
 	cobra.CheckErr(prepErr)
 
-	_, insertErr := createPortfolio.Exec(name, currency, activeValue)
+	_, insertErr := addPortfolio.Exec(name, currency, activeValue)
 	cobra.CheckErr(insertErr)
 
 	fmt.Printf("'%s' is created succesfully\n", name)

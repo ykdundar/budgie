@@ -1,13 +1,12 @@
 package portfolios
 
 import (
-	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/database"
 	"github.com/ykdundar/budgie/internal/functions"
 )
 
-func AddPortfolio(name string, currency string, active bool) {
+func AddPortfolio(name string, currency string, active bool) error{
 	activeValue := functions.BoolConverter(active)
 
 	addPortfolio, prepErr := database.DBConnection.Prepare(
@@ -19,5 +18,5 @@ func AddPortfolio(name string, currency string, active bool) {
 	_, insertErr := addPortfolio.Exec(name, currency, activeValue)
 	cobra.CheckErr(insertErr)
 
-	fmt.Printf("'%s' is created succesfully\n", name)
+	return insertErr
 }

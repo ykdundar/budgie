@@ -6,7 +6,7 @@ import (
 	"github.com/ykdundar/budgie/database"
 )
 
-func DeletePortfolio(name string) {
+func DeletePortfolio(name string) error {
 	deletePortfolio, queryErr := database.DBConnection.Prepare(
 		fmt.Sprintf("DELETE FROM portfolios WHERE name= '%s'", name),
 	)
@@ -15,5 +15,5 @@ func DeletePortfolio(name string) {
 
 	_, deleteErr := deletePortfolio.Exec()
 	cobra.CheckErr(deleteErr)
-	fmt.Printf("'%s' is deleted succesfully", name)
+	return deleteErr
 }

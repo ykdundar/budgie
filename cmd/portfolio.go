@@ -19,7 +19,11 @@ var addPortfolioCmd = &cobra.Command{
 	Use:   "add",
 	Short: "Adds a new portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
-		portfolios.AddPortfolio(name, currency, active)
+		addPortfolio := portfolios.AddPortfolio(name, currency, active)
+
+		if addPortfolio == nil{
+			fmt.Printf("'%s' is created succesfully\n", name)
+		}
 	},
 }
 
@@ -27,7 +31,11 @@ var updateCmd = &cobra.Command{
 	Use:   "update",
 	Short: "Updates a portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
-		portfolios.UpdatePortfolio(name, rename, currency, active)
+		updatePortfolio := portfolios.UpdatePortfolio(name, rename, currency, active)
+
+		if updatePortfolio == nil{
+			fmt.Printf("'%s' is updated succesfully\n", name)
+		}
 	},
 }
 
@@ -35,7 +43,10 @@ var deleteCmd = &cobra.Command{
 	Use:   "delete",
 	Short: "Deletes a portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
-		portfolios.DeletePortfolio(name)
+		deletePortfolio := portfolios.DeletePortfolio(name)
+		if deletePortfolio == nil{
+			fmt.Printf("'%s' is deleted succesfully", name)
+		}
 	},
 }
 

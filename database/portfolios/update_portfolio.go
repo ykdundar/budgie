@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func UpdatePortfolio(name string, rename string, currency string, active bool) {
+func UpdatePortfolio(name string, rename string, currency string, active bool) error {
 	activeValue := functions.BoolConverter(active)
 
 	var queryStr []string
@@ -34,6 +34,5 @@ func UpdatePortfolio(name string, rename string, currency string, active bool) {
 	_, updateErr := updatePortfolio.Exec()
 
 	cobra.CheckErr(updateErr)
-
-	fmt.Printf("'%s' is updated succesfully\n", name)
+	return updateErr
 }

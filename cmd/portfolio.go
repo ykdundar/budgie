@@ -15,7 +15,7 @@ var portfolioCmd = &cobra.Command{
 	},
 }
 
-var addPortfolioCmd = &cobra.Command{
+var createCmd = &cobra.Command{
 	Use:   "add",
 	Short: "Adds a new portfolio",
 	Run: func(cmd *cobra.Command, args []string) {

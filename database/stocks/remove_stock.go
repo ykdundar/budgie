@@ -8,7 +8,7 @@ import (
 	"github.com/ykdundar/budgie/internal/objects"
 )
 
-func RemoveStock(portfolio string, ticker string) {
+func RemoveStock(portfolio string, ticker string) error{
 
 	portfolioStr := objects.Portfolio{}
 	portfolioStr = portfolios.FindPortfolio(portfolio)
@@ -19,5 +19,7 @@ func RemoveStock(portfolio string, ticker string) {
 
 	_, removeErr := removeStock.Exec()
 	cobra.CheckErr(removeErr)
-	fmt.Printf("'%s' is removed from '%s' succesfully", ticker, portfolio)
+
+	return removeErr
+
 }

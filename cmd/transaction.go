@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/api"
 	"github.com/ykdundar/budgie/database/tokens"
@@ -35,7 +36,10 @@ var buyCmd = &cobra.Command{
 			cobra.CheckErr(eodReqErr)
 		}
 
-		transactions.AddTransaction(ticker, price, shares, cmd.Use, date, lastPrice)
+		addTransaction := transactions.AddTransaction(ticker, price, shares, cmd.Use, date, lastPrice)
+		if addTransaction == nil{
+			fmt.Printf("'%s' is added succesfully\n", ticker)
+		}
 	},
 	Example: `budgie transaction buy
 	--ticker "MSFT"
@@ -62,8 +66,10 @@ var sellCmd = &cobra.Command{
 			lastPrice = eodReq.Data[0].Close
 			cobra.CheckErr(eodReqErr)
 		}
-
-		transactions.AddTransaction(ticker, price, shares, cmd.Use, date, lastPrice)
+		addTransaction := transactions.AddTransaction(ticker, price, shares, cmd.Use, date, lastPrice)
+		if addTransaction == nil{
+			fmt.Printf("'%s' is added succesfully\n", ticker)
+		}
 	},
 	Example: `budgie transaction sell
 	--ticker "MSFT"
@@ -77,7 +83,10 @@ var removeTransactionCmd = &cobra.Command{
 	Use:   "remove",
 	Short: "Removes your stock purchases",
 	Run: func(cmd *cobra.Command, args []string) {
-		transactions.RemoveTransaction(id)
+		removeTransaction :=transactions.RemoveTransaction(id)
+		if removeTransaction ==nil{
+			fmt.Printf("'%d' is removed succesfully", id)
+		}
 	},
 }
 

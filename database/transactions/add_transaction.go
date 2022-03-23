@@ -1,13 +1,12 @@
 package transactions
 
 import (
-	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/database"
 	"time"
 )
 
-func AddTransaction(ticker string, price float64, shares int, category string, date string, lastPrice float64) {
+func AddTransaction(ticker string, price float64, shares int, category string, date string, lastPrice float64) error{
 	val, timeErr := time.Parse("02.01.2006", date)
 	cobra.CheckErr(timeErr)
 
@@ -30,10 +29,8 @@ func AddTransaction(ticker string, price float64, shares int, category string, d
 		marketValue   = lastPrice * float64(shares)
 	)
 
-	fmt.Println(lastPrice)
-
 	_, insertErr := addTransaction.Exec(ticker, price, shares, transactionCategory, unixTime, purchaseValue, marketValue)
 	cobra.CheckErr(insertErr)
 
-	fmt.Printf("'%s' is added succesfully\n", ticker)
+	return insertErr
 }

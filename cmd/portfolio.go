@@ -54,7 +54,10 @@ var listAllPortfoliosCmd = &cobra.Command{
 	Use:   "list",
 	Short: "Lists all portfolios",
 	Run: func(cmd *cobra.Command, args []string) {
-		portfolios.SelectAllPortfolios()
+		selectAllPortfolios := portfolios.SelectAllPortfolios()
+		for _, v := range selectAllPortfolios {
+			fmt.Println("Id: ", v.Id, "Name: ", v.Name, "Currency: ", v.Currency)
+		}
 	},
 }
 

@@ -1,6 +1,6 @@
 package functions
 
-func ConvertBoolToInt(b bool) int {
+func BoolConverter(b bool) int {
 	value := 0
 
 	if b == true {

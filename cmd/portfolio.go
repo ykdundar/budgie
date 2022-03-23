@@ -21,36 +21,36 @@ var addPortfolioCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		addPortfolio := portfolios.AddPortfolio(name, currency, active)
 
-		if addPortfolio == nil{
+		if addPortfolio == nil {
 			fmt.Printf("'%s' is created succesfully\n", name)
 		}
 	},
 }
 
-var updateCmd = &cobra.Command{
+var updatePortfolioCmd = &cobra.Command{
 	Use:   "update",
 	Short: "Updates a portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
 		updatePortfolio := portfolios.UpdatePortfolio(name, rename, currency, active)
 
-		if updatePortfolio == nil{
+		if updatePortfolio == nil {
 			fmt.Printf("'%s' is updated succesfully\n", name)
 		}
 	},
 }
 
-var deleteCmd = &cobra.Command{
+var deletePortfolioCmd = &cobra.Command{
 	Use:   "delete",
 	Short: "Deletes a portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
 		deletePortfolio := portfolios.DeletePortfolio(name)
-		if deletePortfolio == nil{
+		if deletePortfolio == nil {
 			fmt.Printf("'%s' is deleted succesfully", name)
 		}
 	},
 }
 
-var listCmd = &cobra.Command{
+var listAllPortfoliosCmd = &cobra.Command{
 	Use:   "list",
 	Short: "Lists all portfolios",
 	Run: func(cmd *cobra.Command, args []string) {
@@ -58,7 +58,7 @@ var listCmd = &cobra.Command{
 	},
 }
 
-var showCmd = &cobra.Command{
+var showPortfolioCmd = &cobra.Command{
 	Use:   "show",
 	Short: "Shows an active portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
@@ -68,22 +68,22 @@ var showCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(portfolioCmd)
-	portfolioCmd.AddCommand(addPortfolioCmd, updateCmd, deleteCmd, listCmd, showCmd)
+	portfolioCmd.AddCommand(addPortfolioCmd, updatePortfolioCmd, deletePortfolioCmd, listAllPortfoliosCmd, showPortfolioCmd)
 
 	addPortfolioCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name (required)")
 	addPortfolioCmd.Flags().StringVarP(&currency, "currency", "c", "USD", "Portfolio currency")
 	addPortfolioCmd.Flags().BoolVarP(&active, "active", "a", true, "Set to true if default portfolio")
 	addPortfolioCmd.MarkFlagRequired("name")
 
-	updateCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name (required)")
-	updateCmd.Flags().StringVarP(&rename, "rename", "r", "", "Update portfolio name")
-	updateCmd.Flags().StringVarP(&currency, "currency", "c", "USD", "Portfolio currency")
-	updateCmd.Flags().BoolVarP(&active, "active", "a", true, "Set to true if default portfolio")
-	updateCmd.MarkFlagRequired("name")
+	updatePortfolioCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name (required)")
+	updatePortfolioCmd.Flags().StringVarP(&rename, "rename", "r", "", "Update portfolio name")
+	updatePortfolioCmd.Flags().StringVarP(&currency, "currency", "c", "USD", "Portfolio currency")
+	updatePortfolioCmd.Flags().BoolVarP(&active, "active", "a", true, "Set to true if default portfolio")
+	updatePortfolioCmd.MarkFlagRequired("name")
 
-	deleteCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name (required)")
-	deleteCmd.MarkFlagRequired("name")
+	deletePortfolioCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name (required)")
+	deletePortfolioCmd.MarkFlagRequired("name")
 
 	// bu zorunlu mu? yoksa aktifi mi gosterecek? aktif ne ki?
-	showCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name")
+	showPortfolioCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name")
 }

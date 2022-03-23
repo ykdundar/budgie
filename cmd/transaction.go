@@ -18,7 +18,7 @@ var transactionCmd = &cobra.Command{
 	},
 }
 
-var buyCmd = &cobra.Command{
+var buyTransactionCmd = &cobra.Command{
 	Use:   "buy",
 	Short: "Saves your stock buys",
 	PreRun: func(cmd *cobra.Command, args []string) {
@@ -37,7 +37,7 @@ var buyCmd = &cobra.Command{
 		}
 
 		addTransaction := transactions.AddTransaction(ticker, price, shares, cmd.Use, date, lastPrice)
-		if addTransaction == nil{
+		if addTransaction == nil {
 			fmt.Printf("'%s' is added succesfully\n", ticker)
 		}
 	},
@@ -49,7 +49,7 @@ var buyCmd = &cobra.Command{
 `,
 }
 
-var sellCmd = &cobra.Command{
+var sellTransactionCmd = &cobra.Command{
 	Use:   "sell",
 	Short: "Saves your stock sells",
 	PreRun: func(cmd *cobra.Command, args []string) {
@@ -67,7 +67,7 @@ var sellCmd = &cobra.Command{
 			cobra.CheckErr(eodReqErr)
 		}
 		addTransaction := transactions.AddTransaction(ticker, price, shares, cmd.Use, date, lastPrice)
-		if addTransaction == nil{
+		if addTransaction == nil {
 			fmt.Printf("'%s' is added succesfully\n", ticker)
 		}
 	},
@@ -83,14 +83,14 @@ var removeTransactionCmd = &cobra.Command{
 	Use:   "remove",
 	Short: "Removes your stock purchases",
 	Run: func(cmd *cobra.Command, args []string) {
-		removeTransaction :=transactions.RemoveTransaction(id)
-		if removeTransaction ==nil{
+		removeTransaction := transactions.RemoveTransaction(id)
+		if removeTransaction == nil {
 			fmt.Printf("'%d' is removed succesfully", id)
 		}
 	},
 }
 
-var reportCmd = &cobra.Command{
+var reportTransactionsCmd = &cobra.Command{
 	Use:   "report",
 	Short: "Reports transaction earnings/losses per stock",
 	Args:  cobra.NoArgs,
@@ -136,26 +136,26 @@ var listAllTransactionsCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(transactionCmd)
-	transactionCmd.AddCommand(buyCmd, sellCmd, removeTransactionCmd, reportCmd, listAllTransactionsCmd)
-	reportCmd.AddCommand(dayCmd, monthCmd, yearCmd)
+	transactionCmd.AddCommand(buyTransactionCmd, sellTransactionCmd, removeTransactionCmd, reportTransactionsCmd, listAllTransactionsCmd)
+	reportTransactionsCmd.AddCommand(dayCmd, monthCmd, yearCmd)
 
-	buyCmd.Flags().StringVarP(&ticker, "ticker", "t", "", "Company name (required)")
-	buyCmd.MarkFlagRequired("ticker")
-	buyCmd.Flags().Float64VarP(&price, "price", "p", 0, "Company price (required)")
-	buyCmd.MarkFlagRequired("price")
-	buyCmd.Flags().StringVarP(&date, "date", "d", time.Now().Format("02.01.2006"), "The date stock was bought (required)")
-	buyCmd.MarkFlagRequired("date")
-	buyCmd.Flags().IntVarP(&shares, "shares", "s", 0, "Number of shares (required)")
-	buyCmd.MarkFlagRequired("shares")
+	buyTransactionCmd.Flags().StringVarP(&ticker, "ticker", "t", "", "Company name (required)")
+	buyTransactionCmd.MarkFlagRequired("ticker")
+	buyTransactionCmd.Flags().Float64VarP(&price, "price", "p", 0, "Company price (required)")
+	buyTransactionCmd.MarkFlagRequired("price")
+	buyTransactionCmd.Flags().StringVarP(&date, "date", "d", time.Now().Format("02.01.2006"), "The date stock was bought (required)")
+	buyTransactionCmd.MarkFlagRequired("date")
+	buyTransactionCmd.Flags().IntVarP(&shares, "shares", "s", 0, "Number of shares (required)")
+	buyTransactionCmd.MarkFlagRequired("shares")
 
-	sellCmd.Flags().StringVarP(&ticker, "ticker", "t", "", "Company name (required)")
-	sellCmd.MarkFlagRequired("ticker")
-	sellCmd.Flags().Float64VarP(&price, "price", "p", 0, "Company price (required)")
-	sellCmd.MarkFlagRequired("price")
-	sellCmd.Flags().StringVarP(&date, "date", "d", time.Now().Format("02.01.2006"), "The date stock was sold (required)")
-	sellCmd.MarkFlagRequired("date")
-	sellCmd.Flags().IntVarP(&shares, "shares", "s", 0, "Number of shares (required)")
-	sellCmd.MarkFlagRequired("shares")
+	sellTransactionCmd.Flags().StringVarP(&ticker, "ticker", "t", "", "Company name (required)")
+	sellTransactionCmd.MarkFlagRequired("ticker")
+	sellTransactionCmd.Flags().Float64VarP(&price, "price", "p", 0, "Company price (required)")
+	sellTransactionCmd.MarkFlagRequired("price")
+	sellTransactionCmd.Flags().StringVarP(&date, "date", "d", time.Now().Format("02.01.2006"), "The date stock was sold (required)")
+	sellTransactionCmd.MarkFlagRequired("date")
+	sellTransactionCmd.Flags().IntVarP(&shares, "shares", "s", 0, "Number of shares (required)")
+	sellTransactionCmd.MarkFlagRequired("shares")
 
 	removeTransactionCmd.Flags().IntVarP(&id, "id", "i", 0, "Transaction ID (required)")
 	removeTransactionCmd.MarkFlagRequired("id")

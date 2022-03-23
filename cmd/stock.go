@@ -15,12 +15,12 @@ var stockCmd = &cobra.Command{
 	},
 }
 
-var addCmd = &cobra.Command{
+var addStockCmd = &cobra.Command{
 	Use:   "add",
 	Short: "add a stock to a given portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
 		addStock := stocks.AddStock(portfolio, ticker)
-		if addStock == nil{
+		if addStock == nil {
 			fmt.Printf("'%s' is added succesfully\n", ticker)
 		}
 	},
@@ -30,12 +30,12 @@ var addCmd = &cobra.Command{
 `,
 }
 
-var removeCmd = &cobra.Command{
+var removeStockCmd = &cobra.Command{
 	Use:   "remove",
 	Short: "Removes a given stock",
 	Run: func(cmd *cobra.Command, args []string) {
 		removeStock := stocks.RemoveStock(portfolio, ticker)
-		if removeStock == nil{
+		if removeStock == nil {
 			fmt.Printf("'%s' is removed from '%s' succesfully", ticker, portfolio)
 		}
 	},
@@ -47,16 +47,16 @@ var removeCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(stockCmd)
-	stockCmd.AddCommand(addCmd, removeCmd)
+	stockCmd.AddCommand(addStockCmd, removeStockCmd)
 
-	addCmd.Flags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
-	addCmd.MarkFlagRequired("portfolio")
-	addCmd.Flags().StringVarP(&ticker, "ticker", "s", "", "Company name (required)")
-	addCmd.MarkFlagRequired("ticker")
+	addStockCmd.Flags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
+	addStockCmd.MarkFlagRequired("portfolio")
+	addStockCmd.Flags().StringVarP(&ticker, "ticker", "s", "", "Company name (required)")
+	addStockCmd.MarkFlagRequired("ticker")
 
-	removeCmd.Flags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
-	removeCmd.MarkFlagRequired("portfolio")
-	removeCmd.Flags().StringVarP(&ticker, "ticker", "t", "", "Company name (required)")
-	removeCmd.MarkFlagRequired("ticker")
+	removeStockCmd.Flags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
+	removeStockCmd.MarkFlagRequired("portfolio")
+	removeStockCmd.Flags().StringVarP(&ticker, "ticker", "t", "", "Company name (required)")
+	removeStockCmd.MarkFlagRequired("ticker")
 
 }

@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/database/tokens"
 	"github.com/ykdundar/budgie/internal/functions"
@@ -17,9 +18,8 @@ token will be updated.`,
 	PreRun: func(cmd *cobra.Command, args []string) {
 		tokens.CreateTokensTable()
 	},
-
 	Run: func(cmd *cobra.Command, args []string) {
-		tokenErr := functions.CheckToken(token)
+		tokenErr := functions.ValidateToken(token)
 		cobra.CheckErr(tokenErr)
 
 		tokens.AddToken(token)

@@ -11,8 +11,7 @@ func CreatePortfoliosTable() {
 		"CREATE TABLE IF NOT EXISTS portfolios (" +
 			"id INTEGER PRIMARY KEY," +
 			"name TEXT UNIQUE," +
-			"currency TEXT," +
-			"active INTEGER)",
+			"currency TEXT)",
 	)
 	defer createPortfolios.Close()
 	cobra.CheckErr(queryErr)

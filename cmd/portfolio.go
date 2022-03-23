@@ -19,7 +19,7 @@ var addPortfolioCmd = &cobra.Command{
 	Use:   "add",
 	Short: "Adds a new portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
-		addPortfolio := portfolios.AddPortfolio(name, currency, active)
+		addPortfolio := portfolios.AddPortfolio(name, currency)
 
 		if addPortfolio == nil {
 			fmt.Printf("'%s' is created succesfully\n", name)
@@ -31,7 +31,7 @@ var updatePortfolioCmd = &cobra.Command{
 	Use:   "update",
 	Short: "Updates a portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
-		updatePortfolio := portfolios.UpdatePortfolio(name, rename, currency, active)
+		updatePortfolio := portfolios.UpdatePortfolio(name, rename, currency)
 
 		if updatePortfolio == nil {
 			fmt.Printf("'%s' is updated succesfully\n", name)
@@ -63,7 +63,7 @@ var listAllPortfoliosCmd = &cobra.Command{
 
 var showPortfolioCmd = &cobra.Command{
 	Use:   "show",
-	Short: "Shows an active portfolio",
+	Short: "Shows an given portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println(portfolios.FindPortfolio(name))
 	},
@@ -75,18 +75,17 @@ func init() {
 
 	addPortfolioCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name (required)")
 	addPortfolioCmd.Flags().StringVarP(&currency, "currency", "c", "USD", "Portfolio currency")
-	addPortfolioCmd.Flags().BoolVarP(&active, "active", "a", true, "Set to true if default portfolio")
 	addPortfolioCmd.MarkFlagRequired("name")
 
 	updatePortfolioCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name (required)")
 	updatePortfolioCmd.Flags().StringVarP(&rename, "rename", "r", "", "Update portfolio name")
 	updatePortfolioCmd.Flags().StringVarP(&currency, "currency", "c", "USD", "Portfolio currency")
-	updatePortfolioCmd.Flags().BoolVarP(&active, "active", "a", true, "Set to true if default portfolio")
 	updatePortfolioCmd.MarkFlagRequired("name")
 
 	deletePortfolioCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name (required)")
 	deletePortfolioCmd.MarkFlagRequired("name")
 
 	// bu zorunlu mu? yoksa aktifi mi gosterecek? aktif ne ki?
-	showPortfolioCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name")
+	showPortfolioCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name (required")
+	showPortfolioCmd.MarkFlagRequired("name")
 }

@@ -4,12 +4,10 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/database"
-	"github.com/ykdundar/budgie/internal/functions"
 	"strings"
 )
 
-func UpdatePortfolio(name string, rename string, currency string, active bool) error {
-	activeValue := functions.BoolConverter(active)
+func UpdatePortfolio(name string, rename string, currency string) error {
 
 	var queryStr []string
 
@@ -21,7 +19,6 @@ func UpdatePortfolio(name string, rename string, currency string, active bool) e
 		queryStr = append(queryStr, fmt.Sprintf("currency='%s'", currency))
 	}
 
-	queryStr = append(queryStr, fmt.Sprintf("active=%d", activeValue))
 
 	updateSql := strings.Join(queryStr[:], ",")
 

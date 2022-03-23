@@ -8,7 +8,7 @@ import (
 )
 
 func AddPortfolio(name string, currency string, active bool) {
-	activeValue := functions.ConvertBoolToInt(active)
+	activeValue := functions.BoolConverter(active)
 
 	createPortfolio, prepErr := database.DBConnection.Prepare(
 		"INSERT INTO portfolios (name, currency, active) VALUES (?, ?, ?)",

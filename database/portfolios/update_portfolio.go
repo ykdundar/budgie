@@ -9,7 +9,7 @@ import (
 )
 
 func UpdatePortfolio(name string, rename string, currency string, active bool) {
-	activeValue := functions.ConvertBoolToInt(active)
+	activeValue := functions.BoolConverter(active)
 
 	var queryStr []string
 
@@ -30,7 +30,6 @@ func UpdatePortfolio(name string, rename string, currency string, active bool) {
 	)
 	defer updatePortfolio.Close()
 	cobra.CheckErr(prepErr)
-
 
 	_, updateErr := updatePortfolio.Exec()
 

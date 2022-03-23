@@ -22,7 +22,12 @@ token will be updated.`,
 		tokenErr := functions.ValidateToken(token)
 		cobra.CheckErr(tokenErr)
 
-		tokens.AddToken(token)
+		addToken := tokens.AddToken(token)
+
+		if addToken == nil {
+			fmt.Printf("'%s' is added succesfully\n", token)
+		}
+
 	},
 }
 

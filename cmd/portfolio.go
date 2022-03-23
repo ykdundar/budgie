@@ -15,7 +15,7 @@ var portfolioCmd = &cobra.Command{
 	},
 }
 
-var createCmd = &cobra.Command{
+var addPortfolioCmd = &cobra.Command{
 	Use:   "add",
 	Short: "Adds a new portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
@@ -57,12 +57,12 @@ var showCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(portfolioCmd)
-	portfolioCmd.AddCommand(createCmd, updateCmd, deleteCmd, listCmd, showCmd)
+	portfolioCmd.AddCommand(addPortfolioCmd, updateCmd, deleteCmd, listCmd, showCmd)
 
-	createCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name (required)")
-	createCmd.Flags().StringVarP(&currency, "currency", "c", "USD", "Portfolio currency")
-	createCmd.Flags().BoolVarP(&active, "active", "a", true, "Set to true if default portfolio")
-	createCmd.MarkFlagRequired("name")
+	addPortfolioCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name (required)")
+	addPortfolioCmd.Flags().StringVarP(&currency, "currency", "c", "USD", "Portfolio currency")
+	addPortfolioCmd.Flags().BoolVarP(&active, "active", "a", true, "Set to true if default portfolio")
+	addPortfolioCmd.MarkFlagRequired("name")
 
 	updateCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name (required)")
 	updateCmd.Flags().StringVarP(&rename, "rename", "r", "", "Update portfolio name")

@@ -9,7 +9,7 @@ import (
 // portfolioCmd represents the portfolio command
 var portfolioCmd = &cobra.Command{
 	Use:   "portfolio",
-	Short: "portfolio commend creates, updates, deletes and lists portfolios by using sub commends",
+	Short: "portfolio is used to create, update, delete and list portfolios",
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 		portfolios.CreatePortfoliosTable()
 	},
@@ -65,7 +65,7 @@ func init() {
 	createCmd.MarkFlagRequired("name")
 
 	updateCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name (required)")
-	updateCmd.Flags().StringVarP(&rename, "rename", "r", "", "Update portfolio name (required)")
+	updateCmd.Flags().StringVarP(&rename, "rename", "r", "", "Update portfolio name")
 	updateCmd.Flags().StringVarP(&currency, "currency", "c", "USD", "Portfolio currency")
 	updateCmd.Flags().BoolVarP(&active, "active", "a", true, "Set to true if default portfolio")
 	updateCmd.MarkFlagRequired("name")
@@ -73,5 +73,6 @@ func init() {
 	deleteCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name (required)")
 	deleteCmd.MarkFlagRequired("name")
 
+	// bu zorunlu mu? yoksa aktifi mi gosterecek? aktif ne ki?
 	showCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name")
 }

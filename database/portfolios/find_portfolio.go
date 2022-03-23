@@ -8,10 +8,9 @@ import (
 )
 
 func FindPortfolio(name string) objects.Portfolio {
-	record := database.DBConnection.QueryRow("SELECT * FROM portfolios WHERE name=?", name)
-
 	portfolio := objects.Portfolio{}
 
+	record := database.DBConnection.QueryRow("SELECT * FROM portfolios WHERE name=?", name)
 	scanErr := record.Scan(&portfolio.Id, &portfolio.Name, &portfolio.Currency, &portfolio.Active)
 
 	if scanErr == sql.ErrNoRows {

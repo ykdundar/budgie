@@ -55,7 +55,7 @@ var listAllPortfoliosCmd = &cobra.Command{
 
 var showPortfolioCmd = &cobra.Command{
 	Use:   "show",
-	Short: "Shows an given portfolio",
+	Short: "Shows a portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println(portfolios.FindPortfolio(name))
 	},

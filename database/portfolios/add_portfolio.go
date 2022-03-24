@@ -5,8 +5,7 @@ import (
 	"github.com/ykdundar/budgie/database"
 )
 
-func AddPortfolio(name string, currency string) error{
-
+func AddPortfolio(name string, currency string) {
 	addPortfolio, prepErr := database.DBConnection.Prepare(
 		"INSERT INTO portfolios (name, currency) VALUES (?, ?)",
 	)
@@ -15,6 +14,4 @@ func AddPortfolio(name string, currency string) error{
 
 	_, insertErr := addPortfolio.Exec(name, currency)
 	cobra.CheckErr(insertErr)
-
-	return insertErr
 }

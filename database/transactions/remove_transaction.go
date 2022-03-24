@@ -6,7 +6,7 @@ import (
 	"github.com/ykdundar/budgie/database"
 )
 
-func RemoveTransaction(id int) error{
+func RemoveTransaction(id int) {
 	// remove with id?
 	removeTransaction, queryErr := database.DBConnection.Prepare(fmt.Sprintf("DELETE FROM transactions WHERE id='%d'", id))
 	defer removeTransaction.Close()
@@ -14,5 +14,4 @@ func RemoveTransaction(id int) error{
 
 	_, removeErr := removeTransaction.Exec()
 	cobra.CheckErr(removeErr)
-	return removeErr
 }

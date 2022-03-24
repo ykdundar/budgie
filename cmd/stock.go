@@ -19,10 +19,8 @@ var addStockCmd = &cobra.Command{
 	Use:   "add",
 	Short: "add a stock to a given portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
-		addStock := stocks.AddStock(portfolio, ticker)
-		if addStock == nil {
-			fmt.Printf("'%s' is added succesfully\n", ticker)
-		}
+		stocks.AddStock(portfolio, ticker)
+		fmt.Printf("'%s' is added succesfully\n", ticker)
 	},
 	Example: `budgie stock add
 	--portfolio "European Stocks"
@@ -34,10 +32,8 @@ var removeStockCmd = &cobra.Command{
 	Use:   "remove",
 	Short: "Removes a given stock",
 	Run: func(cmd *cobra.Command, args []string) {
-		removeStock := stocks.RemoveStock(portfolio, ticker)
-		if removeStock == nil {
-			fmt.Printf("'%s' is removed from '%s' succesfully", ticker, portfolio)
-		}
+		stocks.RemoveStock(portfolio, ticker)
+		fmt.Printf("'%s' is removed from '%s' succesfully", ticker, portfolio)
 	},
 	Example: `budgie stock remove
 	--portfolio "European Stocks"
@@ -58,5 +54,4 @@ func init() {
 	removeStockCmd.MarkFlagRequired("portfolio")
 	removeStockCmd.Flags().StringVarP(&ticker, "ticker", "t", "", "Company name (required)")
 	removeStockCmd.MarkFlagRequired("ticker")
-
 }

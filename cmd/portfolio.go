@@ -19,11 +19,8 @@ var addPortfolioCmd = &cobra.Command{
 	Use:   "add",
 	Short: "Adds a new portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
-		addPortfolio := portfolios.AddPortfolio(name, currency)
-
-		if addPortfolio == nil {
-			fmt.Printf("'%s' is created succesfully\n", name)
-		}
+		portfolios.AddPortfolio(name, currency)
+		fmt.Printf("'%s' is created succesfully\n", name)
 	},
 }
 
@@ -31,11 +28,8 @@ var updatePortfolioCmd = &cobra.Command{
 	Use:   "update",
 	Short: "Updates a portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
-		updatePortfolio := portfolios.UpdatePortfolio(name, rename, currency)
-
-		if updatePortfolio == nil {
-			fmt.Printf("'%s' is updated succesfully\n", name)
-		}
+		portfolios.UpdatePortfolio(name, rename, currency)
+		fmt.Printf("'%s' is updated succesfully\n", name)
 	},
 }
 
@@ -43,10 +37,8 @@ var deletePortfolioCmd = &cobra.Command{
 	Use:   "delete",
 	Short: "Deletes a portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
-		deletePortfolio := portfolios.DeletePortfolio(name)
-		if deletePortfolio == nil {
-			fmt.Printf("'%s' is deleted succesfully", name)
-		}
+		portfolios.DeletePortfolio(name)
+		fmt.Printf("'%s' is deleted succesfully", name)
 	},
 }
 
@@ -85,7 +77,6 @@ func init() {
 	deletePortfolioCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name (required)")
 	deletePortfolioCmd.MarkFlagRequired("name")
 
-	// bu zorunlu mu? yoksa aktifi mi gosterecek? aktif ne ki?
 	showPortfolioCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name (required")
 	showPortfolioCmd.MarkFlagRequired("name")
 }

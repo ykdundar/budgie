@@ -36,10 +36,8 @@ var buyTransactionCmd = &cobra.Command{
 			cobra.CheckErr(eodReqErr)
 		}
 
-		addTransaction := transactions.AddTransaction(ticker, price, shares, cmd.Use, date, lastPrice)
-		if addTransaction == nil {
-			fmt.Printf("'%s' is added succesfully\n", ticker)
-		}
+		transactions.AddTransaction(ticker, price, shares, cmd.Use, date, lastPrice)
+		fmt.Printf("'%s' is added succesfully\n", ticker)
 	},
 	Example: `budgie transaction buy
 	--ticker "MSFT"
@@ -66,10 +64,8 @@ var sellTransactionCmd = &cobra.Command{
 			lastPrice = eodReq.Data[0].Close
 			cobra.CheckErr(eodReqErr)
 		}
-		addTransaction := transactions.AddTransaction(ticker, price, shares, cmd.Use, date, lastPrice)
-		if addTransaction == nil {
-			fmt.Printf("'%s' is added succesfully\n", ticker)
-		}
+		transactions.AddTransaction(ticker, price, shares, cmd.Use, date, lastPrice)
+		fmt.Printf("'%s' is added succesfully\n", ticker)
 	},
 	Example: `budgie transaction sell
 	--ticker "MSFT"
@@ -83,10 +79,8 @@ var removeTransactionCmd = &cobra.Command{
 	Use:   "remove",
 	Short: "Removes your stock purchases",
 	Run: func(cmd *cobra.Command, args []string) {
-		removeTransaction := transactions.RemoveTransaction(id)
-		if removeTransaction == nil {
-			fmt.Printf("'%d' is removed succesfully", id)
-		}
+		transactions.RemoveTransaction(id)
+		fmt.Printf("'%d' is removed succesfully", id)
 	},
 }
 

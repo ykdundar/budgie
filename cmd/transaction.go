@@ -25,7 +25,7 @@ var buyTransactionCmd = &cobra.Command{
 		tokens.SetToken()
 	},
 	Run: func(cmd *cobra.Command, args []string) {
-		req, reqErr := api.IntradayRequest(ticker)
+		req, reqErr := api.IntradayRequest([]string{ticker})
 		cobra.CheckErr(reqErr)
 
 		lastPrice := req.Data[0].Last
@@ -54,7 +54,7 @@ var sellTransactionCmd = &cobra.Command{
 		tokens.SetToken()
 	},
 	Run: func(cmd *cobra.Command, args []string) {
-		req, reqErr := api.IntradayRequest(ticker)
+		req, reqErr := api.IntradayRequest([]string{ticker})
 		cobra.CheckErr(reqErr)
 
 		lastPrice := req.Data[0].Last

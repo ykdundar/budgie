@@ -5,6 +5,7 @@ import (
 	"errors"
 	"io/ioutil"
 	"net/http"
+	"strings"
 )
 
 type Intraday struct {
@@ -22,13 +23,13 @@ type Intraday struct {
 }
 
 // TODO: Symbols can be a slice of strings. The API supports comma seperated values
-func IntradayRequest(symbols string) (Intraday, error) {
+func IntradayRequest(symbols []string) (Intraday, error) {
 	const endpointURL string = "/intraday/latest"
 
 	baseURL := BaseURL()
 	values := baseURL.Query()
 
-	values.Add("symbols", symbols)
+	values.Add("symbols", strings.Join(symbols, ","))
 
 	baseURL.RawQuery = values.Encode()
 	baseURL.Path = baseURL.Path + endpointURL

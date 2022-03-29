@@ -3,7 +3,11 @@ package cmd
 import (
 	"fmt"
 	"github.com/spf13/cobra"
+	"github.com/ykdundar/budgie/api"
+	"github.com/ykdundar/budgie/database"
 	"github.com/ykdundar/budgie/database/portfolios"
+	"github.com/ykdundar/budgie/database/tokens"
+	"github.com/ykdundar/budgie/internal/objects"
 )
 
 // portfolioCmd represents the portfolio command
@@ -60,7 +64,24 @@ var showPortfolioCmd = &cobra.Command{
 		tokens.SetToken()
 	},
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(portfolios.FindPortfolio(name))
+		portfolioId := portfolios.FindPortfolio(name).Id
+
+		records, queryErr := database.DBConnection.Query("SELECT ticker FROM stocks WHERE portfolio_id=?", portfolioId)
+		defer records.Close()
+		cobra.CheckErr(queryErr)
+
+		stock := objects.Stock{}
+		var tickerSlc []string
+
+		for records.Next() {
+			scanErr := records.Scan(&stock.Ticker)
+			cobra.CheckErr(scanErr)
+			tickerSlc = append(tickerSlc, stock.Ticker)
+		}
+
+		requests, intradayErr := api.IntradayRequest(tickerSlc)
+		cobra.CheckErr(intradayErr)
+		fmt.Println(requests)
 	},
 }
 

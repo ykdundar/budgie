@@ -56,6 +56,9 @@ var listAllPortfoliosCmd = &cobra.Command{
 var showPortfolioCmd = &cobra.Command{
 	Use:   "show",
 	Short: "Shows a portfolio",
+	PreRun: func(cmd *cobra.Command, args []string) {
+		tokens.SetToken()
+	},
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println(portfolios.FindPortfolio(name))
 	},

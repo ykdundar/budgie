@@ -8,28 +8,26 @@ import (
 )
 
 func UpdatePortfolio(name string, rename string, currency string) error {
-
-	var queryStr []string
-
-	if rename != "" {
-		queryStr = append(queryStr, fmt.Sprintf("name='%s'", rename))
-	}
-
-	if currency != "" {
-		queryStr = append(queryStr, fmt.Sprintf("currency='%s'", currency))
-	}
-
-
-	updateSql := strings.Join(queryStr[:], ",")
-
-	updatePortfolio, prepErr := database.DBConnection.Prepare(
-		fmt.Sprintf("UPDATE portfolios SET %s WHERE name = '%s'", updateSql, name),
-	)
+	updatePortfolio, prepErr := database.DBConnection.Prepare(buildQuery(name, rename, currency))
 	defer updatePortfolio.Close()
 	cobra.CheckErr(prepErr)
 
 	_, updateErr := updatePortfolio.Exec()
-
 	cobra.CheckErr(updateErr)
+
 	return updateErr
+}
+
+func buildQuery(name string, rename string, currency string) string {
+	var querySlc []string
+
+	if rename != "" {
+		querySlc = append(querySlc, fmt.Sprintf("name='%s'", rename))
+	}
+
+	if currency != "" {
+		querySlc = append(querySlc, fmt.Sprintf("currency='%s'", currency))
+	}
+
+	return fmt.Sprintf("UPDATE portfolios SET %s WHERE name = '%s'", strings.Join(querySlc[:], ","), name)
 }

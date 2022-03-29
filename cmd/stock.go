@@ -9,7 +9,7 @@ import (
 // stockCmd represents the stock command
 var stockCmd = &cobra.Command{
 	Use:   "stock",
-	Short: "stock command adds, removes and reports a given stock by subcommands",
+	Short: "stock command is allows you to watch stocks that you are interested in",
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 		stocks.CreateStocksTable()
 	},
@@ -17,7 +17,7 @@ var stockCmd = &cobra.Command{
 
 var addStockCmd = &cobra.Command{
 	Use:   "add",
-	Short: "add a stock to a given portfolio",
+	Short: "adds a stock to a given portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
 		stocks.AddStock(portfolio, ticker)
 		fmt.Printf("'%s' is added succesfully\n", ticker)
@@ -30,7 +30,7 @@ var addStockCmd = &cobra.Command{
 
 var removeStockCmd = &cobra.Command{
 	Use:   "remove",
-	Short: "Removes a given stock",
+	Short: "removes a stock from a given portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
 		stocks.RemoveStock(portfolio, ticker)
 		fmt.Printf("'%s' is removed from '%s' succesfully", ticker, portfolio)

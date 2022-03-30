@@ -20,6 +20,10 @@ type Intraday struct {
 		Symbol   string  `json:"symbol"`
 		Exchange string  `json:"exchange"`
 	} `json:"data"`
+	Error struct {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	} `json:"error"`
 }
 
 
@@ -38,13 +42,18 @@ func IntradayRequest(symbols []string) (Intraday, error) {
 
 	if err != nil {
 		return Intraday{}, errors.New("the HTTP request has failed with an error")
-	} else {
-		data, _ := ioutil.ReadAll(response.Body)
-		intraday := Intraday{}
-		err := json.Unmarshal(data, &intraday)
-		if err != nil {
-			return Intraday{}, err
-		}
-		return intraday, nil
 	}
+
+	data, _ := ioutil.ReadAll(response.Body)
+	intraday := Intraday{}
+	err = json.Unmarshal(data, &intraday)
+	if err != nil {
+		return Intraday{}, err
+	}
+
+	if intraday.Error.Code != "" {
+		return Intraday{}, errors.New(intraday.Error.Message)
+	}
+
+	return intraday, nil
 }

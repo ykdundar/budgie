@@ -61,8 +61,9 @@ var sellTransactionCmd = &cobra.Command{
 
 		if lastPrice == 0 {
 			eodReq, eodReqErr := api.EndOfDayRequest(ticker, "latest")
-			lastPrice = eodReq.Data[0].Close
 			cobra.CheckErr(eodReqErr)
+
+			lastPrice = eodReq.Data[0].Close
 		}
 		transactions.AddTransaction(ticker, price, shares, cmd.Use, date, lastPrice)
 		fmt.Printf("'%s' is added succesfully\n", ticker)

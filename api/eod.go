@@ -25,6 +25,10 @@ type EndOfDay struct {
 		Exchange    string      `json:"exchange"`
 		Date        string      `json:"date"`
 	} `json:"data"`
+	Error struct {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	} `json:"error"`
 }
 
 func EndOfDayRequest(symbols string, date string) (EndOfDay, error) {
@@ -42,14 +46,18 @@ func EndOfDayRequest(symbols string, date string) (EndOfDay, error) {
 
 	if err != nil {
 		return EndOfDay{}, errors.New("the HTTP request has failed with an error")
-	} else {
-		data, _ := ioutil.ReadAll(response.Body)
-		endOfDay := EndOfDay{}
-		err := json.Unmarshal(data, &endOfDay)
-		if err != nil {
-			return EndOfDay{}, err
-		}
-		return endOfDay, nil
 	}
 
+	data, _ := ioutil.ReadAll(response.Body)
+	endOfDay := EndOfDay{}
+	err = json.Unmarshal(data, &endOfDay)
+	if err != nil {
+		return EndOfDay{}, err
+	}
+
+	if endOfDay.Error.Code != "" {
+		return EndOfDay{}, errors.New(endOfDay.Error.Message)
+	}
+
+	return endOfDay, nil
 }

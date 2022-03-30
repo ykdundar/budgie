@@ -22,7 +22,7 @@ type Intraday struct {
 	} `json:"data"`
 }
 
-// TODO: Symbols can be a slice of strings. The API supports comma seperated values
+
 func IntradayRequest(symbols []string) (Intraday, error) {
 	const endpointURL string = "/intraday/latest"
 

@@ -58,6 +58,7 @@ var showStockCmd = &cobra.Command{
 	--ticker "MSFT, AAPL"
 `,
 }
+
 var searchStockCmd = &cobra.Command{
 	Use:   "search",
 	Short: "fetch information of a given stock",
@@ -65,18 +66,19 @@ var searchStockCmd = &cobra.Command{
 		tokens.SetToken()
 	},
 	Run: func(cmd *cobra.Command, args []string) {
-		requests, intradayErr := api.IntradayRequest([]string{ticker})
-		cobra.CheckErr(intradayErr)
-		fmt.Println(requests)
+		request, tickerErr := api.TickerRequest(name)
+		cobra.CheckErr(tickerErr)
+		data := request.Data[0]
+		fmt.Println("Name:",data.Name, " ", "Symbol:",data.Symbol, " ", "Market:", data.StockExchange.Acronym, " ", "Country:", data.StockExchange.Country, " ", "Ciyt:", data.StockExchange.City)
 	},
 	Example: `budgie search 
-	--ticker "MSFT, AAPL"
+	--name="Apple"
 `,
 }
 
 func init() {
 	rootCmd.AddCommand(stockCmd)
-	stockCmd.AddCommand(addStockCmd, removeStockCmd, showStockCmd)
+	stockCmd.AddCommand(addStockCmd, removeStockCmd, showStockCmd, searchStockCmd)
 
 	addStockCmd.Flags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
 	addStockCmd.MarkFlagRequired("portfolio")
@@ -90,4 +92,7 @@ func init() {
 
 	showStockCmd.Flags().StringVarP(&ticker, "ticker", "t", "", "Company symbol (required)")
 	showStockCmd.MarkFlagRequired("ticker")
+
+	searchStockCmd.Flags().StringVarP(&name, "name", "n", "", "Company name (required)")
+	searchStockCmd.MarkFlagRequired("name")
 }

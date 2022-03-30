@@ -3,7 +3,9 @@ package cmd
 import (
 	"fmt"
 	"github.com/spf13/cobra"
+	"github.com/ykdundar/budgie/api"
 	"github.com/ykdundar/budgie/database/stocks"
+	"github.com/ykdundar/budgie/database/tokens"
 )
 
 // stockCmd represents the stock command
@@ -41,17 +43,51 @@ var removeStockCmd = &cobra.Command{
 `,
 }
 
+var showStockCmd = &cobra.Command{
+	Use:   "show",
+	Short: "shows a stock or comma seperated stocks",
+	PreRun: func(cmd *cobra.Command, args []string) {
+		tokens.SetToken()
+	},
+	Run: func(cmd *cobra.Command, args []string) {
+		requests, intradayErr := api.IntradayRequest([]string{ticker})
+		cobra.CheckErr(intradayErr)
+		fmt.Println(requests)
+	},
+	Example: `budgie stock show
+	--ticker "MSFT, AAPL"
+`,
+}
+var searchStockCmd = &cobra.Command{
+	Use:   "search",
+	Short: "fetch information of a given stock",
+	PreRun: func(cmd *cobra.Command, args []string) {
+		tokens.SetToken()
+	},
+	Run: func(cmd *cobra.Command, args []string) {
+		requests, intradayErr := api.IntradayRequest([]string{ticker})
+		cobra.CheckErr(intradayErr)
+		fmt.Println(requests)
+	},
+	Example: `budgie search 
+	--ticker "MSFT, AAPL"
+`,
+}
+
 func init() {
 	rootCmd.AddCommand(stockCmd)
-	stockCmd.AddCommand(addStockCmd, removeStockCmd)
+	stockCmd.AddCommand(addStockCmd, removeStockCmd, showStockCmd)
 
 	addStockCmd.Flags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
 	addStockCmd.MarkFlagRequired("portfolio")
-	addStockCmd.Flags().StringVarP(&ticker, "ticker", "s", "", "Company name (required)")
+	addStockCmd.Flags().StringVarP(&ticker, "ticker", "t", "", "Company symbol (required)")
 	addStockCmd.MarkFlagRequired("ticker")
 
 	removeStockCmd.Flags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
 	removeStockCmd.MarkFlagRequired("portfolio")
-	removeStockCmd.Flags().StringVarP(&ticker, "ticker", "t", "", "Company name (required)")
+	removeStockCmd.Flags().StringVarP(&ticker, "ticker", "t", "", "Company symbol (required)")
 	removeStockCmd.MarkFlagRequired("ticker")
+
+	showStockCmd.Flags().StringVarP(&ticker, "ticker", "t", "", "Company symbol (required)")
+	showStockCmd.MarkFlagRequired("ticker")
 }

@@ -15,15 +15,13 @@ var transactionCmd = &cobra.Command{
 	Short: "transaction command adds, updates, removes and reports a given stock by subcommands",
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 		transactions.CreateTransactionsTable()
+		tokens.SetToken()
 	},
 }
 
 var buyTransactionCmd = &cobra.Command{
 	Use:   "buy",
 	Short: "Saves your stock buys",
-	PreRun: func(cmd *cobra.Command, args []string) {
-		tokens.SetToken()
-	},
 	Run: func(cmd *cobra.Command, args []string) {
 		req, reqErr := api.IntradayRequest([]string{ticker})
 		cobra.CheckErr(reqErr)
@@ -32,8 +30,9 @@ var buyTransactionCmd = &cobra.Command{
 
 		if lastPrice == 0 {
 			eodReq, eodReqErr := api.EndOfDayRequest(ticker, "latest")
-			lastPrice = eodReq.Data[0].Close
 			cobra.CheckErr(eodReqErr)
+
+			lastPrice = eodReq.Data[0].Close
 		}
 
 		transactions.AddTransaction(ticker, price, shares, cmd.Use, date, lastPrice)
@@ -50,9 +49,6 @@ var buyTransactionCmd = &cobra.Command{
 var sellTransactionCmd = &cobra.Command{
 	Use:   "sell",
 	Short: "Saves your stock sells",
-	PreRun: func(cmd *cobra.Command, args []string) {
-		tokens.SetToken()
-	},
 	Run: func(cmd *cobra.Command, args []string) {
 		req, reqErr := api.IntradayRequest([]string{ticker})
 		cobra.CheckErr(reqErr)

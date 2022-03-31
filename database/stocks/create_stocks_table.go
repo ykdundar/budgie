@@ -7,7 +7,7 @@ import (
 )
 
 func CreateStocksTable() {
-	createStocksTable, queryErr := database.DBConnection.Prepare(
+	createStocksTable, queryErr := database.DBConnection().Prepare(
 		"CREATE TABLE IF NOT EXISTS stocks (" +
 			"stockId INTEGER PRIMARY KEY," +
 			"ticker TEXT," +

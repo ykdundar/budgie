@@ -66,7 +66,7 @@ var showPortfolioCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		portfolioId := portfolios.FindPortfolio(name).Id
 
-		records, queryErr := database.DBConnection.Query("SELECT ticker FROM stocks WHERE portfolio_id=?", portfolioId)
+		records, queryErr := database.DBConnection().Query("SELECT ticker FROM stocks WHERE portfolio_id=?", portfolioId)
 		defer records.Close()
 		cobra.CheckErr(queryErr)
 

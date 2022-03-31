@@ -10,7 +10,7 @@ func AddTransaction(ticker string, price float64, shares int, category string, d
 	val, timeErr := time.Parse("02.01.2006", date)
 	cobra.CheckErr(timeErr)
 
-	addTransaction, queryErr := database.DBConnection.Prepare(
+	addTransaction, queryErr := database.DBConnection().Prepare(
 		"INSERT INTO transactions" +
 			"(ticker, price, shares, transaction_category, transactions_date, purchase_value, market_value)" +
 			"VALUES (?,?,?,?,?,?,?)")

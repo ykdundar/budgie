@@ -6,8 +6,8 @@ import (
 	"github.com/ykdundar/budgie/internal/objects"
 )
 
-func SelectAllPortfolios() []objects.Portfolio{
-	records, queryErr := database.DBConnection.Query("SELECT * FROM portfolios")
+func SelectAllPortfolios() []objects.Portfolio {
+	records, queryErr := database.DBConnection().Query("SELECT * FROM portfolios")
 	defer records.Close()
 	cobra.CheckErr(queryErr)
 

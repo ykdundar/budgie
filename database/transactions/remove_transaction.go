@@ -8,7 +8,7 @@ import (
 
 func RemoveTransaction(id int) {
 	// remove with id?
-	removeTransaction, queryErr := database.DBConnection.Prepare(fmt.Sprintf("DELETE FROM transactions WHERE id='%d'", id))
+	removeTransaction, queryErr := database.DBConnection().Prepare(fmt.Sprintf("DELETE FROM transactions WHERE id='%d'", id))
 	defer removeTransaction.Close()
 	cobra.CheckErr(queryErr)
 

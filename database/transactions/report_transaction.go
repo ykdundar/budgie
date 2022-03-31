@@ -38,7 +38,7 @@ func ReportRequest(command string, commandValue string) {
 		"SELECT ticker, shares, purchase_value, transaction_category FROM transactions WHERE transactions_date > %d", pastTime,
 	)
 
-	records, queryErr := database.DBConnection.Query(baseQuery)
+	records, queryErr := database.DBConnection().Query(baseQuery)
 	defer records.Close()
 	cobra.CheckErr(queryErr)
 

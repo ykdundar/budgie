@@ -8,7 +8,7 @@ import (
 )
 
 func UpdatePortfolio(name string, rename string, currency string) error {
-	updatePortfolio, prepErr := database.DBConnection.Prepare(buildQuery(name, rename, currency))
+	updatePortfolio, prepErr := database.DBConnection().Prepare(buildQuery(name, rename, currency))
 	defer updatePortfolio.Close()
 	cobra.CheckErr(prepErr)
 

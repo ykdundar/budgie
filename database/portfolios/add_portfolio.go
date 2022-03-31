@@ -6,7 +6,7 @@ import (
 )
 
 func AddPortfolio(name string, currency string) {
-	addPortfolio, prepErr := database.DBConnection.Prepare(
+	addPortfolio, prepErr := database.DBConnection().Prepare(
 		"INSERT INTO portfolios (name, currency) VALUES (?, ?)",
 	)
 	defer addPortfolio.Close()

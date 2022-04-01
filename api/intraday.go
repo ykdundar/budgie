@@ -26,14 +26,13 @@ type Intraday struct {
 	} `json:"error"`
 }
 
-
 func IntradayRequest(symbols []string) (Intraday, error) {
 	const endpointURL string = "/intraday/latest"
 
 	baseURL := BaseURL()
 	values := baseURL.Query()
 
-	values.Add("symbols", strings.Join(symbols, ","))
+	values.Add("symbols", strings.ReplaceAll(strings.Join(symbols, ","), " ", ""))
 
 	baseURL.RawQuery = values.Encode()
 	baseURL.Path = baseURL.Path + endpointURL

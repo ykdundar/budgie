@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/api"
 	"github.com/ykdundar/budgie/database"
@@ -83,9 +82,8 @@ var showPortfolioCmd = &cobra.Command{
 
 		requests, intradayErr := api.IntradayRequest(tickerSlc)
 		cobra.CheckErr(intradayErr)
-		headers := table.Row{"Open", "High", "Low", "Last",
-			"Close", "Volume", "Date", "Symbol", "Exchange"}
-		functions.PrintOnTable(requests, name, headers)
+
+		functions.ShowCmdPrinter(requests, name)
 	},
 }
 

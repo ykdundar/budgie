@@ -69,11 +69,8 @@ var searchStockCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		request, tickerErr := api.TickerRequest(name)
 		cobra.CheckErr(tickerErr)
-
-		data := request.Data
-		for _, v := range data {
-			fmt.Println("Name:", v.Name, " ", "Symbol:", v.Symbol, " ", "Market:", v.StockExchange.Acronym, " ", "Country:", v.StockExchange.Country, " ", "City:", v.StockExchange.City)
-		}
+		
+		functions.SearchStockPrinter(request, name)
 	},
 	Example: `budgie search 
 	--name="Apple"

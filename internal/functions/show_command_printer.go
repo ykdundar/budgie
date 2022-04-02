@@ -6,11 +6,11 @@ import (
 	"os"
 )
 
-func ShowCmdPrinter(intraday api.Intraday, name string) {
+func ShowCmdPrinter(intraday api.Intraday, header string) {
 	rowConfigAutoMerge := table.RowConfig{AutoMerge: true}
 	t := table.NewWriter()
 	t.SetOutputMirror(os.Stdout)
-	t.AppendHeader(table.Row{name, name, name, name, name, name, name, name, name}, rowConfigAutoMerge)
+	t.AppendHeader(table.Row{header, header, header, header, header, header, header, header, header}, rowConfigAutoMerge)
 	t.AppendHeader(table.Row{"SYMBOL", "OPEN", "HIGH", "LOW", "LAST", "CLOSE", "VOLUME", "DATE", "EXCHANGE"})
 
 	for _, v := range intraday.Data {

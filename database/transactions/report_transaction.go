@@ -14,7 +14,7 @@ type TransactionSum struct {
 	PurchaseValue float64
 }
 
-func ReportRequest(command string, commandValue string) {
+func ReportRequest(command string, commandValue string) map[string]TransactionSum {
 	var commandValueInt int = 0
 	var convErr error
 
@@ -63,5 +63,5 @@ func ReportRequest(command string, commandValue string) {
 		}
 	}
 
-	fmt.Println(transactions)
+	return transactions
 }

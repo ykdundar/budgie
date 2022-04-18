@@ -96,34 +96,39 @@ var reportTransactionsCmd = &cobra.Command{
 	Short: "Reports transaction earnings/losses per stock",
 	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
-		transactions.ReportRequest(cmd.Use, "")
+		transactions := transactions.ReportRequest(cmd.Use, "")
+		functions.ReportTransactionPrinter(transactions, "My Earnings/Losses")
 	},
 }
 
 var dayCmd = &cobra.Command{
 	Use:   "day",
-	Short: "Reports transaction earnings/losses per stock for a given number of days",
+	Short: "Earnings/losses per stock for a given number of days",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		transactions.ReportRequest(cmd.Use, args[0])
+		transactions := transactions.ReportRequest(cmd.Use, args[0])
+		functions.ReportTransactionPrinter(transactions, "My Earnings/Losses")
 	},
 }
 
 var monthCmd = &cobra.Command{
 	Use:   "month",
-	Short: "Reports transaction earnings/losses per stock for a given number of months",
+	Short: "Earnings/losses per stock for a given number of months",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		transactions.ReportRequest(cmd.Use, args[0])
+		transactions := transactions.ReportRequest(cmd.Use, args[0])
+		functions.ReportTransactionPrinter(transactions, "My Earnings/Losses")
+
 	},
 }
 
 var yearCmd = &cobra.Command{
 	Use:   "year",
-	Short: "Reports transaction earnings/losses per stock for a given number of years",
+	Short: "Earnings/losses per stock for a given number of years",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		transactions.ReportRequest(cmd.Use, args[0])
+		transactions := transactions.ReportRequest(cmd.Use, args[0])
+		functions.ReportTransactionPrinter(transactions, "My Earnings/Losses")
 	},
 }
 

@@ -46,7 +46,7 @@ var removeStockCmd = &cobra.Command{
 
 var showStockCmd = &cobra.Command{
 	Use:   "show",
-	Short: "shows a stock or comma seperated stocks",
+	Short: "shows intraday details of a single stock or multiple comma seperated stocks",
 	PreRun: func(cmd *cobra.Command, args []string) {
 		tokens.SetToken()
 	},
@@ -62,14 +62,14 @@ var showStockCmd = &cobra.Command{
 
 var searchStockCmd = &cobra.Command{
 	Use:   "search",
-	Short: "fetch information of a given stock",
+	Short: "fetches information of a given stock",
 	PreRun: func(cmd *cobra.Command, args []string) {
 		tokens.SetToken()
 	},
 	Run: func(cmd *cobra.Command, args []string) {
 		request, tickerErr := api.TickerRequest(name)
 		cobra.CheckErr(tickerErr)
-		
+
 		functions.SearchStockPrinter(request, name)
 	},
 	Example: `budgie search 
@@ -83,17 +83,17 @@ func init() {
 
 	addStockCmd.Flags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
 	addStockCmd.MarkFlagRequired("portfolio")
-	addStockCmd.Flags().StringVarP(&ticker, "ticker", "t", "", "Company symbol (required)")
+	addStockCmd.Flags().StringVarP(&ticker, "ticker", "t", "", "Stock symbol (required)")
 	addStockCmd.MarkFlagRequired("ticker")
 
 	removeStockCmd.Flags().StringVarP(&portfolio, "portfolio", "p", "", "Portfolio name (required)")
 	removeStockCmd.MarkFlagRequired("portfolio")
-	removeStockCmd.Flags().StringVarP(&ticker, "ticker", "t", "", "Company symbol (required)")
+	removeStockCmd.Flags().StringVarP(&ticker, "ticker", "t", "", "Stock symbol (required)")
 	removeStockCmd.MarkFlagRequired("ticker")
 
-	showStockCmd.Flags().StringVarP(&ticker, "ticker", "t", "", "Company symbol (required)")
+	showStockCmd.Flags().StringVarP(&ticker, "ticker", "t", "", "Stock symbol (required)")
 	showStockCmd.MarkFlagRequired("ticker")
 
-	searchStockCmd.Flags().StringVarP(&name, "name", "n", "", "Company name (required)")
+	searchStockCmd.Flags().StringVarP(&name, "name", "n", "", "Stock name (required)")
 	searchStockCmd.MarkFlagRequired("name")
 }

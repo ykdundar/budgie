@@ -22,7 +22,7 @@ var transactionCmd = &cobra.Command{
 
 var buyTransactionCmd = &cobra.Command{
 	Use:   "buy",
-	Short: "Saves your stock buys",
+	Short: "Saves a transaction (buy)",
 	Run: func(cmd *cobra.Command, args []string) {
 		req, reqErr := api.IntradayRequest([]string{ticker})
 		cobra.CheckErr(reqErr)
@@ -40,16 +40,16 @@ var buyTransactionCmd = &cobra.Command{
 		fmt.Printf("'%s' is added succesfully\n", ticker)
 	},
 	Example: `budgie transaction buy
-	--ticker "MSFT"
-	--price 180
-	--shares 20
-	--date "19.01.2022"
+	--ticker="MSFT"
+	--price=180
+	--shares=20
+	--date="19.01.2022"
 `,
 }
 
 var sellTransactionCmd = &cobra.Command{
 	Use:   "sell",
-	Short: "Saves your stock sells",
+	Short: "Saves a transaction (sell)",
 	Run: func(cmd *cobra.Command, args []string) {
 		req, reqErr := api.IntradayRequest([]string{ticker})
 		cobra.CheckErr(reqErr)
@@ -66,16 +66,16 @@ var sellTransactionCmd = &cobra.Command{
 		fmt.Printf("'%s' is added succesfully\n", ticker)
 	},
 	Example: `budgie transaction sell
-	--ticker "MSFT"
-	--price 180
-	--shares 20
-	--date "19.01.2022"
+	--ticker="MSFT"
+	--price=180
+	--shares=20
+	--date="19.01.2022"
 `,
 }
 
 var listAllTransactionsCmd = &cobra.Command{
 	Use:   "list",
-	Short: "Lists all your buying and selling records ",
+	Short: "Lists all your transactions",
 	Run: func(cmd *cobra.Command, args []string) {
 		transactions := transactions.ListAllTransactions()
 		functions.ListTransactionPrinter(transactions, "My Transactions")
@@ -84,10 +84,10 @@ var listAllTransactionsCmd = &cobra.Command{
 
 var removeTransactionCmd = &cobra.Command{
 	Use:   "remove",
-	Short: "Removes your stock purchases",
+	Short: "Removes a transaction",
 	Run: func(cmd *cobra.Command, args []string) {
 		transactions.RemoveTransaction(id)
-		fmt.Printf("'%d' is removed succesfully", id)
+		fmt.Printf("'%d' is removed succesfully\n", id)
 	},
 }
 
@@ -136,8 +136,7 @@ func init() {
 	buyTransactionCmd.MarkFlagRequired("ticker")
 	buyTransactionCmd.Flags().Float64VarP(&price, "price", "p", 0, "Company price (required)")
 	buyTransactionCmd.MarkFlagRequired("price")
-	buyTransactionCmd.Flags().StringVarP(&date, "date", "d", time.Now().Format("02.01.2006"), "The date stock was bought (required)")
-	buyTransactionCmd.MarkFlagRequired("date")
+	buyTransactionCmd.Flags().StringVarP(&date, "date", "d", time.Now().Format("02.01.2006"), "The date stock was bought")
 	buyTransactionCmd.Flags().IntVarP(&shares, "shares", "s", 0, "Number of shares (required)")
 	buyTransactionCmd.MarkFlagRequired("shares")
 
@@ -145,8 +144,7 @@ func init() {
 	sellTransactionCmd.MarkFlagRequired("ticker")
 	sellTransactionCmd.Flags().Float64VarP(&price, "price", "p", 0, "Company price (required)")
 	sellTransactionCmd.MarkFlagRequired("price")
-	sellTransactionCmd.Flags().StringVarP(&date, "date", "d", time.Now().Format("02.01.2006"), "The date stock was sold (required)")
-	sellTransactionCmd.MarkFlagRequired("date")
+	sellTransactionCmd.Flags().StringVarP(&date, "date", "d", time.Now().Format("02.01.2006"), "The date stock was sold")
 	sellTransactionCmd.Flags().IntVarP(&shares, "shares", "s", 0, "Number of shares (required)")
 	sellTransactionCmd.MarkFlagRequired("shares")
 

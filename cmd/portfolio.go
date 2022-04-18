@@ -43,7 +43,7 @@ var deletePortfolioCmd = &cobra.Command{
 	Short: "Deletes a portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
 		portfolios.DeletePortfolio(name)
-		fmt.Printf("'%s' is deleted succesfully", name)
+		fmt.Printf("'%s' is deleted succesfully\n", name)
 	},
 }
 
@@ -76,6 +76,10 @@ var showPortfolioCmd = &cobra.Command{
 			scanErr := records.Scan(&stock.Ticker)
 			cobra.CheckErr(scanErr)
 			tickerSlc = append(tickerSlc, stock.Ticker)
+		}
+
+		if tickerSlc == nil {
+			cobra.CheckErr("No stocks have been found for this portfolio")
 		}
 
 		requests, intradayErr := api.IntradayRequest(tickerSlc)

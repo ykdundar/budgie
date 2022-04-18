@@ -61,7 +61,6 @@ func ReportRequest(command string, commandValue string) {
 				PurchaseValue: transactions[dbRecord.Ticker].PurchaseValue - dbRecord.PurchaseValue,
 			}
 		}
-
 	}
 
 	fmt.Println(transactions)

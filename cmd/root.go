@@ -10,9 +10,7 @@ import (
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "budgie",
-	Short: "budgie allows you to manage your stock purchases without leaving the command line",
-	Long: `You can create portfolios and add, update, remove your stocks into these portfolios and
- check your stocks or stock you are interested in`,
+	Short: "budgie allows you to manage your stock portfolios without leaving the command line",
 	Args: cobra.NoArgs,
 }
 

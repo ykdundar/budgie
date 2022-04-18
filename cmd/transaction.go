@@ -6,6 +6,7 @@ import (
 	"github.com/ykdundar/budgie/api"
 	"github.com/ykdundar/budgie/database/tokens"
 	"github.com/ykdundar/budgie/database/transactions"
+	"github.com/ykdundar/budgie/internal/functions"
 	"time"
 )
 
@@ -72,6 +73,15 @@ var sellTransactionCmd = &cobra.Command{
 `,
 }
 
+var listAllTransactionsCmd = &cobra.Command{
+	Use:   "list",
+	Short: "Lists all your buying and selling records ",
+	Run: func(cmd *cobra.Command, args []string) {
+		transactions := transactions.ListAllTransactions()
+		functions.ListTransactionPrinter(transactions, "My Transactions")
+	},
+}
+
 var removeTransactionCmd = &cobra.Command{
 	Use:   "remove",
 	Short: "Removes your stock purchases",
@@ -114,14 +124,6 @@ var yearCmd = &cobra.Command{
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		transactions.ReportRequest(cmd.Use, args[0])
-	},
-}
-
-var listAllTransactionsCmd = &cobra.Command{
-	Use:   "list",
-	Short: "Lists all your buying and selling records ",
-	Run: func(cmd *cobra.Command, args []string) {
-		transactions.ListAllTransactions()
 	},
 }
 

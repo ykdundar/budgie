@@ -1,14 +1,15 @@
 package transactions
 
 import (
-	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/database"
 	"github.com/ykdundar/budgie/internal/objects"
 )
 
-func ListAllTransactions() {
-	records, queryErr := database.DBConnection().Query("SELECT id, ticker, price,  shares, transaction_category FROM transactions")
+func ListAllTransactions() []objects.Transaction {
+	records, queryErr := database.DBConnection().Query(
+		"SELECT id, ticker, transactions_date, price, shares, transaction_category, purchase_value, market_value FROM transactions",
+	)
 	defer records.Close()
 	cobra.CheckErr(queryErr)
 
@@ -16,11 +17,19 @@ func ListAllTransactions() {
 	var transactions []objects.Transaction
 
 	for records.Next() {
-		scanErr := records.Scan(&transaction.Id, &transaction.Ticker, &transaction.Price, &transaction.Shares, &transaction.TransactionCategory)
+		scanErr := records.Scan(
+			&transaction.Id,
+			&transaction.Ticker,
+			&transaction.TransactionDate,
+			&transaction.Price,
+			&transaction.Shares,
+			&transaction.TransactionCategory,
+			&transaction.PurchaseValue,
+			&transaction.MarketValue,
+		)
 		cobra.CheckErr(scanErr)
 		transactions = append(transactions, transaction)
 	}
-	for _, v := range transactions {
-		fmt.Println("Id: ", v.Id, "Ticker: ", v.Ticker, "Price: ", v.Price, "Shares: ", v.Shares, "Category: ", v.TransactionCategory)
-	}
+
+	return transactions
 }

@@ -5,6 +5,7 @@ import (
 	"errors"
 	"io/ioutil"
 	"net/http"
+	"strings"
 )
 
 type EndOfDay struct {
@@ -31,13 +32,13 @@ type EndOfDay struct {
 	} `json:"error"`
 }
 
-func EndOfDayRequest(symbols string, date string) (EndOfDay, error) {
+func EndOfDayRequest(symbols []string, date string) (EndOfDay, error) {
 	var endpointURL string = "/eod/" + date
 
 	baseURL := BaseURL()
 	values := baseURL.Query()
 
-	values.Add("symbols", symbols)
+	values.Add("symbols", strings.ReplaceAll(strings.Join(symbols, ","), " ", ""))
 
 	baseURL.RawQuery = values.Encode()
 	baseURL.Path = baseURL.Path + endpointURL

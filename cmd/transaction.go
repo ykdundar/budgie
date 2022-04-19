@@ -30,7 +30,7 @@ var buyTransactionCmd = &cobra.Command{
 		lastPrice := req.Data[0].Last
 
 		if lastPrice == 0 {
-			eodReq, eodReqErr := api.EndOfDayRequest(ticker, "latest")
+			eodReq, eodReqErr := api.EndOfDayRequest([]string{ticker}, "latest")
 			cobra.CheckErr(eodReqErr)
 
 			lastPrice = eodReq.Data[0].Close
@@ -57,7 +57,7 @@ var sellTransactionCmd = &cobra.Command{
 		lastPrice := req.Data[0].Last
 
 		if lastPrice == 0 {
-			eodReq, eodReqErr := api.EndOfDayRequest(ticker, "latest")
+			eodReq, eodReqErr := api.EndOfDayRequest([]string{ticker}, "latest")
 			cobra.CheckErr(eodReqErr)
 
 			lastPrice = eodReq.Data[0].Close

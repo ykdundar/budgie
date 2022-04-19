@@ -11,7 +11,7 @@ func FindPortfolio(name string) objects.Portfolio {
 	portfolio := objects.Portfolio{}
 
 	record := database.DBConnection().QueryRow("SELECT * FROM portfolios WHERE name=?", name)
-	scanErr := record.Scan(&portfolio.Id, &portfolio.Name, &portfolio.Currency)
+	scanErr := record.Scan(&portfolio.Id, &portfolio.Name)
 
 	if scanErr == sql.ErrNoRows {
 		cobra.CheckErr(scanErr)

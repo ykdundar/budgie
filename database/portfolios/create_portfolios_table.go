@@ -10,8 +10,7 @@ func CreatePortfoliosTable() {
 	createPortfolios, queryErr := database.DBConnection().Prepare(
 		"CREATE TABLE IF NOT EXISTS portfolios (" +
 			"id INTEGER PRIMARY KEY," +
-			"name TEXT UNIQUE," +
-			"currency TEXT)",
+			"name TEXT UNIQUE)",
 	)
 	defer createPortfolios.Close()
 	cobra.CheckErr(queryErr)

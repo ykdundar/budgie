@@ -15,7 +15,7 @@ func SelectAllPortfolios() []objects.Portfolio {
 	var portfolios []objects.Portfolio
 
 	for records.Next() {
-		scanErr := records.Scan(&portfolio.Id, &portfolio.Name, &portfolio.Currency)
+		scanErr := records.Scan(&portfolio.Id, &portfolio.Name)
 		cobra.CheckErr(scanErr)
 
 		portfolios = append(portfolios, portfolio)

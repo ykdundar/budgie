@@ -21,13 +21,13 @@ If you want to update your token, you can run the same command again. The latest
 #### Create Portfolio
 
 ```sh
-budgie portfolio create --name="European Stocks" --currency="USD" --active=true
+budgie portfolio create --name="European Stocks"
 ```
 
 #### Update Portfolio
 
 ```sh
-budgie portfolio update --name="European Stocks" --rename="German Stocks" --currency="EUR" --active=false
+budgie portfolio update --name="European Stocks" --rename="German Stocks"
 ```
 
 #### Delete Portfolio
@@ -45,7 +45,7 @@ budgie portfolio list
 #### Show a Single Portfolio
 
 ```sh
-budgie portfolio show # shows the active portfolio
+budgie portfolio show # shows a portfolio
 budgie portfolio show --name="European Stocks"
 ```
 

@@ -7,8 +7,8 @@ import (
 	"strings"
 )
 
-func UpdatePortfolio(name string, rename string, currency string) error {
-	updatePortfolio, prepErr := database.DBConnection().Prepare(buildQuery(name, rename, currency))
+func UpdatePortfolio(name string, rename string) error {
+	updatePortfolio, prepErr := database.DBConnection().Prepare(buildQuery(name, rename))
 	defer updatePortfolio.Close()
 	cobra.CheckErr(prepErr)
 
@@ -18,16 +18,11 @@ func UpdatePortfolio(name string, rename string, currency string) error {
 	return updateErr
 }
 
-func buildQuery(name string, rename string, currency string) string {
+func buildQuery(name string, rename string) string {
 	var querySlc []string
 
 	if rename != "" {
 		querySlc = append(querySlc, fmt.Sprintf("name='%s'", rename))
 	}
-
-	if currency != "" {
-		querySlc = append(querySlc, fmt.Sprintf("currency='%s'", currency))
-	}
-
 	return fmt.Sprintf("UPDATE portfolios SET %s WHERE name = '%s'", strings.Join(querySlc[:], ","), name)
 }

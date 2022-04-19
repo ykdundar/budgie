@@ -11,10 +11,10 @@ func ListPortfolioPrinter(portfolio []objects.Portfolio, head string) {
 	t := table.NewWriter()
 	t.SetOutputMirror(os.Stdout)
 	t.AppendHeader(table.Row{head, head, head}, rowConfigAutoMerge)
-	t.AppendHeader(table.Row{"ID", "NAME", "CURRENCY"})
+	t.AppendHeader(table.Row{"ID", "NAME"})
 
 	for _, v := range portfolio {
-		t.AppendRow(table.Row{v.Id, v.Name, v.Currency})
+		t.AppendRow(table.Row{v.Id, v.Name})
 		t.AppendSeparator()
 	}
 	t.SetStyle(table.StyleRounded)

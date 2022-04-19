@@ -4,5 +4,4 @@ package objects
 type Portfolio struct {
 	Id       int
 	Name     string
-	Currency string
 }

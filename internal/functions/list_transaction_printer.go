@@ -24,20 +24,18 @@ func ListTransactionPrinter(transactions []objects.Transaction, head string) {
 		if currentPrice.Data[0].Last == 0{
 			curPrice, _ := api.EndOfDayRequest([]string{v.Ticker}, "latest")
 			marketValue = curPrice.Data[0].Close * float64(v.Shares)
-			t.AppendRow(
-				table.Row{v.Id, v.Ticker, v.TransactionCategory,
-					time.Unix(int64(v.TransactionDate), 0).Format("2006-1-2"),
-					v.Shares, v.Price,
-					fmt.Sprintf("%.2f \n", marketValue), v.PurchaseValue})
+		} else {
+			marketValue = currentPrice.Data[0].Last * float64(v.Shares)
 		}
-		marketValue = currentPrice.Data[0].Last * float64(v.Shares)
+
 		t.AppendRow(
 			table.Row{v.Id, v.Ticker, v.TransactionCategory,
-			time.Unix(int64(v.TransactionDate), 0).Format("2006-1-2"),
-			v.Shares, v.Price,
-			fmt.Sprintf("%.2f \n", marketValue), v.PurchaseValue})
+				time.Unix(int64(v.TransactionDate), 0).Format("2006-1-2"),
+				v.Shares, v.Price,
+				fmt.Sprintf("%.2f \n", marketValue), v.PurchaseValue})
+
 	}
-	
+
 	t.AppendSeparator()
 	t.SetStyle(table.StyleRounded)
 	t.Style().Options.SeparateRows = true

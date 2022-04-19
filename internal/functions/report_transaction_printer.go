@@ -16,7 +16,6 @@ func ReportTransactionPrinter(transactionList map[string]transactions.Transactio
 	t.AppendHeader(table.Row{"SYMBOL", "SHARES", "PURCHASE VALUE", "MARKET VALUE", "DIFFERENCE"})
 
 	for k, v := range transactionList {
-
 		currentPrice, _ := api.IntradayRequest([]string{k})
 		var marketValue float64
 		var diff float64
@@ -24,16 +23,14 @@ func ReportTransactionPrinter(transactionList map[string]transactions.Transactio
 		if currentPrice.Data[0].Last == 0 {
 			curPrice, _ := api.EndOfDayRequest([]string{k}, "latest")
 			marketValue = curPrice.Data[0].Close * float64(v.Shares)
-			diff = v.PurchaseValue - marketValue
-			t.AppendRow(table.Row{k, v.Shares, v.PurchaseValue, fmt.Sprintf("%.2f \n", marketValue), diff})
+		} else {
+			marketValue = currentPrice.Data[0].Last * float64(v.Shares)
 		}
-		marketValue = currentPrice.Data[0].Last * float64(v.Shares)
+
 		diff = v.PurchaseValue - marketValue
-
-		t.AppendRow(table.Row{k, v.Shares, v.PurchaseValue, marketValue, diff})
-
+		t.AppendRow(table.Row{k, v.Shares, v.PurchaseValue, fmt.Sprintf("%.2f \n", marketValue), diff})
 	}
-	
+
 	t.SetStyle(table.StyleRounded)
 	t.Style().Options.SeparateRows = true
 	t.Render()

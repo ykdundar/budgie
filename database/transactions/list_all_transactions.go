@@ -8,7 +8,7 @@ import (
 
 func ListAllTransactions() []objects.Transaction {
 	records, queryErr := database.DBConnection().Query(
-		"SELECT id, ticker, transactions_date, price, shares, transaction_category, purchase_value, market_value FROM transactions",
+		"SELECT id, ticker, transactions_date, price, shares, transaction_category, purchase_value FROM transactions",
 	)
 	defer records.Close()
 	cobra.CheckErr(queryErr)
@@ -25,7 +25,6 @@ func ListAllTransactions() []objects.Transaction {
 			&transaction.Shares,
 			&transaction.TransactionCategory,
 			&transaction.PurchaseValue,
-			&transaction.MarketValue,
 		)
 		cobra.CheckErr(scanErr)
 		transactions = append(transactions, transaction)

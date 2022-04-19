@@ -26,14 +26,14 @@ func ReportTransactionPrinter(transactionList map[string]transactions.Transactio
 			marketValue = curPrice.Data[0].Close * float64(v.Shares)
 			diff = v.PurchaseValue - marketValue
 			t.AppendRow(table.Row{k, v.Shares, v.PurchaseValue, fmt.Sprintf("%.2f \n", marketValue), diff})
-			t.AppendSeparator()
 		}
 		marketValue = currentPrice.Data[0].Last * float64(v.Shares)
 		diff = v.PurchaseValue - marketValue
 
 		t.AppendRow(table.Row{k, v.Shares, v.PurchaseValue, marketValue, diff})
-		t.AppendSeparator()
+
 	}
+	
 	t.SetStyle(table.StyleRounded)
 	t.Style().Options.SeparateRows = true
 	t.Render()

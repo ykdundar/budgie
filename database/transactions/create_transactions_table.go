@@ -15,8 +15,7 @@ func CreateTransactionsTable() {
 			"price INTEGER," +
 			"shares INTEGER," +
 			"transaction_category INTEGER," +
-			"purchase_value INTEGER," +
-			"market_value INTEGER)",
+			"purchase_value INTEGER)",
 	)
 	defer createTransactionsTable.Close()
 	cobra.CheckErr(queryErr)

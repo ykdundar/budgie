@@ -17,6 +17,9 @@ func ListTransactionPrinter(transactions []objects.Transaction, head string) {
 	for _, v := range transactions {
 		t.AppendRow(table.Row{v.Id, v.Ticker, v.TransactionCategory,
 			v.TransactionDate, v.Shares, v.Price, v.MarketValue, v.PurchaseValue})
+			time.Unix(int64(v.TransactionDate), 0).Format("2006-1-2"), v.Shares, v.Price, fmt.Sprintf("%.2f \n", marketValue), v.PurchaseValue})
+			time.Unix(int64(v.TransactionDate), 0).Format("2006-1-2"),
+			fmt.Sprintf("%.2f \n", marketValue), v.PurchaseValue})
 		t.AppendSeparator()
 	}
 	t.SetStyle(table.StyleRounded)

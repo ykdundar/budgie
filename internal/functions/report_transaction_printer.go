@@ -1,6 +1,7 @@
 package functions
 
 import (
+	"fmt"
 	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/ykdundar/budgie/api"
 	"github.com/ykdundar/budgie/database/transactions"
@@ -24,7 +25,7 @@ func ReportTransactionPrinter(transactionList map[string]transactions.Transactio
 			curPrice, _ := api.EndOfDayRequest([]string{k}, "latest")
 			marketValue = curPrice.Data[0].Close * float64(v.Shares)
 			diff = v.PurchaseValue - marketValue
-			t.AppendRow(table.Row{k, v.Shares, v.PurchaseValue, marketValue, diff})
+			t.AppendRow(table.Row{k, v.Shares, v.PurchaseValue, fmt.Sprintf("%.2f \n", marketValue), diff})
 			t.AppendSeparator()
 		}
 		marketValue = currentPrice.Data[0].Last * float64(v.Shares)

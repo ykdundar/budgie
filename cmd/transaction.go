@@ -51,6 +51,8 @@ var sellTransactionCmd = &cobra.Command{
 	Use:   "sell",
 	Short: "Saves a transaction (sell)",
 	Run: func(cmd *cobra.Command, args []string) {
+		functions.CheckStockSufficiency(shares, ticker)
+
 		req, reqErr := api.IntradayRequest([]string{ticker})
 		cobra.CheckErr(reqErr)
 

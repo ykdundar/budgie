@@ -29,11 +29,10 @@ func ListTransactionPrinter(transactions []objects.Transaction, head string) {
 		}
 
 		t.AppendRow(
-			table.Row{v.Id, v.Ticker, v.TransactionCategory,
+			table.Row{v.Id, v.Ticker, IntToString(v.TransactionCategory) ,
 				time.Unix(int64(v.TransactionDate), 0).Format("2006-1-2"),
 				v.Shares, v.Price,
 				fmt.Sprintf("%.2f \n", marketValue), v.PurchaseValue})
-
 	}
 
 	t.AppendSeparator()

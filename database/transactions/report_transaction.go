@@ -35,7 +35,7 @@ func ReportRequest(command string, commandValue string) map[string]TransactionSu
 	}
 
 	var baseQuery = fmt.Sprintf(
-		"SELECT ticker, shares, purchase_value, transaction_category FROM transactions WHERE transactions_date > %d", pastTime,
+		"SELECT ticker, sum(shares), sum(purchase_value), transaction_category FROM transactions WHERE transactions_date > %d GROUP BY transaction_category, ticker", pastTime,
 	)
 
 	records, queryErr := database.DBConnection().Query(baseQuery)
@@ -50,17 +50,11 @@ func ReportRequest(command string, commandValue string) map[string]TransactionSu
 		scanErr := records.Scan(&dbRecord.Ticker, &dbRecord.Shares, &dbRecord.PurchaseValue, &dbRecord.TransactionCategory)
 		cobra.CheckErr(scanErr)
 
-		if dbRecord.TransactionCategory == 1 {
-			transactions[dbRecord.Ticker] = TransactionSum{
-				Shares:        transactions[dbRecord.Ticker].Shares + dbRecord.Shares,
-				PurchaseValue: transactions[dbRecord.Ticker].PurchaseValue + dbRecord.PurchaseValue,
-			}
-		} else {
-			transactions[dbRecord.Ticker] = TransactionSum{
-				Shares:        transactions[dbRecord.Ticker].Shares - dbRecord.Shares,
-				PurchaseValue: transactions[dbRecord.Ticker].PurchaseValue - dbRecord.PurchaseValue,
-			}
-		}
+		transactions = append(transactions, TransactionSum{
+			Ticker: dbRecord.Ticker,
+			Shares: dbRecord.Shares,
+			PurchaseValue: dbRecord.PurchaseValue,
+		})
 	}
 
 	return transactions

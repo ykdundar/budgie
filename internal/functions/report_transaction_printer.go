@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-func ReportTransactionPrinter(transactionList map[string]transactions.TransactionSum, head string) {
+func ReportTransactionPrinter(transactionList []transactions.TransactionSum, head string) {
 	rowConfigAutoMerge := table.RowConfig{AutoMerge: true}
 	t := table.NewWriter()
 	t.SetOutputMirror(os.Stdout)

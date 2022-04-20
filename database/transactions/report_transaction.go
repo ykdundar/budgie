@@ -10,11 +10,12 @@ import (
 )
 
 type TransactionSum struct {
+	Ticker 		  string
 	Shares        int
 	PurchaseValue float64
 }
 
-func ReportRequest(command string, commandValue string) map[string]TransactionSum {
+func ReportRequest(command string, commandValue string) []TransactionSum {
 	var commandValueInt int = 0
 	var convErr error
 
@@ -44,7 +45,7 @@ func ReportRequest(command string, commandValue string) map[string]TransactionSu
 
 	dbRecord := objects.Transaction{}
 
-	transactions := make(map[string]TransactionSum)
+	var transactions []TransactionSum
 
 	for records.Next() {
 		scanErr := records.Scan(&dbRecord.Ticker, &dbRecord.Shares, &dbRecord.PurchaseValue, &dbRecord.TransactionCategory)

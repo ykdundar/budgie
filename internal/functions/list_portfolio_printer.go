@@ -10,7 +10,7 @@ func ListPortfolioPrinter(portfolio []objects.Portfolio, head string) {
 	rowConfigAutoMerge := table.RowConfig{AutoMerge: true}
 	t := table.NewWriter()
 	t.SetOutputMirror(os.Stdout)
-	t.AppendHeader(table.Row{head, head, head}, rowConfigAutoMerge)
+	t.AppendHeader(table.Row{head, head}, rowConfigAutoMerge)
 	t.AppendHeader(table.Row{"ID", "NAME"})
 
 	for _, v := range portfolio {

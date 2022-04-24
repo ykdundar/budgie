@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/api"
 	"github.com/ykdundar/budgie/database/stocks"
@@ -9,7 +10,7 @@ import (
 	"github.com/ykdundar/budgie/internal/functions"
 )
 
-// stockCmd represents the stock command
+// stockCmd represents the stock command.
 var stockCmd = &cobra.Command{
 	Use:   "stock",
 	Short: "stock command is allows you to watch stocks that you are interested in",
@@ -23,7 +24,7 @@ var addStockCmd = &cobra.Command{
 	Short: "adds a stock to a given portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
 		stocks.AddStock(portfolio, ticker)
-		fmt.Printf("'%s' is added succesfully\n", ticker)
+		fmt.Printf("'%s' is added successfully\n", ticker)
 	},
 	Example: `budgie stock add
 	--portfolio "European Stocks"
@@ -36,7 +37,7 @@ var removeStockCmd = &cobra.Command{
 	Short: "removes a stock from a given portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
 		stocks.RemoveStock(portfolio, ticker)
-		fmt.Printf("'%s' is removed from '%s' succesfully", ticker, portfolio)
+		fmt.Printf("'%s' is removed from '%s' successfully", ticker, portfolio)
 	},
 	Example: `budgie stock remove
 	--portfolio "European Stocks"
@@ -46,7 +47,7 @@ var removeStockCmd = &cobra.Command{
 
 var showStockCmd = &cobra.Command{
 	Use:   "show",
-	Short: "shows intraday details of a single stock or multiple comma seperated stocks",
+	Short: "shows intraday details of a single stock or multiple comma  stocks",
 	PreRun: func(cmd *cobra.Command, args []string) {
 		tokens.SetToken()
 	},

@@ -10,15 +10,15 @@ func ListAllTransactions() []objects.Transaction {
 	records, queryErr := database.DBConnection().Query(
 		"SELECT id, ticker, transactions_date, price, shares, transaction_category, purchase_value FROM transactions",
 	)
-	defer records.Close()
 	cobra.CheckErr(queryErr)
+	defer records.Close()
 
 	transaction := objects.Transaction{}
 	var transactions []objects.Transaction
 
 	for records.Next() {
 		scanErr := records.Scan(
-			&transaction.Id,
+			&transaction.ID,
 			&transaction.Ticker,
 			&transaction.TransactionDate,
 			&transaction.Price,

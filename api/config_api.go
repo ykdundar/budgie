@@ -2,8 +2,9 @@ package api
 
 import (
 	"fmt"
-	"github.com/spf13/viper"
 	"net/url"
+
+	"github.com/spf13/viper"
 )
 
 func BaseURL() *url.URL {

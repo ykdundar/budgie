@@ -33,7 +33,7 @@ type EndOfDay struct {
 }
 
 func EndOfDayRequest(symbols []string, date string) (EndOfDay, error) {
-	var endpointURL string = "/eod/" + date
+	var endpointURL = "/eod/" + date
 
 	baseURL := BaseURL()
 	values := baseURL.Query()
@@ -50,6 +50,7 @@ func EndOfDayRequest(symbols []string, date string) (EndOfDay, error) {
 	}
 
 	data, _ := ioutil.ReadAll(response.Body)
+	defer response.Body.Close()
 	endOfDay := EndOfDay{}
 	err = json.Unmarshal(data, &endOfDay)
 	if err != nil {

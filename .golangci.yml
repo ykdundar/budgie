@@ -1,0 +1,34 @@
+run:
+  tests: false
+  max-issues-per-linter: 0
+  max-same-issues: 0
+
+linters:
+  enable:
+    - asciicheck
+    - bodyclose
+    - cyclop
+    - depguard
+    - dogsled
+    - dupl
+    - errorlint
+    - exhaustive
+    - exportloopref
+    - goconst
+    - godot
+    - godox
+    - goimports
+    - goprintffuncname
+    - gosec
+    - ifshort
+    - misspell
+    - prealloc
+    - sqlclosecheck
+    - unconvert
+    - unparam
+    - whitespace
+issues:
+  exclude-rules:
+    - path: cmd/
+      linters:
+        - errcheck

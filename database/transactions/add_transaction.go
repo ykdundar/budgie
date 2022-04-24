@@ -1,9 +1,10 @@
 package transactions
 
 import (
+	"time"
+
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/database"
-	"time"
 )
 
 func AddTransaction(ticker string, price float64, shares int, category string, date string, lastPrice float64) {
@@ -14,8 +15,8 @@ func AddTransaction(ticker string, price float64, shares int, category string, d
 		"INSERT INTO transactions" +
 			"(ticker, price, shares, transaction_category, transactions_date, purchase_value)" +
 			"VALUES (?,?,?,?,?,?)")
-	defer addTransaction.Close()
 	cobra.CheckErr(queryErr)
+	defer addTransaction.Close()
 
 	transactionCategory := 1
 

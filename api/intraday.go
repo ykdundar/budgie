@@ -44,6 +44,7 @@ func IntradayRequest(symbols []string) (Intraday, error) {
 	}
 
 	data, _ := ioutil.ReadAll(response.Body)
+	defer response.Body.Close()
 	intraday := Intraday{}
 	err = json.Unmarshal(data, &intraday)
 	if err != nil {

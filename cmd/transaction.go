@@ -2,15 +2,16 @@ package cmd
 
 import (
 	"fmt"
+	"time"
+
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/api"
 	"github.com/ykdundar/budgie/database/tokens"
 	"github.com/ykdundar/budgie/database/transactions"
 	"github.com/ykdundar/budgie/internal/functions"
-	"time"
 )
 
-// transactionCmd represents the transaction command
+// transactionCmd represents the transaction command.
 var transactionCmd = &cobra.Command{
 	Use:   "transaction",
 	Short: "transaction command adds, updates, removes and reports a given stock by subcommands",
@@ -37,7 +38,7 @@ var buyTransactionCmd = &cobra.Command{
 		}
 
 		transactions.AddTransaction(ticker, price, shares, cmd.Use, date, lastPrice)
-		fmt.Printf("'%s' is added succesfully\n", ticker)
+		fmt.Printf("'%s' is added successfully\n", ticker)
 	},
 	Example: `budgie transaction buy
 	--ticker="MSFT"
@@ -65,7 +66,7 @@ var sellTransactionCmd = &cobra.Command{
 			lastPrice = eodReq.Data[0].Close
 		}
 		transactions.AddTransaction(ticker, price, shares, cmd.Use, date, lastPrice)
-		fmt.Printf("'%s' is added succesfully\n", ticker)
+		fmt.Printf("'%s' is added successfully\n", ticker)
 	},
 	Example: `budgie transaction sell
 	--ticker="MSFT"
@@ -89,7 +90,7 @@ var removeTransactionCmd = &cobra.Command{
 	Short: "Removes a transaction",
 	Run: func(cmd *cobra.Command, args []string) {
 		transactions.RemoveTransaction(id)
-		fmt.Printf("'%d' is removed succesfully\n", id)
+		fmt.Printf("'%d' is removed successfully\n", id)
 	},
 }
 

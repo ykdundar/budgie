@@ -1,22 +1,22 @@
 package cmd
 
 import (
+	"os"
+
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/database"
-	"os"
 )
 
-// rootCmd represents the base command when called without any subcommands
+// rootCmd represents the base command when called without any subcommands.
 var rootCmd = &cobra.Command{
 	Use:   "budgie",
 	Short: "budgie allows you to manage your stock portfolios without leaving the command line",
-	Args: cobra.NoArgs,
+	Args:  cobra.NoArgs,
 }
 
 func Execute() {
-	err := rootCmd.Execute()
-	if err != nil {
+	if err := rootCmd.Execute(); err != nil {
 		os.Exit(1)
 	}
 }

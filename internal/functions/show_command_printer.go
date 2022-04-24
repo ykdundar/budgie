@@ -1,10 +1,11 @@
 package functions
 
 import (
-	"github.com/jedib0t/go-pretty/v6/table"
-	"github.com/ykdundar/budgie/api"
 	"os"
 	"time"
+
+	"github.com/jedib0t/go-pretty/v6/table"
+	"github.com/ykdundar/budgie/api"
 )
 
 func ShowCmdPrinter(intraday api.Intraday, header string) {

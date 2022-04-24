@@ -12,8 +12,8 @@ func CreatePortfoliosTable() {
 			"id INTEGER PRIMARY KEY," +
 			"name TEXT UNIQUE)",
 	)
-	defer createPortfolios.Close()
 	cobra.CheckErr(queryErr)
+	defer createPortfolios.Close()
 
 	_, portfolioErr := createPortfolios.Exec()
 	cobra.CheckErr(portfolioErr)

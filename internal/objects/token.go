@@ -1,6 +1,6 @@
 package objects
 
 type Token struct {
-	Id int
+	ID    int
 	Token string
 }

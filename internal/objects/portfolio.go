@@ -1,7 +1,7 @@
 package objects
 
-// Portfolio struct
+// Portfolio struct.
 type Portfolio struct {
-	Id       int
-	Name     string
+	ID   int
+	Name string
 }

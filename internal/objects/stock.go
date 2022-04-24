@@ -1,8 +1,8 @@
 package objects
 
-// Stock represents basic information about a stock
+// Stock represents basic information about a stock.
 type Stock struct {
-	StockId     int
+	StockID     int
 	Ticker      string
-	PortfolioId int
+	PortfolioID int
 }

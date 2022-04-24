@@ -2,12 +2,13 @@ package cmd
 
 import (
 	"fmt"
+
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/database/tokens"
 	"github.com/ykdundar/budgie/internal/functions"
 )
 
-// configCmd represents the config command
+// configCmd represents the config command.
 var configCmd = &cobra.Command{
 	Use:   "config",
 	Short: "config is used to add or update an API token",
@@ -23,7 +24,7 @@ token will be updated.`,
 		cobra.CheckErr(tokenErr)
 
 		tokens.AddToken(token)
-		fmt.Printf("'%s' is added succesfully\n", token)
+		fmt.Printf("'%s' is added successfully\n", token)
 	},
 }
 

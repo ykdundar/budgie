@@ -1,8 +1,6 @@
 package functions
 
-import (
-	"strconv"
-)
+import "strconv"
 
 func IntToString(category int) string {
 	strCategory := strconv.Itoa(category)

@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/api"
 	"github.com/ykdundar/budgie/database"
@@ -11,7 +12,7 @@ import (
 	"github.com/ykdundar/budgie/internal/objects"
 )
 
-// portfolioCmd represents the portfolio command
+// portfolioCmd represents the portfolio command.
 var portfolioCmd = &cobra.Command{
 	Use:   "portfolio",
 	Short: "portfolio is used to create, update, delete and list portfolios",
@@ -25,7 +26,7 @@ var addPortfolioCmd = &cobra.Command{
 	Short: "Adds a new portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
 		portfolios.AddPortfolio(name)
-		fmt.Printf("'%s' is created succesfully\n", name)
+		fmt.Printf("'%s' is created database.DBConnection()\n", name)
 	},
 }
 
@@ -34,7 +35,7 @@ var updatePortfolioCmd = &cobra.Command{
 	Short: "Updates a portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
 		portfolios.UpdatePortfolio(name, rename)
-		fmt.Printf("'%s' is updated succesfully\n", name)
+		fmt.Printf("'%s' is updated successfully\n", name)
 	},
 }
 
@@ -43,7 +44,7 @@ var deletePortfolioCmd = &cobra.Command{
 	Short: "Deletes a portfolio",
 	Run: func(cmd *cobra.Command, args []string) {
 		portfolios.DeletePortfolio(name)
-		fmt.Printf("'%s' is deleted succesfully\n", name)
+		fmt.Printf("'%s' is deleted successfully\n", name)
 	},
 }
 
@@ -63,11 +64,11 @@ var showPortfolioCmd = &cobra.Command{
 		tokens.SetToken()
 	},
 	Run: func(cmd *cobra.Command, args []string) {
-		portfolioId := portfolios.FindPortfolio(name).Id
+		portfolioID := portfolios.FindPortfolio(name).ID
 
-		records, queryErr := database.DBConnection().Query("SELECT ticker FROM stocks WHERE portfolio_id=?", portfolioId)
-		defer records.Close()
+		records, queryErr := database.DBConnection().Query("SELECT ticker FROM stocks WHERE portfolio_id=?", portfolioID)
 		cobra.CheckErr(queryErr)
+		defer records.Close()
 
 		stock := objects.Stock{}
 		var tickerSlc []string

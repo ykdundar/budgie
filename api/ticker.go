@@ -2,9 +2,9 @@ package api
 
 import (
 	"encoding/json"
+	"errors"
 	"io/ioutil"
 	"net/http"
-	"errors"
 )
 
 type Ticker struct {
@@ -39,13 +39,14 @@ func TickerRequest(name string) (Ticker, error) {
 
 	if err != nil {
 		return Ticker{}, errors.New("the HTTP request has failed with an error")
-	} else {
-		data, _ := ioutil.ReadAll(response.Body)
-		ticker := Ticker{}
-		err := json.Unmarshal(data, &ticker)
-		if err != nil {
-			return Ticker{}, err
-		}
-		return ticker, nil
 	}
+
+	data, _ := ioutil.ReadAll(response.Body)
+	defer response.Body.Close()
+	ticker := Ticker{}
+	err = json.Unmarshal(data, &ticker)
+	if err != nil {
+		return Ticker{}, err
+	}
+	return ticker, nil
 }

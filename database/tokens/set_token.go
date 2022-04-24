@@ -6,7 +6,7 @@ import (
 	"github.com/ykdundar/budgie/internal/functions"
 )
 
-func SetToken(){
+func SetToken() {
 	token := FindToken()
 	tokenErr := functions.ValidateToken(token)
 

@@ -16,8 +16,8 @@ func CreateStocksTable() {
 			"FOREIGN KEY(portfolio_id)" +
 			"REFERENCES portfolios(id))",
 	)
-	defer createStocksTable.Close()
 	cobra.CheckErr(queryErr)
+	defer createStocksTable.Close()
 
 	_, stockErr := createStocksTable.Exec()
 	cobra.CheckErr(stockErr)

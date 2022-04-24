@@ -2,15 +2,16 @@ package portfolios
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/database"
-	"strings"
 )
 
 func UpdatePortfolio(name string, rename string) error {
 	updatePortfolio, prepErr := database.DBConnection().Prepare(buildQuery(name, rename))
-	defer updatePortfolio.Close()
 	cobra.CheckErr(prepErr)
+	defer updatePortfolio.Close()
 
 	_, updateErr := updatePortfolio.Exec()
 	cobra.CheckErr(updateErr)

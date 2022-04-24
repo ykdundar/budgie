@@ -8,14 +8,14 @@ import (
 
 func SelectAllPortfolios() []objects.Portfolio {
 	records, queryErr := database.DBConnection().Query("SELECT * FROM portfolios")
-	defer records.Close()
 	cobra.CheckErr(queryErr)
+	defer records.Close()
 
 	portfolio := objects.Portfolio{}
 	var portfolios []objects.Portfolio
 
 	for records.Next() {
-		scanErr := records.Scan(&portfolio.Id, &portfolio.Name)
+		scanErr := records.Scan(&portfolio.ID, &portfolio.Name)
 		cobra.CheckErr(scanErr)
 
 		portfolios = append(portfolios, portfolio)

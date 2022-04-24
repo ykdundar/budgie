@@ -5,15 +5,15 @@ import (
 	"github.com/ykdundar/budgie/database"
 )
 
-// CreateTokensTable creates a table to store API tokens
+// CreateTokensTable creates a table to store API tokens.
 func CreateTokensTable() {
 	createTokensTable, queryErr := database.DBConnection().Prepare(
 		"CREATE TABLE IF NOT EXISTS tokens (" +
 			"id INTEGER PRIMARY KEY," +
 			"token TEXT)",
 	)
-	defer createTokensTable.Close()
 	cobra.CheckErr(queryErr)
+	defer createTokensTable.Close()
 
 	_, tokensErr := createTokensTable.Exec()
 	cobra.CheckErr(tokensErr)

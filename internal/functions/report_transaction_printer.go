@@ -2,9 +2,10 @@ package functions
 
 import (
 	"fmt"
+	"os"
+
 	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/ykdundar/budgie/database/transactions"
-	"os"
 )
 
 func ReportTransactionPrinter(transactionList []transactions.TransactionSum, head string) {

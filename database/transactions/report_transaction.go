@@ -2,21 +2,22 @@ package transactions
 
 import (
 	"fmt"
+	"strconv"
+	"time"
+
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/database"
 	"github.com/ykdundar/budgie/internal/objects"
-	"strconv"
-	"time"
 )
 
 type TransactionSum struct {
-	Ticker 		  string
+	Ticker        string
 	Shares        int
 	PurchaseValue float64
 }
 
 func ReportRequest(command string, commandValue string) []TransactionSum {
-	var commandValueInt int = 0
+	var commandValueInt int
 	var convErr error
 
 	if command != "report" {
@@ -40,8 +41,8 @@ func ReportRequest(command string, commandValue string) []TransactionSum {
 	)
 
 	records, queryErr := database.DBConnection().Query(baseQuery)
-	defer records.Close()
 	cobra.CheckErr(queryErr)
+	defer records.Close()
 
 	dbRecord := objects.Transaction{}
 
@@ -52,8 +53,8 @@ func ReportRequest(command string, commandValue string) []TransactionSum {
 		cobra.CheckErr(scanErr)
 
 		transactions = append(transactions, TransactionSum{
-			Ticker: dbRecord.Ticker,
-			Shares: dbRecord.Shares,
+			Ticker:        dbRecord.Ticker,
+			Shares:        dbRecord.Shares,
 			PurchaseValue: dbRecord.PurchaseValue,
 		})
 	}

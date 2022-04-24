@@ -10,9 +10,9 @@ func AddStock(portfolioName string, ticker string) {
 	portfolio := portfolios.FindPortfolio(portfolioName)
 
 	addStock, queryErr := database.DBConnection().Prepare("INSERT INTO stocks (portfolio_id, ticker) VALUES (?, ?)")
-	defer addStock.Close()
 	cobra.CheckErr(queryErr)
+	defer addStock.Close()
 
-	_, insertErr := addStock.Exec(portfolio.Id, ticker)
+	_, insertErr := addStock.Exec(portfolio.ID, ticker)
 	cobra.CheckErr(insertErr)
 }

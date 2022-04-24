@@ -1,9 +1,10 @@
 package functions
 
 import (
+	"os"
+
 	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/ykdundar/budgie/internal/objects"
-	"os"
 )
 
 func ListPortfolioPrinter(portfolio []objects.Portfolio, head string) {
@@ -14,7 +15,7 @@ func ListPortfolioPrinter(portfolio []objects.Portfolio, head string) {
 	t.AppendHeader(table.Row{"ID", "NAME"})
 
 	for _, v := range portfolio {
-		t.AppendRow(table.Row{v.Id, v.Name})
+		t.AppendRow(table.Row{v.ID, v.Name})
 		t.AppendSeparator()
 	}
 	t.SetStyle(table.StyleRounded)

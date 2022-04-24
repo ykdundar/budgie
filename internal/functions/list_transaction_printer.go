@@ -2,10 +2,11 @@ package functions
 
 import (
 	"fmt"
-	"github.com/jedib0t/go-pretty/v6/table"
-	"github.com/ykdundar/budgie/internal/objects"
 	"os"
 	"time"
+
+	"github.com/jedib0t/go-pretty/v6/table"
+	"github.com/ykdundar/budgie/internal/objects"
 )
 
 func ListTransactionPrinter(transactions []objects.Transaction, head string) {
@@ -22,7 +23,7 @@ func ListTransactionPrinter(transactions []objects.Transaction, head string) {
 		marketValue = lastPrice * float64(v.Shares)
 
 		t.AppendRow(
-			table.Row{v.Id, v.Ticker, IntToString(v.TransactionCategory) ,
+			table.Row{v.ID, v.Ticker, IntToString(v.TransactionCategory),
 				time.Unix(int64(v.TransactionDate), 0).Format("2006-1-2"),
 				v.Shares, v.Price,
 				fmt.Sprintf("%.2f \n", marketValue), v.PurchaseValue})

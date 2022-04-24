@@ -1,9 +1,10 @@
 package functions
 
 import (
+	"os"
+
 	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/ykdundar/budgie/api"
-	"os"
 )
 
 func SearchStockPrinter(ticker api.Ticker, head string) {

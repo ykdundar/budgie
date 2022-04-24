@@ -17,8 +17,8 @@ func CreateTransactionsTable() {
 			"transaction_category INTEGER," +
 			"purchase_value INTEGER)",
 	)
-	defer createTransactionsTable.Close()
 	cobra.CheckErr(queryErr)
+	defer createTransactionsTable.Close()
 
 	_, transactionsErr := createTransactionsTable.Exec()
 	cobra.CheckErr(transactionsErr)

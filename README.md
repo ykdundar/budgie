@@ -1,5 +1,6 @@
 # budgie
 
+![release](https://github.com/ykdundar/budgie/actions/workflows/release.yml/badge.svg)
 [![GoDoc](https://godoc.org/github.com/ykdundar/budgie?status.svg)](https://godoc.org/github.com/ykdundar/budgie)
 ![Supported Version](https://img.shields.io/badge/go%20version-%3E%3D1.14-turquoise)
 [![Go Report Card](https://goreportcard.com/badge/github.com/ykdundar/budgie)](https://goreportcard.com/report/github.com/ykdundar/budgie)

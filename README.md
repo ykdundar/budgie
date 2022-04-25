@@ -1,5 +1,11 @@
 # budgie
 
+[![GoDoc](https://godoc.org/github.com/ykdundar/budgie?status.svg)](https://godoc.org/github.com/ykdundar/budgie)
+![Supported Version](https://img.shields.io/badge/go%20version-%3E%3D1.14-turquoise)
+[![Go Report Card](https://goreportcard.com/badge/github.com/ykdundar/budgie)](https://goreportcard.com/report/github.com/ykdundar/budgie)
+[![Maintainability](https://api.codeclimate.com/v1/badges/5199df38a19f2964163a/maintainability)](https://codeclimate.com/github/ykdundar/budgie/maintainability)
+[![License](https://img.shields.io/github/license/ykdundar/budgie)](https://github.com/ykdundar/budgie/blob/main/LICENSE)
+
 `budgie` is a CLI tool that allows you to keep a track of your portfolio and your investments.
 Under the hood it uses APIs of [marketstack](https://marketstack.com) to provide intraday and
 end of day price data. `budgie` stores everything locally (in a locally stored SQLite database)

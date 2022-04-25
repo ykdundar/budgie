@@ -2,12 +2,11 @@ package cmd
 
 import (
 	"fmt"
-
 	"github.com/spf13/cobra"
 	"github.com/ykdundar/budgie/api"
 	"github.com/ykdundar/budgie/database/stocks"
 	"github.com/ykdundar/budgie/database/tokens"
-	"github.com/ykdundar/budgie/internal/functions"
+	"github.com/ykdundar/budgie/internal/tableprinters"
 )
 
 // stockCmd represents the stock command.
@@ -54,7 +53,7 @@ var showStockCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		requests, intradayErr := api.IntradayRequest([]string{ticker})
 		cobra.CheckErr(intradayErr)
-		functions.ShowCmdPrinter(requests, ticker)
+		tableprinters.ShowCmdPrinter(requests, ticker)
 	},
 	Example: `budgie stock show
 	--ticker "MSFT, AAPL"
@@ -71,7 +70,7 @@ var searchStockCmd = &cobra.Command{
 		request, tickerErr := api.TickerRequest(name)
 		cobra.CheckErr(tickerErr)
 
-		functions.SearchStockPrinter(request, name)
+		tableprinters.SearchStockPrinter(request, name)
 	},
 	Example: `budgie search 
 	--name="Apple"

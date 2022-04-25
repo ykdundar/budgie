@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/ykdundar/budgie/internal/tableprinters"
 	"time"
 
 	"github.com/spf13/cobra"
@@ -81,7 +82,7 @@ var listAllTransactionsCmd = &cobra.Command{
 	Short: "Lists all your transactions",
 	Run: func(cmd *cobra.Command, args []string) {
 		transactions := transactions.ListAllTransactions()
-		functions.ListTransactionPrinter(transactions, "My Transactions")
+		tableprinters.ListTransactionPrinter(transactions, "My Transactions")
 	},
 }
 
@@ -100,7 +101,7 @@ var reportTransactionsCmd = &cobra.Command{
 	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		transactions := transactions.ReportRequest(cmd.Use, "")
-		functions.ReportTransactionPrinter(transactions, "My Earnings/Losses")
+		tableprinters.ReportTransactionPrinter(transactions, "My Earnings/Losses")
 	},
 }
 
@@ -110,7 +111,7 @@ var dayCmd = &cobra.Command{
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		transactions := transactions.ReportRequest(cmd.Use, args[0])
-		functions.ReportTransactionPrinter(transactions, "My Earnings/Losses")
+		tableprinters.ReportTransactionPrinter(transactions, "My Earnings/Losses")
 	},
 }
 
@@ -120,7 +121,7 @@ var monthCmd = &cobra.Command{
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		transactions := transactions.ReportRequest(cmd.Use, args[0])
-		functions.ReportTransactionPrinter(transactions, "My Earnings/Losses")
+		tableprinters.ReportTransactionPrinter(transactions, "My Earnings/Losses")
 
 	},
 }
@@ -131,7 +132,7 @@ var yearCmd = &cobra.Command{
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		transactions := transactions.ReportRequest(cmd.Use, args[0])
-		functions.ReportTransactionPrinter(transactions, "My Earnings/Losses")
+		tableprinters.ReportTransactionPrinter(transactions, "My Earnings/Losses")
 	},
 }
 

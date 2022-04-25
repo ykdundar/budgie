@@ -8,8 +8,8 @@ import (
 	"github.com/ykdundar/budgie/database"
 	"github.com/ykdundar/budgie/database/portfolios"
 	"github.com/ykdundar/budgie/database/tokens"
-	"github.com/ykdundar/budgie/internal/functions"
 	"github.com/ykdundar/budgie/internal/objects"
+	"github.com/ykdundar/budgie/internal/tableprinters"
 )
 
 // portfolioCmd represents the portfolio command.
@@ -53,7 +53,7 @@ var listAllPortfoliosCmd = &cobra.Command{
 	Short: "Lists all portfolios",
 	Run: func(cmd *cobra.Command, args []string) {
 		selectAllPortfolios := portfolios.SelectAllPortfolios()
-		functions.ListPortfolioPrinter(selectAllPortfolios, "My Portfolios")
+		tableprinters.ListPortfolioPrinter(selectAllPortfolios, "My Portfolios")
 	},
 }
 
@@ -86,7 +86,7 @@ var showPortfolioCmd = &cobra.Command{
 		requests, intradayErr := api.IntradayRequest(tickerSlc)
 		cobra.CheckErr(intradayErr)
 
-		functions.ShowCmdPrinter(requests, name)
+		tableprinters.ShowCmdPrinter(requests, name)
 	},
 }
 

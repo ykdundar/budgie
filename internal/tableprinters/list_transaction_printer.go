@@ -10,66 +10,68 @@ import (
 	"github.com/ykdundar/budgie/internal/objects"
 )
 
+var tableConfig = []table.ColumnConfig{
+	{
+		Number:      1,
+		Align:       text.AlignCenter,
+		AlignHeader: text.AlignCenter,
+		WidthMin:    15,
+		WidthMax:    15,
+	},
+	{
+		Number:      2,
+		Align:       text.AlignCenter,
+		AlignHeader: text.AlignCenter,
+		WidthMin:    15,
+		WidthMax:    15,
+	},
+	{
+		Number:      3,
+		Align:       text.AlignCenter,
+		AlignHeader: text.AlignCenter,
+		WidthMin:    15,
+		WidthMax:    15,
+	},
+	{
+		Number:      4,
+		Align:       text.AlignCenter,
+		AlignHeader: text.AlignCenter,
+		WidthMin:    15,
+		WidthMax:    15,
+	},
+	{
+		Number:      5,
+		Align:       text.AlignCenter,
+		AlignHeader: text.AlignCenter,
+		WidthMin:    15,
+		WidthMax:    15,
+	},
+	{
+		Number:      6,
+		Align:       text.AlignCenter,
+		AlignHeader: text.AlignCenter,
+		WidthMin:    15,
+		WidthMax:    15,
+	},
+	{
+		Number:      7,
+		Align:       text.AlignCenter,
+		AlignHeader: text.AlignCenter,
+		WidthMin:    15,
+		WidthMax:    15,
+	},
+	{
+		Number:      8,
+		Align:       text.AlignCenter,
+		AlignHeader: text.AlignCenter,
+		WidthMin:    15,
+		WidthMax:    15,
+	},
+}
+
 func ListTransactionPrinter(transactions []objects.Transaction, head string) {
 	t := table.NewWriter()
-	t.SetColumnConfigs([]table.ColumnConfig{
-		{
-			Number:      1,
-			Align:       text.AlignCenter,
-			AlignHeader: text.AlignCenter,
-			WidthMin:    15,
-			WidthMax:    15,
-		},
-		{
-			Number:      2,
-			Align:       text.AlignCenter,
-			AlignHeader: text.AlignCenter,
-			WidthMin:    15,
-			WidthMax:    15,
-		},
-		{
-			Number:      3,
-			Align:       text.AlignCenter,
-			AlignHeader: text.AlignCenter,
-			WidthMin:    15,
-			WidthMax:    15,
-		},
-		{
-			Number:      4,
-			Align:       text.AlignCenter,
-			AlignHeader: text.AlignCenter,
-			WidthMin:    15,
-			WidthMax:    15,
-		},
-		{
-			Number:      5,
-			Align:       text.AlignCenter,
-			AlignHeader: text.AlignCenter,
-			WidthMin:    15,
-			WidthMax:    15,
-		},
-		{
-			Number:      6,
-			Align:       text.AlignCenter,
-			AlignHeader: text.AlignCenter,
-			WidthMin:    15,
-			WidthMax:    15,
-		},
-		{
-			Number:      7,
-			Align:       text.AlignCenter,
-			AlignHeader: text.AlignCenter,
-			WidthMin:    15,
-			WidthMax:    15,
-		},
-		{
-			Number:      8,
-			Align:       text.AlignCenter,
-			AlignHeader: text.AlignCenter,
-			WidthMin:    15,
-			WidthMax:    15,
-		},
-	})
+	t.SetColumnConfigs(tableConfig)
 	t.SetStyle(table.StyleRounded)
 	t.SetTitle(head)
 	t.Style().Title.Align = text.AlignCenter

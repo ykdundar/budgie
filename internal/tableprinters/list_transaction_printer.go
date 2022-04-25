@@ -1,12 +1,12 @@
 package tableprinters
 
 import (
-	"github.com/jedib0t/go-pretty/v6/text"
-	"github.com/ykdundar/budgie/internal/functions"
 	"os"
 	"time"
 
 	"github.com/jedib0t/go-pretty/v6/table"
+	"github.com/jedib0t/go-pretty/v6/text"
+	"github.com/ykdundar/budgie/internal/functions"
 	"github.com/ykdundar/budgie/internal/objects"
 )
 

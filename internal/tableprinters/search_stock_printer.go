@@ -1,10 +1,10 @@
 package tableprinters
 
 import (
-	"github.com/jedib0t/go-pretty/v6/text"
 	"os"
 
 	"github.com/jedib0t/go-pretty/v6/table"
+	"github.com/jedib0t/go-pretty/v6/text"
 	"github.com/ykdundar/budgie/api"
 )
 

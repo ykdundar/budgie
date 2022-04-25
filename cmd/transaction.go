@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/ykdundar/budgie/internal/tableprinters"
 	"time"
 
 	"github.com/spf13/cobra"
@@ -10,6 +9,7 @@ import (
 	"github.com/ykdundar/budgie/database/tokens"
 	"github.com/ykdundar/budgie/database/transactions"
 	"github.com/ykdundar/budgie/internal/functions"
+	"github.com/ykdundar/budgie/internal/tableprinters"
 )
 
 // transactionCmd represents the transaction command.

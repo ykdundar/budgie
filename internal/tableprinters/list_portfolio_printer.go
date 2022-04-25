@@ -4,20 +4,20 @@ import (
 	"os"
 
 	"github.com/jedib0t/go-pretty/v6/table"
-	"github.com/ykdundar/budgie/internal/objects"
 	"github.com/jedib0t/go-pretty/v6/text"
+	"github.com/ykdundar/budgie/internal/objects"
 )
 
 func ListPortfolioPrinter(portfolio []objects.Portfolio, head string) {
 	t := table.NewWriter()
 	t.SetColumnConfigs([]table.ColumnConfig{
 		{
-			Number: 1,
+			Number:      1,
 			Align:       text.AlignCenter,
 			AlignHeader: text.AlignCenter,
 		},
 		{
-			Number: 2,
+			Number:      2,
 			Align:       text.AlignCenter,
 			AlignHeader: text.AlignCenter,
 		},

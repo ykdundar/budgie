@@ -1,12 +1,12 @@
 package tableprinters
 
 import (
-	"github.com/jedib0t/go-pretty/v6/text"
-	"github.com/ykdundar/budgie/internal/functions"
 	"os"
 
 	"github.com/jedib0t/go-pretty/v6/table"
+	"github.com/jedib0t/go-pretty/v6/text"
 	"github.com/ykdundar/budgie/database/transactions"
+	"github.com/ykdundar/budgie/internal/functions"
 )
 
 func ReportTransactionPrinter(transactionList []transactions.TransactionSum, head string) {

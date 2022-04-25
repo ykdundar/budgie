@@ -104,6 +104,6 @@ func init() {
 	deletePortfolioCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name (required)")
 	deletePortfolioCmd.MarkFlagRequired("name")
 
-	showPortfolioCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name (required")
+	showPortfolioCmd.Flags().StringVarP(&name, "name", "n", "", "Portfolio name (required)")
 	showPortfolioCmd.MarkFlagRequired("name")
 }

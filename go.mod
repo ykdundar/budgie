@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/jedib0t/go-pretty/v6 v6.3.1
-	github.com/mattn/go-sqlite3 v1.14.12
+	github.com/mattn/go-sqlite3 v1.14.13
 	github.com/spf13/cobra v1.4.0
 	github.com/spf13/viper v1.11.0
 	github.com/stretchr/testify v1.7.1

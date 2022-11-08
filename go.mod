@@ -3,11 +3,11 @@ module github.com/ykdundar/budgie
 go 1.17
 
 require (
-	github.com/jedib0t/go-pretty/v6 v6.3.2
+	github.com/jedib0t/go-pretty/v6 v6.4.2
 	github.com/mattn/go-sqlite3 v1.14.13
 	github.com/spf13/cobra v1.4.0
 	github.com/spf13/viper v1.12.0
-	github.com/stretchr/testify v1.7.2
+	github.com/stretchr/testify v1.7.4
 )
 
 require (
